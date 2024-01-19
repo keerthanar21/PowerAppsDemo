@@ -20,10 +20,21 @@ Screen1 As screen:
         ZIndex: =2
 
     "Progress1 As 'Progress Bar'":
+        BasePaletteColor: =
         DisplayMode: =DisplayMode.Edit
         Height: =45
         Width: =450
         X: =102
         Y: =538
         ZIndex: =3
+
+    CheckboxCanvas1 As Checkbox:
+        DisplayMode: =DisplayMode.Edit
+        Height: =32
+        OnCheck: =false
+        OnUncheck: =false
+        Width: =160
+        X: =694
+        Y: =524
+        ZIndex: =4
 
