@@ -181,7 +181,7 @@
         "OptimizeForDevices": "Off",
         "Parent": "HeaderNavigation",
         "PersistMetaDataIDKey": false,
-        "PublishOrderIndex": 2218,
+        "PublishOrderIndex": 2,
         "Rules": [
           {
             "Category": "Data",
@@ -251,13 +251,13 @@
           },
           {
             "Category": "Design",
-            "InvariantScript": "//Parent.Width\r\n//galNavigation.Width\r\n0",
+            "InvariantScript": "//Parent.Width\n//galNavigation.Width\n0",
             "Property": "Width",
             "RuleProviderType": "Unknown"
           },
           {
             "Category": "Design",
-            "InvariantScript": "//Parent.Height/2\r\n40",
+            "InvariantScript": "//Parent.Height/2\n40",
             "Property": "Height",
             "RuleProviderType": "Unknown"
           },
@@ -549,7 +549,7 @@
         "OptimizeForDevices": "Off",
         "Parent": "HeaderNavigation",
         "PersistMetaDataIDKey": false,
-        "PublishOrderIndex": 2219,
+        "PublishOrderIndex": 3,
         "Rules": [
           {
             "Category": "Data",
@@ -797,7 +797,7 @@
         "OptimizeForDevices": "Off",
         "Parent": "HeaderNavigation",
         "PersistMetaDataIDKey": false,
-        "PublishOrderIndex": 2220,
+        "PublishOrderIndex": 4,
         "Rules": [
           {
             "Category": "Data",
@@ -1041,7 +1041,7 @@
         "OptimizeForDevices": "Off",
         "Parent": "HeaderNavigation",
         "PersistMetaDataIDKey": false,
-        "PublishOrderIndex": 2221,
+        "PublishOrderIndex": 5,
         "Rules": [
           {
             "Category": "Data",
@@ -1153,7 +1153,7 @@
           },
           {
             "Category": "Design",
-            "InvariantScript": "40\r\n//Parent.Height",
+            "InvariantScript": "40\n//Parent.Height",
             "Property": "Height",
             "RuleProviderType": "User"
           },
@@ -1265,7 +1265,7 @@
             "OptimizeForDevices": "Off",
             "Parent": "galNavigation",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 2223,
+            "PublishOrderIndex": 10,
             "Rules": [
               {
                 "Category": "Design",
@@ -1560,11 +1560,11 @@
             "OptimizeForDevices": "Off",
             "Parent": "galNavigation",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 2224,
+            "PublishOrderIndex": 11,
             "Rules": [
               {
                 "Category": "Data",
-                "InvariantScript": "//\"Overview\"\r\n//ThisItem.Title",
+                "InvariantScript": "//\"Overview\"\n//ThisItem.Title",
                 "Property": "Text",
                 "RuleProviderType": "Unknown"
               },
@@ -1810,7 +1810,7 @@
               },
               {
                 "Category": "Behavior",
-                "InvariantScript": "//Navigate(HeaderNavigation.ScreenNavHome);\r\n//If(ThisItem.Title=\"Admin\",Set(varAdminNav,!varAdminNav),Navigate(ThisItem.Screen));",
+                "InvariantScript": "//Navigate(HeaderNavigation.ScreenNavHome);\n//If(ThisItem.Title=\"Admin\",Set(varAdminNav,!varAdminNav),Navigate(ThisItem.Screen));",
                 "Property": "OnSelect",
                 "RuleProviderType": "Unknown"
               }
@@ -2074,11 +2074,11 @@
             "OptimizeForDevices": "Off",
             "Parent": "galNavigation",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 2225,
+            "PublishOrderIndex": 12,
             "Rules": [
               {
                 "Category": "Data",
-                "InvariantScript": "\"Overview\"\r\n//ThisItem.Title",
+                "InvariantScript": "\"Overview\"\n//ThisItem.Title",
                 "Property": "Text",
                 "RuleProviderType": "Unknown"
               },
@@ -2324,7 +2324,7 @@
               },
               {
                 "Category": "Behavior",
-                "InvariantScript": "Navigate(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen);\r\nSet(varAdminNav,false)",
+                "InvariantScript": "Navigate(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen);\nSet(varAdminNav,false)",
                 "Property": "OnSelect",
                 "RuleProviderType": "Unknown"
               }
@@ -2588,11 +2588,11 @@
             "OptimizeForDevices": "Off",
             "Parent": "galNavigation",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 2226,
+            "PublishOrderIndex": 13,
             "Rules": [
               {
                 "Category": "Data",
-                "InvariantScript": "\"Workload\"\r\n//ThisItem.Title",
+                "InvariantScript": "\"Workload\"\n//ThisItem.Title",
                 "Property": "Text",
                 "RuleProviderType": "Unknown"
               },
@@ -2826,7 +2826,7 @@
               },
               {
                 "Category": "Design",
-                "InvariantScript": "//If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen && !varAdminNav,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))\r\nIf(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen && !varAdminNav,Color.White,RGBA(32,42,68,1))",
+                "InvariantScript": "//If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen && !varAdminNav,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))\nIf(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen && !varAdminNav,Color.White,RGBA(32,42,68,1))",
                 "Property": "Color",
                 "RuleProviderType": "Unknown"
               },
@@ -2838,7 +2838,7 @@
               },
               {
                 "Category": "Behavior",
-                "InvariantScript": "Navigate(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen);\r\nSet(varAdminNav,false)",
+                "InvariantScript": "Navigate(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen);\nSet(varAdminNav,false)",
                 "Property": "OnSelect",
                 "RuleProviderType": "Unknown"
               }
@@ -3102,11 +3102,11 @@
             "OptimizeForDevices": "Off",
             "Parent": "galNavigation",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 2227,
+            "PublishOrderIndex": 14,
             "Rules": [
               {
                 "Category": "Data",
-                "InvariantScript": "\"All Requests\"\r\n//ThisItem.Title",
+                "InvariantScript": "\"All Requests\"\n//ThisItem.Title",
                 "Property": "Text",
                 "RuleProviderType": "Unknown"
               },
@@ -3340,7 +3340,7 @@
               },
               {
                 "Category": "Design",
-                "InvariantScript": "//If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen && !varAdminNav,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))\r\nIf(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen && !varAdminNav,Color.White,RGBA(32,42,68,1))",
+                "InvariantScript": "//If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen && !varAdminNav,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))\nIf(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen && !varAdminNav,Color.White,RGBA(32,42,68,1))",
                 "Property": "Color",
                 "RuleProviderType": "Unknown"
               },
@@ -3352,7 +3352,7 @@
               },
               {
                 "Category": "Behavior",
-                "InvariantScript": "Navigate(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen);\r\nSet(varAdminNav,false)",
+                "InvariantScript": "Navigate(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen);\nSet(varAdminNav,false)",
                 "Property": "OnSelect",
                 "RuleProviderType": "Unknown"
               }
@@ -3616,11 +3616,11 @@
             "OptimizeForDevices": "Off",
             "Parent": "galNavigation",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 2228,
+            "PublishOrderIndex": 15,
             "Rules": [
               {
                 "Category": "Data",
-                "InvariantScript": "\"Pending Requests\"\r\n//ThisItem.Title",
+                "InvariantScript": "\"Pending Requests\"\n//ThisItem.Title",
                 "Property": "Text",
                 "RuleProviderType": "Unknown"
               },
@@ -3854,7 +3854,7 @@
               },
               {
                 "Category": "Design",
-                "InvariantScript": "//If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen && !varAdminNav,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))\r\nIf(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen && !varAdminNav,Color.White,RGBA(32,42,68,1))",
+                "InvariantScript": "//If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen && !varAdminNav,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))\nIf(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen && !varAdminNav,Color.White,RGBA(32,42,68,1))",
                 "Property": "Color",
                 "RuleProviderType": "Unknown"
               },
@@ -3866,7 +3866,7 @@
               },
               {
                 "Category": "Behavior",
-                "InvariantScript": "Navigate(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen);\r\nSet(varAdminNav,false)",
+                "InvariantScript": "Navigate(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen);\nSet(varAdminNav,false)",
                 "Property": "OnSelect",
                 "RuleProviderType": "Unknown"
               }
@@ -4130,11 +4130,11 @@
             "OptimizeForDevices": "Off",
             "Parent": "galNavigation",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 2229,
+            "PublishOrderIndex": 16,
             "Rules": [
               {
                 "Category": "Data",
-                "InvariantScript": "\"Rejected Requests\"\r\n//ThisItem.Title",
+                "InvariantScript": "\"Rejected Requests\"\n//ThisItem.Title",
                 "Property": "Text",
                 "RuleProviderType": "Unknown"
               },
@@ -4374,13 +4374,13 @@
               },
               {
                 "Category": "Design",
-                "InvariantScript": "//If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen && !varAdminNav,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))\r\nIf(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen && !varAdminNav,Color.White,RGBA(32,42,68,1))",
+                "InvariantScript": "//If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen && !varAdminNav,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))\nIf(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen && !varAdminNav,Color.White,RGBA(32,42,68,1))",
                 "Property": "Color",
                 "RuleProviderType": "Unknown"
               },
               {
                 "Category": "Behavior",
-                "InvariantScript": "Navigate(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen);\r\nSet(varAdminNav,false)",
+                "InvariantScript": "Navigate(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen);\nSet(varAdminNav,false)",
                 "Property": "OnSelect",
                 "RuleProviderType": "Unknown"
               }
@@ -4644,11 +4644,11 @@
             "OptimizeForDevices": "Off",
             "Parent": "galNavigation",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 2230,
+            "PublishOrderIndex": 17,
             "Rules": [
               {
                 "Category": "Data",
-                "InvariantScript": "\"Cancelled Requests\"\r\n//ThisItem.Title",
+                "InvariantScript": "\"Cancelled Requests\"\n//ThisItem.Title",
                 "Property": "Text",
                 "RuleProviderType": "Unknown"
               },
@@ -4888,13 +4888,13 @@
               },
               {
                 "Category": "Design",
-                "InvariantScript": "//If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen && !varAdminNav,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))\r\nIf(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen && !varAdminNav,Color.White,RGBA(32,42,68,1))",
+                "InvariantScript": "//If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen && !varAdminNav,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))\nIf(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen && !varAdminNav,Color.White,RGBA(32,42,68,1))",
                 "Property": "Color",
                 "RuleProviderType": "Unknown"
               },
               {
                 "Category": "Behavior",
-                "InvariantScript": "Navigate(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen);\r\nSet(varAdminNav,false)",
+                "InvariantScript": "Navigate(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen);\nSet(varAdminNav,false)",
                 "Property": "OnSelect",
                 "RuleProviderType": "Unknown"
               }
@@ -5158,11 +5158,11 @@
             "OptimizeForDevices": "Off",
             "Parent": "galNavigation",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 2231,
+            "PublishOrderIndex": 18,
             "Rules": [
               {
                 "Category": "Data",
-                "InvariantScript": "\"Completed Requests\"\r\n//ThisItem.Title",
+                "InvariantScript": "\"Completed Requests\"\n//ThisItem.Title",
                 "Property": "Text",
                 "RuleProviderType": "Unknown"
               },
@@ -5402,13 +5402,13 @@
               },
               {
                 "Category": "Design",
-                "InvariantScript": "//If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen && !varAdminNav,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))\r\nIf(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen && !varAdminNav,Color.White,RGBA(32,42,68,1))",
+                "InvariantScript": "//If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen && !varAdminNav,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))\nIf(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen && !varAdminNav,Color.White,RGBA(32,42,68,1))",
                 "Property": "Color",
                 "RuleProviderType": "Unknown"
               },
               {
                 "Category": "Behavior",
-                "InvariantScript": "Navigate(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen);\r\nSet(varAdminNav,false)",
+                "InvariantScript": "Navigate(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen);\nSet(varAdminNav,false)",
                 "Property": "OnSelect",
                 "RuleProviderType": "Unknown"
               }
@@ -5672,11 +5672,11 @@
             "OptimizeForDevices": "Off",
             "Parent": "galNavigation",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 2232,
+            "PublishOrderIndex": 19,
             "Rules": [
               {
                 "Category": "Data",
-                "InvariantScript": "\"Delegation\"\r\n//ThisItem.Title",
+                "InvariantScript": "\"Delegation\"\n//ThisItem.Title",
                 "Property": "Text",
                 "RuleProviderType": "Unknown"
               },
@@ -5916,13 +5916,13 @@
               },
               {
                 "Category": "Design",
-                "InvariantScript": "//If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen && !varAdminNav,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))\r\nIf(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen && !varAdminNav,Color.White,RGBA(32,42,68,1))",
+                "InvariantScript": "//If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen && !varAdminNav,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))\nIf(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen && !varAdminNav,Color.White,RGBA(32,42,68,1))",
                 "Property": "Color",
                 "RuleProviderType": "Unknown"
               },
               {
                 "Category": "Behavior",
-                "InvariantScript": "Navigate(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen);\r\nSet(varAdminNav,false)",
+                "InvariantScript": "Navigate(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen);\nSet(varAdminNav,false)",
                 "Property": "OnSelect",
                 "RuleProviderType": "Unknown"
               }
@@ -6200,11 +6200,11 @@
             "OptimizeForDevices": "Off",
             "Parent": "galNavigation",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 2233,
+            "PublishOrderIndex": 20,
             "Rules": [
               {
                 "Category": "Data",
-                "InvariantScript": "\"Admin\"\r\n//ThisItem.Title",
+                "InvariantScript": "\"Admin\"\n//ThisItem.Title",
                 "Property": "Text",
                 "RuleProviderType": "Unknown"
               },
@@ -6354,7 +6354,7 @@
               },
               {
                 "Category": "Design",
-                "InvariantScript": "//true\r\n//If(User().Email in CollAdmin,true,false)\r\nIf(HeaderNavigation.AdminVisibleButton,true,false)",
+                "InvariantScript": "//true\n//If(User().Email in CollAdmin,true,false)\nIf(HeaderNavigation.AdminVisibleButton,true,false)",
                 "Property": "Visible",
                 "RuleProviderType": "Unknown"
               },
@@ -6438,19 +6438,19 @@
               },
               {
                 "Category": "Design",
-                "InvariantScript": "If(varAdminNav,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))\r\n\r\n//If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Title=\"Admin\",RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))",
+                "InvariantScript": "If(varAdminNav,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))\n\n//If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Title=\"Admin\",RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))",
                 "Property": "PressedColor",
                 "RuleProviderType": "Unknown"
               },
               {
                 "Category": "Design",
-                "InvariantScript": "If(varAdminNav,Color.White,RGBA(32,42,68,1))\r\n//If(varAdminNav,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))\r\n\r\n//If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))",
+                "InvariantScript": "If(varAdminNav,Color.White,RGBA(32,42,68,1))\n//If(varAdminNav,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))\n\n//If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))",
                 "Property": "Color",
                 "RuleProviderType": "Unknown"
               },
               {
                 "Category": "Behavior",
-                "InvariantScript": "//UpdateContext({varAdminNav:!varAdminNav});\r\nSet(varAdminNav,!varAdminNav)\r\n//Navigate(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen)",
+                "InvariantScript": "//UpdateContext({varAdminNav:!varAdminNav});\nSet(varAdminNav,!varAdminNav)\n//Navigate(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen)",
                 "Property": "OnSelect",
                 "RuleProviderType": "Unknown"
               }
@@ -6586,7 +6586,7 @@
             "OptimizeForDevices": "Off",
             "Parent": "galNavigation",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 2234,
+            "PublishOrderIndex": 21,
             "Rules": [
               {
                 "Category": "Data",
@@ -6870,7 +6870,7 @@
         "OptimizeForDevices": "Off",
         "Parent": "HeaderNavigation",
         "PersistMetaDataIDKey": false,
-        "PublishOrderIndex": 2222,
+        "PublishOrderIndex": 6,
         "Rules": [
           {
             "Category": "Data",
@@ -6880,7 +6880,7 @@
           },
           {
             "Category": "Data",
-            "InvariantScript": "Sequence(1)\r\n//HeaderNavigation.NavigationItems",
+            "InvariantScript": "Sequence(1)\n//HeaderNavigation.NavigationItems",
             "Property": "Items",
             "RuleProviderType": "Unknown"
           },
@@ -6922,7 +6922,7 @@
           },
           {
             "Category": "Design",
-            "InvariantScript": "//Parent.Width\r\nIfError((Parent.Width-Self.X-imgProfile.Width)/CountRows(Self.AllItems),0)",
+            "InvariantScript": "//Parent.Width\nIfError((Parent.Width-Self.X-imgProfile.Width)/CountRows(Self.AllItems),0)",
             "Property": "TemplateSize",
             "RuleProviderType": "Unknown"
           },
@@ -6946,13 +6946,13 @@
           },
           {
             "Category": "Design",
-            "InvariantScript": "//Parent.Height/2\r\n40",
+            "InvariantScript": "//Parent.Height/2\n40",
             "Property": "Height",
             "RuleProviderType": "Unknown"
           },
           {
             "Category": "Design",
-            "InvariantScript": "0\r\n//lblHeader.Y+lblHeader.Height",
+            "InvariantScript": "0\n//lblHeader.Y+lblHeader.Height",
             "Property": "Y",
             "RuleProviderType": "Unknown"
           },
@@ -7175,11 +7175,11 @@
         "OptimizeForDevices": "Off",
         "Parent": "HeaderNavigation",
         "PersistMetaDataIDKey": false,
-        "PublishOrderIndex": 2235,
+        "PublishOrderIndex": 7,
         "Rules": [
           {
             "Category": "Data",
-            "InvariantScript": "If(IsBlankOrError(User().Image),'user-male-circle--v1',User().Image)\r\n",
+            "InvariantScript": "If(IsBlankOrError(User().Image),'user-male-circle--v1',User().Image)\n",
             "Property": "Image",
             "RuleProviderType": "Unknown"
           },
@@ -7293,7 +7293,7 @@
           },
           {
             "Category": "Design",
-            "InvariantScript": "40\r\n//Parent.Height",
+            "InvariantScript": "40\n//Parent.Height",
             "Property": "Height",
             "RuleProviderType": "Unknown"
           },
@@ -7489,7 +7489,7 @@
         "OptimizeForDevices": "Off",
         "Parent": "HeaderNavigation",
         "PersistMetaDataIDKey": false,
-        "PublishOrderIndex": 2236,
+        "PublishOrderIndex": 8,
         "Rules": [
           {
             "Category": "Data",
@@ -7645,7 +7645,7 @@
             "OptimizeForDevices": "Off",
             "Parent": "galAdminSubMenu",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 2238,
+            "PublishOrderIndex": 22,
             "Rules": [
               {
                 "Category": "Design",
@@ -7838,7 +7838,7 @@
             "OptimizeForDevices": "Off",
             "Parent": "galAdminSubMenu",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 2239,
+            "PublishOrderIndex": 23,
             "Rules": [
               {
                 "Category": "Data",
@@ -8058,7 +8058,7 @@
               },
               {
                 "Category": "Behavior",
-                "InvariantScript": "//Select(Parent)\r\nLaunch(ThisItem.List)",
+                "InvariantScript": "//Select(Parent)\nLaunch(ThisItem.List)",
                 "Property": "OnSelect",
                 "RuleProviderType": "Unknown"
               }
@@ -8194,7 +8194,7 @@
         "OptimizeForDevices": "Off",
         "Parent": "HeaderNavigation",
         "PersistMetaDataIDKey": false,
-        "PublishOrderIndex": 2237,
+        "PublishOrderIndex": 9,
         "Rules": [
           {
             "Category": "Data",
@@ -8252,7 +8252,7 @@
           },
           {
             "Category": "Design",
-            "InvariantScript": "//Min(160, Self.Height - 60)\r\n40",
+            "InvariantScript": "//Min(160, Self.Height - 60)\n40",
             "Property": "TemplateSize",
             "RuleProviderType": "Unknown"
           },
@@ -8288,7 +8288,7 @@
           },
           {
             "Category": "Design",
-            "InvariantScript": "btnAdmin.X+galNavigation.X\r\n//Parent.X+Parent.Width-Self.Width\r\n//galNavigation.X+galNavigation.Width-btnNavigation.Width",
+            "InvariantScript": "btnAdmin.X+galNavigation.X\n//Parent.X+Parent.Width-Self.Width\n//galNavigation.X+galNavigation.Width-btnNavigation.Width",
             "Property": "X",
             "RuleProviderType": "Unknown"
           },
@@ -8460,7 +8460,7 @@
         "NameMapSourceSchema": "?"
       }
     ],
-    "LastModifiedTimestamp": "638412525682256141",
+    "LastModifiedTimestamp": "638412597361040684",
     "Name": "HeaderNavigation",
     "Rules": [
       {
@@ -8471,7 +8471,7 @@
       },
       {
         "Category": "Data",
-        "InvariantScript": "colLeftNav\r\n/*Table({\r\n    No:1,\r\n        Title: \"Overview\",\r\n        Screen:'Home Screen'\r\n})*/\r\n/*Table({\r\n    No:1,\r\n        Title: \"Overview\",\r\n        Screen:Scr_Home\r\n},\r\n{No:2,\r\n        Title: \"Workload\",\r\n         Screen:Scr_WorkLoad\r\n},\r\n{No:3,\r\n        Title: \"All Requests\",\r\n         Screen:Scr_AllRequests\r\n},\r\n{No:4,\r\n        Title: \"Pending Requests\",\r\n         Screen:Scr_PendingRequest\r\n},\r\n{No:5,\r\n        Title: \"Rejected Requests\",\r\n         Screen:Scr_RejectedRequest\r\n},\r\n{No:6,\r\n        Title: \"Cancelled Requests\",\r\n         Screen:Scr_CancelledRequest\r\n},\r\n{No:7,\r\n        Title: \"Completed Requests\",\r\n         Screen:Scr_CompletedRequest\r\n},\r\n{No:8,\r\n        Title: \"Delegation\",\r\n         Screen:Scr_Delegation,\r\n         Screen2:Scr_CreateDelegation\r\n},\r\n{No:9,\r\n        Title: \"Admin\"\r\n       // List:LookUp(GlobalConfig,Key=\"AdminList\").Value\r\n        \r\n})*/\r\n",
+        "InvariantScript": "colLeftNav\n/*Table({\n    No:1,\n        Title: \"Overview\",\n        Screen:'Home Screen'\n})*/\n/*Table({\n    No:1,\n        Title: \"Overview\",\n        Screen:Scr_Home\n},\n{No:2,\n        Title: \"Workload\",\n         Screen:Scr_WorkLoad\n},\n{No:3,\n        Title: \"All Requests\",\n         Screen:Scr_AllRequests\n},\n{No:4,\n        Title: \"Pending Requests\",\n         Screen:Scr_PendingRequest\n},\n{No:5,\n        Title: \"Rejected Requests\",\n         Screen:Scr_RejectedRequest\n},\n{No:6,\n        Title: \"Cancelled Requests\",\n         Screen:Scr_CancelledRequest\n},\n{No:7,\n        Title: \"Completed Requests\",\n         Screen:Scr_CompletedRequest\n},\n{No:8,\n        Title: \"Delegation\",\n         Screen:Scr_Delegation,\n         Screen2:Scr_CreateDelegation\n},\n{No:9,\n        Title: \"Admin\"\n       // List:LookUp(GlobalConfig,Key=\"AdminList\").Value\n        \n})*/\n",
         "Property": "NavigationItems",
         "RuleProviderType": "System"
       },
@@ -8489,7 +8489,7 @@
       },
       {
         "Category": "Data",
-        "InvariantScript": "Table(\r\n            {\r\n                Submenu: \"Legal Entity\",\r\n                List:LookUp(GlobalConfig,Key=\"LegalEntity\").Value\r\n            },\r\n            {\r\n                Submenu:\"Process Owner\",\r\n                List:LookUp(GlobalConfig,Key=\"ProcessOwner\").Value\r\n            },\r\n            {\r\n                Submenu:\"Member Corporate Management Committee\",\r\n                List:LookUp(GlobalConfig,Key=\"MemberofCorporateManagement\").Value\r\n            },\r\n            {\r\n                Submenu:\"Country Amendments\",\r\n                List:LookUp(GlobalConfig,Key=\"CountryAmendments\").Value\r\n            },\r\n            {\r\n                Submenu:\"Export Users\",\r\n                List:LookUp(GlobalConfig,Key=\"ExportUsers\").Value\r\n            },\r\n            {\r\n                Submenu:\"Import Management Entity\",\r\n                List:LookUp(GlobalConfig,Key=\"ImportManagementEntity\").Value\r\n            },\r\n            {\r\n                Submenu:\"ME Table - Special Approvers\",\r\n                List:LookUp(GlobalConfig,Key=\"METable\").Value\r\n            },\r\n            {\r\n                Submenu:\"Email\",\r\n                List:LookUp(GlobalConfig,Key=\"Email\").Value\r\n            }\r\n        \r\n)",
+        "InvariantScript": "Table(\n            {\n                Submenu: \"Legal Entity\",\n                List:LookUp(GlobalConfig,Key=\"LegalEntity\").Value\n            },\n            {\n                Submenu:\"Process Owner\",\n                List:LookUp(GlobalConfig,Key=\"ProcessOwner\").Value\n            },\n            {\n                Submenu:\"Member Corporate Management Committee\",\n                List:LookUp(GlobalConfig,Key=\"MemberofCorporateManagement\").Value\n            },\n            {\n                Submenu:\"Country Amendments\",\n                List:LookUp(GlobalConfig,Key=\"CountryAmendments\").Value\n            },\n            {\n                Submenu:\"Export Users\",\n                List:LookUp(GlobalConfig,Key=\"ExportUsers\").Value\n            },\n            {\n                Submenu:\"Import Management Entity\",\n                List:LookUp(GlobalConfig,Key=\"ImportManagementEntity\").Value\n            },\n            {\n                Submenu:\"ME Table - Special Approvers\",\n                List:LookUp(GlobalConfig,Key=\"METable\").Value\n            },\n            {\n                Submenu:\"Email\",\n                List:LookUp(GlobalConfig,Key=\"Email\").Value\n            }\n        \n)",
         "Property": "SubMenuNav",
         "RuleProviderType": "System"
       },
@@ -8537,7 +8537,7 @@
       },
       {
         "Category": "Design",
-        "InvariantScript": "//HeaderNavigation.HeaderHeight\r\nIf(HeaderNavigation.AdminVisible,480,40)\r\n",
+        "InvariantScript": "//HeaderNavigation.HeaderHeight\nIf(HeaderNavigation.AdminVisible,480,40)\n",
         "Property": "Height",
         "RuleProviderType": "System"
       }
@@ -8625,7 +8625,7 @@
   "IsPcfControl": false,
   "IsPremiumPcfControl": false,
   "IsWidgetTemplate": false,
-  "LastModifiedTimestamp": "638412525682256141",
+  "LastModifiedTimestamp": "638412597361040684",
   "Name": "ad61c5fa43d24731876a5d4c7918082d",
   "OverridableProperties": {},
   "Version": "638073198860065802"

@@ -10,10 +10,20 @@ Screen1 As screen:
         ZIndex: =1
 
     ButtonCanvas1 As Button:
+        BasePaletteColor: =
         DisplayMode: =DisplayMode.Edit
+        FontColor: =
         Height: =62
         Width: =462
         X: =60
         Y: =60
         ZIndex: =2
+
+    "Progress1 As 'Progress Bar'":
+        DisplayMode: =DisplayMode.Edit
+        Height: =45
+        Width: =450
+        X: =102
+        Y: =538
+        ZIndex: =3
 
