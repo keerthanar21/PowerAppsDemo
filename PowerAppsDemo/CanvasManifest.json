@@ -154,6 +154,7 @@
     "Scr_Export",
     "Scr_ArchiveExport",
     "Scr_Home_2",
-    "Scr_SplashScreen"
+    "Scr_SplashScreen",
+    "Screen1"
   ]
 }
