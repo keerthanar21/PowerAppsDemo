@@ -1,0 +1,606 @@
+HeaderNavigation As CanvasComponent:
+    AdminVisible: =galAdminSubMenu.Visible
+    AdminVisibleButton: =AdminAccess
+    Fill: =RGBA(255, 255, 255, 1)
+    FontFamily: ="'Roboto Condensed',sans-serif"
+    FontSize: =10
+    HeaderHeight: =480
+    Height: |
+        =//HeaderNavigation.HeaderHeight
+        If(HeaderNavigation.AdminVisible,480,40)
+    NavigationItems: |
+        =colLeftNav
+        /*Table({
+            No:1,
+                Title: "Overview",
+                Screen:'Home Screen'
+        })*/
+        /*Table({
+            No:1,
+                Title: "Overview",
+                Screen:Scr_Home
+        },
+        {No:2,
+                Title: "Workload",
+                 Screen:Scr_WorkLoad
+        },
+        {No:3,
+                Title: "All Requests",
+                 Screen:Scr_AllRequests
+        },
+        {No:4,
+                Title: "Pending Requests",
+                 Screen:Scr_PendingRequest
+        },
+        {No:5,
+                Title: "Rejected Requests",
+                 Screen:Scr_RejectedRequest
+        },
+        {No:6,
+                Title: "Cancelled Requests",
+                 Screen:Scr_CancelledRequest
+        },
+        {No:7,
+                Title: "Completed Requests",
+                 Screen:Scr_CompletedRequest
+        },
+        {No:8,
+                Title: "Delegation",
+                 Screen:Scr_Delegation,
+                 Screen2:Scr_CreateDelegation
+        },
+        {No:9,
+                Title: "Admin"
+               // List:LookUp(GlobalConfig,Key="AdminList").Value
+                
+        })*/
+    SubMenuNav: |-
+        =Table(
+                    {
+                        Submenu: "Legal Entity",
+                        List:LookUp(GlobalConfig,Key="LegalEntity").Value
+                    },
+                    {
+                        Submenu:"Process Owner",
+                        List:LookUp(GlobalConfig,Key="ProcessOwner").Value
+                    },
+                    {
+                        Submenu:"Member Corporate Management Committee",
+                        List:LookUp(GlobalConfig,Key="MemberofCorporateManagement").Value
+                    },
+                    {
+                        Submenu:"Country Amendments",
+                        List:LookUp(GlobalConfig,Key="CountryAmendments").Value
+                    },
+                    {
+                        Submenu:"Export Users",
+                        List:LookUp(GlobalConfig,Key="ExportUsers").Value
+                    },
+                    {
+                        Submenu:"Import Management Entity",
+                        List:LookUp(GlobalConfig,Key="ImportManagementEntity").Value
+                    },
+                    {
+                        Submenu:"ME Table - Special Approvers",
+                        List:LookUp(GlobalConfig,Key="METable").Value
+                    },
+                    {
+                        Submenu:"Email",
+                        List:LookUp(GlobalConfig,Key="Email").Value
+                    }
+                
+        )
+    Width: =App.Width
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    "galNavigation As gallery.'BrowseLayout_Horizontal_TwoTextOneImageVariant_ver4.0'":
+        AccessibleLabel: ="Header Tab"
+        BorderColor: =RGBA(0, 0, 0, 1)
+        BorderStyle: =BorderStyle.None
+        BorderThickness: =2
+        Fill: =RGBA(102, 182, 227, 1)
+        Height: |-
+            =//Parent.Height/2
+            40
+        Items: |-
+            =Sequence(1)
+            //HeaderNavigation.NavigationItems
+        OnSelect: =//Set(varTabSelect,ThisItem.No)
+        ShowScrollbar: =false
+        TabIndex: =0
+        TemplatePadding: =1
+        TemplateSize: |-
+            =//Parent.Width
+            IfError((Parent.Width-Self.X-imgProfile.Width)/CountRows(Self.AllItems),0)
+        Width: =Parent.Width-Self.X-imgProfile.Width
+        X: =imgLogo.X+imgLogo.Width+5
+        Y: |-
+            =0
+            //lblHeader.Y+lblHeader.Height
+        ZIndex: =1
+
+        recNavigation As rectangle:
+            AccessibleLabel: ="Navigation"
+            BorderStyle: =BorderStyle.None
+            DisplayMode: =DisplayMode.View
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =5
+            OnSelect: =//Navigate(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen)
+            TabIndex: =0
+            Visible: =false
+            Width: =btnNavigation.Width
+            X: =btnNavigation.X
+            Y: =Parent.TemplateHeight-Self.Height-1
+            ZIndex: =1
+
+        btnWorkload As button:
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =1
+            Color: |-
+                =//If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen && !varAdminNav,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))
+                If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen && !varAdminNav,Color.White,RGBA(32,42,68,1))
+            Fill: =RGBA(102, 182, 227, 1)
+            Font: =HeaderNavigation.FontFamily
+            FontWeight: =If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen,FontWeight.Bold,FontWeight.Semibold)
+            Height: =38
+            HoverColor: =Color.Navy
+            HoverFill: =Self.Fill
+            OnSelect: |-
+                =Navigate(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen);
+                Set(varAdminNav,false)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            PressedColor: =If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))
+            PressedFill: =Self.Fill
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Size: =HeaderNavigation.FontSize
+            Text: |-
+                ="Workload"
+                //ThisItem.Title
+            Width: =100
+            X: =btnOverview.X+btnOverview.Width
+            ZIndex: =2
+
+        btnAllRequest As button:
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =1
+            Color: |-
+                =//If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen && !varAdminNav,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))
+                If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen && !varAdminNav,Color.White,RGBA(32,42,68,1))
+            Fill: =RGBA(102, 182, 227, 1)
+            Font: =HeaderNavigation.FontFamily
+            FontWeight: =If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen,FontWeight.Bold,FontWeight.Semibold)
+            Height: =38
+            HoverColor: =Color.Navy
+            HoverFill: =Self.Fill
+            OnSelect: |-
+                =Navigate(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen);
+                Set(varAdminNav,false)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            PressedColor: =If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))
+            PressedFill: =Self.Fill
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Size: =HeaderNavigation.FontSize
+            Text: |-
+                ="All Requests"
+                //ThisItem.Title
+            Visible: =If(HeaderNavigation.AdminVisibleButton,true,false)
+            Width: =120
+            X: =btnWorkload.X+btnWorkload.Width
+            ZIndex: =3
+
+        btnPendingRequest As button:
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =1
+            Color: |-
+                =//If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen && !varAdminNav,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))
+                If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen && !varAdminNav,Color.White,RGBA(32,42,68,1))
+            Fill: =RGBA(102, 182, 227, 1)
+            Font: =HeaderNavigation.FontFamily
+            FontWeight: =If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen,FontWeight.Bold,FontWeight.Semibold)
+            Height: =38
+            HoverColor: =Color.Navy
+            HoverFill: =Self.Fill
+            OnSelect: |-
+                =Navigate(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen);
+                Set(varAdminNav,false)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            PressedColor: =If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))
+            PressedFill: =Self.Fill
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Size: =HeaderNavigation.FontSize
+            Text: |-
+                ="Pending Requests"
+                //ThisItem.Title
+            Width: =150//Parent.Width/9
+            X: =If(btnAllRequest.Visible,btnAllRequest.X+btnAllRequest.Width,btnWorkload.X+btnWorkload.Width)
+            ZIndex: =4
+
+        btnRejectedRequest As button:
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =1
+            Color: |-
+                =//If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen && !varAdminNav,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))
+                If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen && !varAdminNav,Color.White,RGBA(32,42,68,1))
+            Fill: =RGBA(102, 182, 227, 1)
+            Font: =HeaderNavigation.FontFamily
+            FontWeight: =If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen,FontWeight.Bold,FontWeight.Semibold)
+            Height: =38
+            HoverColor: =Color.Navy
+            HoverFill: =Self.Fill
+            OnSelect: |-
+                =Navigate(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen);
+                Set(varAdminNav,false)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            PressedColor: =If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))
+            PressedFill: =Self.Fill
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Size: =HeaderNavigation.FontSize
+            Text: |-
+                ="Rejected Requests"
+                //ThisItem.Title
+            Width: =150//Parent.Width/9
+            X: =btnPendingRequest.X+btnPendingRequest.Width
+            ZIndex: =5
+
+        btnCancelledRequest As button:
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =1
+            Color: |-
+                =//If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen && !varAdminNav,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))
+                If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen && !varAdminNav,Color.White,RGBA(32,42,68,1))
+            Fill: =RGBA(102, 182, 227, 1)
+            Font: =HeaderNavigation.FontFamily
+            FontWeight: =If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen,FontWeight.Bold,FontWeight.Semibold)
+            Height: =38
+            HoverColor: =Color.Navy
+            HoverFill: =Self.Fill
+            OnSelect: |-
+                =Navigate(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen);
+                Set(varAdminNav,false)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            PressedColor: =If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))
+            PressedFill: =Self.Fill
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Size: =HeaderNavigation.FontSize
+            Text: |-
+                ="Cancelled Requests"
+                //ThisItem.Title
+            Width: =150//Parent.Width/9
+            X: =btnRejectedRequest.X+btnRejectedRequest.Width
+            ZIndex: =6
+
+        btnCompletedRequest As button:
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =1
+            Color: |-
+                =//If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen && !varAdminNav,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))
+                If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen && !varAdminNav,Color.White,RGBA(32,42,68,1))
+            Fill: =RGBA(102, 182, 227, 1)
+            Font: =HeaderNavigation.FontFamily
+            FontWeight: =If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen,FontWeight.Bold,FontWeight.Semibold)
+            Height: =38
+            HoverColor: =Color.Navy
+            HoverFill: =Self.Fill
+            OnSelect: |-
+                =Navigate(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen);
+                Set(varAdminNav,false)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            PressedColor: =If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))
+            PressedFill: =Self.Fill
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Size: =HeaderNavigation.FontSize
+            Text: |-
+                ="Completed Requests"
+                //ThisItem.Title
+            Width: =150//Parent.Width/9
+            X: =btnCancelledRequest.X+btnCancelledRequest.Width
+            ZIndex: =7
+
+        btnDelegation As button:
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =1
+            Color: |-
+                =//If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen && !varAdminNav,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))
+                If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen && !varAdminNav,Color.White,RGBA(32,42,68,1))
+            Fill: =RGBA(102, 182, 227, 1)
+            Font: =HeaderNavigation.FontFamily
+            FontWeight: =If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen,FontWeight.Bold,FontWeight.Semibold)
+            Height: =38
+            HoverColor: =Color.Navy
+            HoverFill: =Self.Fill
+            OnSelect: |-
+                =Navigate(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen);
+                Set(varAdminNav,false)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            PressedColor: =If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))
+            PressedFill: =Self.Fill
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Size: =HeaderNavigation.FontSize
+            Text: |-
+                ="Delegation"
+                //ThisItem.Title
+            Width: =100
+            X: =btnCompletedRequest.X+btnCompletedRequest.Width
+            ZIndex: =8
+
+        btnAdmin As button:
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =1
+            Color: |-
+                =If(varAdminNav,Color.White,RGBA(32,42,68,1))
+                //If(varAdminNav,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))
+                
+                //If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))
+            Fill: =RGBA(0, 0, 0, 0)
+            Font: =HeaderNavigation.FontFamily
+            FontWeight: =If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen,FontWeight.Bold,FontWeight.Semibold)
+            Height: =38
+            HoverColor: =Color.Navy
+            HoverFill: =Self.Fill
+            OnSelect: |-
+                =//UpdateContext({varAdminNav:!varAdminNav});
+                Set(varAdminNav,!varAdminNav)
+                //Navigate(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            PressedColor: |-
+                =If(varAdminNav,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))
+                
+                //If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Title="Admin",RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))
+            PressedFill: =Self.Fill
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Size: =HeaderNavigation.FontSize
+            Text: |-
+                ="Admin"
+                //ThisItem.Title
+            Visible: |-
+                =//true
+                //If(User().Email in CollAdmin,true,false)
+                If(HeaderNavigation.AdminVisibleButton,true,false)
+            Width: =120
+            X: =btnDelegation.X+btnDelegation.Width-20
+            ZIndex: =9
+
+        btnOverview As button:
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =1
+            Color: |-
+                =//If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen && !varAdminNav,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))
+                If(
+                    LookUp(
+                        HeaderNavigation.NavigationItems,
+                        Title = Self.Text
+                    ).Screen = App.ActiveScreen && !varAdminNav,
+                    Color.White,
+                    RGBA(32,42,68,1)
+                )
+            Fill: =RGBA(102, 182, 227, 1)
+            Font: =HeaderNavigation.FontFamily
+            FontWeight: =If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen,FontWeight.Bold,FontWeight.Semibold)
+            Height: =38
+            HoverColor: =Color.Navy
+            HoverFill: =Self.Fill
+            OnSelect: |-
+                =Navigate(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen);
+                Set(varAdminNav,false)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            PressedColor: =If(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen=App.ActiveScreen,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))
+            PressedFill: =Self.Fill
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Size: =HeaderNavigation.FontSize
+            Text: |-
+                ="Overview"
+                //ThisItem.Title
+            Width: =100
+            X: =10//btnNavigation_7.X+btnNavigation_7.Width
+            ZIndex: =10
+
+        btnNavigation As button:
+            BorderColor: =RGBA(230, 230, 230, 1)
+            BorderThickness: =0.1
+            Color: =//If(ThisItem.Screen=App.ActiveScreen ||(varAdminNav=true && ThisItem.Title="Admin"),RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))
+            Fill: =RGBA(0, 0, 0, 0)
+            Font: =HeaderNavigation.FontFamily
+            FontWeight: =//If(ThisItem.Screen=App.ActiveScreen,Bold,Normal)
+            HoverColor: =RGBA(65, 182, 230, 1)
+            HoverFill: =Self.Fill
+            OnSelect: |-
+                =//Navigate(HeaderNavigation.ScreenNavHome);
+                //If(ThisItem.Title="Admin",Set(varAdminNav,!varAdminNav),Navigate(ThisItem.Screen));
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            PressedColor: =//If(ThisItem.Screen=App.ActiveScreen,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))
+            PressedFill: =Self.Fill
+            RadiusBottomLeft: =0.1
+            RadiusBottomRight: =0.1
+            RadiusTopLeft: =0.1
+            RadiusTopRight: =0.1
+            Size: =HeaderNavigation.FontSize
+            Text: |-
+                =//"Overview"
+                //ThisItem.Title
+            Visible: =false
+            Width: =Parent.TemplateWidth-5
+            ZIndex: =11
+
+    lblHeader As label:
+        BorderColor: =RGBA(203, 235, 247, 1)
+        BorderStyle: =BorderStyle.None
+        BorderThickness: =1
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledFill: =RGBA(235, 235, 235, 1)
+        DisplayMode: =DisplayMode.View
+        Font: =HeaderNavigation.FontFamily
+        FontWeight: =FontWeight.Bold
+        Height: |-
+            =//Parent.Height/2
+            40
+        LineHeight: =1
+        PaddingLeft: =15
+        Size: =18
+        Text: =""
+        Width: |-
+            =//Parent.Width
+            //galNavigation.Width
+            0
+        ZIndex: =2
+
+    imgLogo As image:
+        BorderColor: =RGBA(102, 182, 227, 1)
+        BorderStyle: =BorderStyle.None
+        BorderThickness: =0.2
+        Height: |-
+            =40
+            //Parent.Height
+        Image: =mahle_logo_2020
+        Width: =109
+        X: =20
+        Y: =lblHeader.Y/2
+        ZIndex: =3
+
+    "galAdminSubMenu As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+        AccessibleLabel: ="Admin Navigation Menu"
+        Fill: =RGBA(241, 244, 249, 1)
+        Height: =If(varAdminNav,CountRows(Self.AllItems)*Self.TemplateHeight,0)
+        Items: =HeaderNavigation.SubMenuNav
+        Layout: =Layout.Vertical
+        TabIndex: =0
+        TemplatePadding: =0
+        TemplateSize: |-
+            =//Min(160, Self.Height - 60)
+            40
+        Visible: =If(varAdminNav,true,false)
+        Width: =btnAdmin.Width+50
+        X: |-
+            =btnAdmin.X+galNavigation.X
+            //Parent.X+Parent.Width-Self.Width
+            //galNavigation.X+galNavigation.Width-btnNavigation.Width
+        Y: =galNavigation.Y+galNavigation.Height
+        ZIndex: =4
+
+        btnSubMenu As button:
+            Align: =Align.Left
+            BorderStyle: =BorderStyle.None
+            Color: =RGBA(30, 40, 99, 1)
+            Fill: =RGBA(241, 244, 249, 1)
+            Font: =HeaderNavigation.FontFamily
+            FontWeight: =FontWeight.Normal
+            HoverColor: =RGBA(65, 182, 230, 1)
+            HoverFill: =Self.Fill
+            OnSelect: |-
+                =//Select(Parent)
+                Launch(ThisItem.List)
+            PressedFill: =Self.Fill
+            Size: =HeaderNavigation.FontSize
+            Text: =ThisItem.Submenu
+            Width: =galAdminSubMenu.Width
+            ZIndex: =6
+
+    imgProfile As image:
+        Fill: =RGBA(102, 182, 227, 1)
+        Height: |-
+            =40
+            //Parent.Height
+        Image: |
+            =If(IsBlankOrError(User().Image),'user-male-circle--v1',User().Image)
+        PaddingBottom: =5
+        PaddingTop: =5
+        Tooltip: =User().FullName
+        Width: =50
+        X: =galNavigation.X+galNavigation.Width
+        ZIndex: =5
+
+    recLogo As rectangle:
+        AccessibleLabel: ="Navigation"
+        BorderStyle: =BorderStyle.None
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(102, 182, 227, 1)
+        Height: =2
+        OnSelect: =//Navigate(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen)
+        TabIndex: =0
+        Width: =imgLogo.Width+30
+        X: =btnNavigation.X
+        Y: =imgLogo.Y+imgLogo.Height-2
+        ZIndex: =6
+
+    recLogo_4 As rectangle:
+        AccessibleLabel: ="Navigation"
+        BorderStyle: =BorderStyle.None
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(102, 182, 227, 1)
+        Height: =2
+        OnSelect: =//Navigate(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen)
+        TabIndex: =0
+        Width: =imgLogo.Width+30
+        X: =btnNavigation.X
+        ZIndex: =7
+
+    recLogo_9 As rectangle:
+        AccessibleLabel: ="Navigation"
+        BorderStyle: =BorderStyle.None
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(102, 182, 227, 1)
+        Height: =imgLogo.Height
+        OnSelect: =//Navigate(LookUp(HeaderNavigation.NavigationItems,Title=Self.Text).Screen)
+        TabIndex: =0
+        Width: =imgLogo.X-7
+        X: =btnNavigation.X
+        ZIndex: =8
+
