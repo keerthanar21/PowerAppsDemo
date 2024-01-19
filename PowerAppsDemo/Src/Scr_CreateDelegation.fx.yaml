@@ -1,0 +1,975 @@
+"Scr_CreateDelegation As screen.'phoneLayout_FluidGridWithHeaderPageLayout_ver3.0'":
+    Fill: =RGBA(255, 255, 255, 1)
+    OnVisible: |-
+        =ClearCollect(colDelegationTab,{
+                No: 1,
+                Title: "Create Delegation",
+                Screen:Scr_CreateDelegation
+            },{
+                No: 2,
+                Title: "Create Delegation on Behalf of",
+                Screen:Scr_CreateDelegation
+            });
+            Set(
+            varRefid,
+            Text(
+                Now(),
+                "[$-en-US]yyyy-mm-dd-hh-mm-ss-fff"
+            )
+        );
+        Set(varReset,false);
+        Set(varReset,true);
+
+    Canvas4_1 As fluidGrid.fluidGridWithBlankCard:
+        BorderThickness: =0
+        Fill: =RGBA(235, 235, 235, 1)
+        Height: =Parent.Height - Self.Y
+        Width: =Parent.Width
+        Y: |-
+            =//Switch(App.ActiveScreen.Size,4,HeaderNavigation_5.Y +80,3,30,20)
+            lblNewDelegation_2.Y+lblNewDelegation_2.Height+10
+        ZIndex: =1
+
+        DataCard4_1 As dataCard:
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderStyle: =BorderStyle.Solid
+            BorderThickness: =0
+            DisplayMode: =DisplayMode.Edit
+            Fill: =RGBA(241, 244, 249, 1)
+            Height: =Parent.Height - 100
+            Width: =Parent.Width
+            X: =0
+            Y: =0
+            ZIndex: =1
+
+            Container3_1 As groupContainer.horizontalAutoLayoutContainer:
+                Height: =679
+                LayoutMode: =LayoutMode.Auto
+                LayoutOverflowY: =LayoutOverflow.Scroll
+                Width: =Parent.Width
+                X: |-
+                    =//BreadcrumbNewDelegation_1.X
+                    0
+                Y: |-
+                    =//lblNewDelegation_1.Y+lblNewDelegation_1.Height+10
+                    0
+                ZIndex: =4
+
+                Container4_1 As groupContainer.manualLayoutContainer:
+                    FillPortions: =0
+                    Height: =dtReturnDa_1.Y+dtReturnDa_1.Height+20
+                    LayoutMinHeight: =dtReturnDa_1.Y+dtReturnDa_1.Height+20
+                    LayoutMinWidth: =250
+                    Width: =Parent.Width
+                    ZIndex: =1
+
+                    Rectangle2_1 As rectangle:
+                        Fill: =RGBA(219, 219, 219, 1)
+                        Height: =2
+                        Visible: =false
+                        Width: =Container4_1.Width
+                        X: =Container4_1.X
+                        Y: =Container4_1.Y+galNewDelegation_1.Height
+                        ZIndex: =3
+
+                    lblApproverNameDelegation_2 As label:
+                        Font: =Apptheme.FontFamily
+                        Height: =35
+                        Size: =Apptheme.FontSize
+                        Text: ="Approver Name"
+                        Width: =If(App.ActiveScreen.Size>3,Parent.Width/2-150,Parent.Width-(2*Self.X))
+                        X: =lblNewDelegation_2.X
+                        Y: =lblImpNoteDelegation_1.Y+lblImpNoteDelegation_1.Height+10
+                        ZIndex: =6
+
+                    txtApproverName_2 As text:
+                        AccessibleLabel: ="Approver Name"
+                        BorderColor: =RGBA(237, 237, 237, 1)
+                        BorderThickness: =0.1
+                        Default: =varUserName
+                        DisabledBorderColor: =RGBA(255, 255, 255, 1)
+                        DisabledColor: =RGBA(0, 0, 0, 1)
+                        Fill: =RGBA(252, 252, 252, 1)
+                        Font: =Apptheme.FontFamily
+                        Height: =lblApproverNameDelegation_2.Height
+                        HoverBorderColor: =RGBA(0, 0, 0, 0)
+                        Size: =Apptheme.FontSize
+                        Width: =If(App.ActiveScreen.Size>3,Parent.Width/2-150,Parent.Width-(2*Self.X))
+                        X: =If(App.ActiveScreen.Size>3,lblApproverNameDelegation_2.X + lblApproverNameDelegation_2. Width+10,lblApproverNameDelegation_2.X)
+                        Y: =If(App.ActiveScreen.Size>3,lblApproverNameDelegation_2.Y,lblApproverNameDelegation_2.Y+lblApproverNameDelegation_2.Height+10)
+                        ZIndex: =7
+
+                    lblSubtitleApprover_1 As label:
+                        Font: =Apptheme.FontFamily
+                        Height: =lblApproverNameDelegation_2.Height
+                        Size: =Apptheme.FontSize
+                        Text: ="Select delegate Approver"
+                        Width: =If(App.ActiveScreen.Size>3,Parent.Width/2-150,Parent.Width-(2*Self.X))
+                        X: =lblApproverNameDelegation_2.X
+                        Y: |-
+                            =txtApproverName_2.Y+txtApproverName_2.Height+30
+                            //If(App.ActiveScreen.Size>2, lblApproverNameDelegation.Y,txtApproverName.Y+txtApproverName.Height+20)
+                        ZIndex: =8
+
+                    lblLeaveDa_1 As label:
+                        Font: =Apptheme.FontFamily
+                        Height: =lblApproverNameDelegation_2.Height
+                        Size: =Apptheme.FontSize
+                        Text: ="Approver Leave Date (Inclusive)"
+                        Width: =If(App.ActiveScreen.Size>3,Parent.Width/2-150,Parent.Width-(2*Self.X))
+                        X: =lblApproverNameDelegation_2.X
+                        Y: |-
+                            =cmbDelegationApprover.Y+cmbDelegationApprover.Height+10
+                            //drpSubtitleApprover.Y+drpSubtitleApprover.Height+20
+                        ZIndex: =10
+
+                    lblReturnDa_1 As label:
+                        Font: =Apptheme.FontFamily
+                        Height: =lblApproverNameDelegation_2.Height
+                        Size: =Apptheme.FontSize
+                        Text: ="Approver Return Date (Inclusive)"
+                        Width: =If(App.ActiveScreen.Size>3,Parent.Width/2-150,Parent.Width-(2*Self.X))
+                        X: =lblApproverNameDelegation_2.X
+                        Y: |-
+                            =dtLeaveDate_1.Y+dtLeaveDate_1.Height+10
+                            //If(App.ActiveScreen.Size>2, txtApproverName.Y+txtApproverName.Height+20,dtLeaveDate.Y+dtLeaveDate.Height+20)
+                        ZIndex: =12
+
+                    "galNewDelegation_1 As gallery.'BrowseLayout_Horizontal_TwoTextOneImageVariant_ver4.0'":
+                        AccessibleLabel: ="Navigation for new request"
+                        Height: =30
+                        Items: |-
+                            =Table({
+                                No:1,
+                                    Title: "Create Delegation"
+                                    
+                            },
+                            {No:2,
+                                    Title: "Create Delegation On Behalf Of"
+                                     
+                            })
+                        OnSelect: =
+                        TabIndex: =0
+                        TemplatePadding: =0
+                        TemplateSize: |
+                            =//Min(440, Self.Height - 60)
+                            IfError(Parent.Width/CountRows(Self.AllItems),0)
+                        Width: =Parent.Width
+                        WrapCount: =0
+                        ZIndex: =16
+
+                        btnNewReqNav_4 As button:
+                            Align: =Align.Left
+                            Color: =If(varCurrentDelegation=ThisItem.Title,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))
+                            Fill: =RGBA(0, 0, 0, 0)
+                            Font: =Apptheme.FontFamily
+                            Height: =30
+                            HoverBorderColor: |-
+                                =//ColorFade(Self.BorderColor, 20%)
+                                Self.Fill
+                            HoverColor: =RGBA(65, 182, 230, 1)
+                            HoverFill: |
+                                =//ColorFade(RGBA(56, 96, 178, 1), -20%)
+                                Self.Fill
+                            OnSelect: |+
+                                =Set(varCurrentDelegation,ThisItem.Title)
+                                
+                            PaddingRight: =0
+                            PressedColor: =If(varCurrentDelegation=ThisItem.Title,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))
+                            PressedFill: =Self.Fill
+                            Size: =Apptheme.FontSize
+                            Text: =ThisItem.Title
+                            Visible: =false
+                            Width: =Parent.TemplateWidth
+                            ZIndex: =4
+
+                    dtLeaveDate_1 As datepicker:
+                        AccessibleLabel: ="New Date"
+                        BorderColor: =RGBA(237, 237, 237, 1)
+                        BorderThickness: =0.5
+                        DefaultDate: =
+                        Font: =Apptheme.FontFamily
+                        Height: =lblApproverNameDelegation_2.Height
+                        Reset: =varReset
+                        Size: =Apptheme.FontSize
+                        Tooltip: ="DD/MM/YYYY"
+                        Width: =If(App.ActiveScreen.Size>3,Parent.Width/2-150,Parent.Width-(2*Self.X))
+                        X: =txtApproverName_2.X
+                        Y: |-
+                            =//lblLeaveDa_1.Y
+                            If(App.ActiveScreen.Size>3,lblLeaveDa_1.Y,lblLeaveDa_1.Y+lblLeaveDa_1.Height+10)
+                        ZIndex: =18
+
+                    dtReturnDa_1 As datepicker:
+                        AccessibleLabel: ="New Date"
+                        BorderColor: =RGBA(237, 237, 237, 1)
+                        BorderThickness: =0.5
+                        DefaultDate: =
+                        Font: =Apptheme.FontFamily
+                        Height: =lblApproverNameDelegation_2.Height
+                        Reset: =varReset
+                        Size: =Apptheme.FontSize
+                        Tooltip: ="DD/MM/YYYY"
+                        Width: =If(App.ActiveScreen.Size>3,Parent.Width/2-150,Parent.Width-(2*Self.X))
+                        X: =txtApproverName_2.X
+                        Y: |-
+                            =//lblReturnDa_1.Y
+                            If(App.ActiveScreen.Size>3,lblReturnDa_1.Y,lblReturnDa_1.Y+lblReturnDa_1.Height+10)
+                        ZIndex: =19
+
+                    cmbDelegationApprover As combobox:
+                        AccessibleLabel: ="Approver2"
+                        BorderColor: =RGBA(237, 237, 237, 1)
+                        BorderThickness: =0.1
+                        ChevronDisabledBackground: =RGBA(0, 0, 0, 0)
+                        ChevronDisabledFill: =RGBA(0, 0, 0, 0)
+                        ChevronFill: =RGBA(241, 244, 249, 1)
+                        ChevronHoverBackground: =//ColorFade(RGBA(56, 96, 178, 1), -20%)
+                        DefaultSelectedItems: =
+                        DisplayFields: =["DisplayName","Mail"]
+                        DisplayMode: =
+                        Font: =Apptheme.FontFamily
+                        Height: =lblApproverNameDelegation_2.Height
+                        HoverBorderColor: =RGBA(255, 255, 255, 1)
+                        HoverFill: =RGBA(255, 255, 255, 1)
+                        Items: |-
+                            =Office365Users.SearchUser({searchTerm:cmbDelegationApprover.SearchText})
+                        OnChange: |
+                            =ClearCollect(
+                                colApproverValidation,
+                                {
+                                    Errors: If(cmbCurrentUser_1.Selected.DisplayName = Lower(cmbApprover1_1.Selected.DisplayName),
+                                        LookUp(
+                                            ValidationErrorMessage,
+                                            Key = "errSameApprovers",
+                                            Value
+                                        )
+                                    )
+                                }
+                            );
+                            If(
+                               // CountA(colPRValidation) > 0,
+                                CountRows(
+                                    Filter(
+                                        colApproverValidation,
+                                        !IsBlank(Errors)
+                                    )
+                                ) > 0,
+                                UpdateContext(
+                                    {
+                                        varValidationPopUp: true,
+                                        Loading: false
+                                    }
+                                ))
+                        PressedColor: =RGBA(0, 0, 0, 1)
+                        PressedFill: =RGBA(255, 255, 255, 1)
+                        Reset: =varReset
+                        SearchFields: =["DisplayName"]
+                        SearchItems: |-
+                            =Search(Office365Users.SearchUser({searchTerm:cmbDelegationApprover.SearchText}),cmbDelegationApprover.SearchText,"DisplayName")
+                        SelectionColor: =RGBA(0, 0, 0, 1)
+                        SelectionFill: =RGBA(204, 231, 246, 1)
+                        SelectMultiple: =false
+                        Size: =Apptheme.FontSize
+                        Template: =ListItemTemplate.Person
+                        Width: =If(App.ActiveScreen.Size>3,Parent.Width/2-150,Parent.Width-(2*Self.X))
+                        X: =txtApproverName_2.X
+                        Y: |-
+                            =//lblSubtitleApprover_1.Y
+                            If(App.ActiveScreen.Size>3,lblSubtitleApprover_1.Y,lblSubtitleApprover_1.Y+lblSubtitleApprover_1.Height+10)
+                        ZIndex: =31
+
+                    lblImpNoteDelegation_1 As label:
+                        AutoHeight: =true
+                        Font: =Apptheme.FontFamily
+                        FontWeight: =FontWeight.Semibold
+                        Height: =lblApproverNameDelegation_2.Height
+                        Size: =Apptheme.FontSize
+                        Text: |-
+                            ="Important: Please make delegation only to approvers with management position"
+                        Width: =galNewDelegation.Width
+                        X: =lblNewDelegation_2.X
+                        Y: =10
+                        ZIndex: =32
+
+                    lblSubstituteApproverAstrisk_2 As label:
+                        Color: =RGBA(255, 0, 0, 1)
+                        Font: =
+                        Height: =20
+                        Size: =15
+                        Text: ="*"
+                        Visible: =App.ActiveScreen.Size>3
+                        Width: =30
+                        X: =lblSubtitleApprover_1.X-10
+                        Y: =lblSubtitleApprover_1.Y+(lblSubtitleApprover_1.Height-Self.Height)/2
+                        ZIndex: =33
+
+                    lblApproverLeaveDateAstrisk_2 As label:
+                        Color: =RGBA(255, 0, 0, 1)
+                        Font: =
+                        Height: =20
+                        Size: =15
+                        Text: ="*"
+                        Visible: =App.ActiveScreen.Size>3
+                        Width: =30
+                        X: =lblLeaveDa_1.X-10
+                        Y: =lblLeaveDa_1.Y+(lblLeaveDa_1.Height-Self.Height)/2
+                        ZIndex: =34
+
+                    lblApproverReturnDateAstrisk_2 As label:
+                        Color: =RGBA(255, 0, 0, 1)
+                        Font: =
+                        Height: =20
+                        Size: =15
+                        Text: ="*"
+                        Visible: =App.ActiveScreen.Size>3
+                        Width: =30
+                        X: =lblReturnDa_1.X-10
+                        Y: =lblReturnDa_1.Y+(lblReturnDa_1.Height-Self.Height)/2
+                        ZIndex: =35
+
+    Rectangle1_2 As rectangle:
+        Fill: =RGBA(236, 225, 245, 1)
+        Height: =60
+        Width: =Parent.Width-(2*Self.X)
+        X: =If(App.ActiveScreen.Size>3,60,20)
+        Y: |-
+            =Parent.Height-Self.Height-5
+            //Switch(App.ActiveScreen.Size,4,60,3,30,20)
+        ZIndex: =2
+
+    btnPrint_2 As button:
+        Color: =RGBA(91, 155, 213, 1)
+        Fill: =RGBA(255, 255, 255, 1)
+        Font: =Apptheme.FontFamily
+        Height: =30
+        OnSelect: =Print()
+        PaddingLeft: =20
+        Size: =Apptheme.FontSize
+        Text: ="Print"
+        Width: =130
+        X: |-
+            =//lblReferSite.X+Self.Width+20
+            //lblReferSite_2.X+lblReferSite_2.Width
+            If(App.ActiveScreen.Size>3, Rectangle1_2.X+Self.Width-60,Rectangle1_2.X+10)
+        Y: =Rectangle1_2.Y+(Rectangle1_2.Height-Self.Height)/2
+        ZIndex: =4
+
+    btnSave_1 As button:
+        BorderThickness: =0.1
+        Fill: =RGBA(127, 178, 57, 1)
+        Font: =Apptheme.FontFamily
+        Height: =30
+        HoverFill: =RGBA(127, 178, 57, 1)
+        OnSelect: |-
+            =UpdateContext({Loading: true});
+            //Substitute Approver Check
+            ClearCollect(
+                colDel,
+                Filter(
+                    Delegation,
+                    cmbDelegationApprover.Selected.Mail = SubstituteApprover
+                )
+            );
+            ClearCollect(
+                ColDel1,
+                Filter(
+                    colDel,
+                    DateDiff(
+                        Today(),
+                        DateValue(ReturnDate)
+                    ) >= 0
+                )
+            );
+            //Set(VarDelDates,First(ColDel1));
+            Clear(colprocess);
+            ForAll(
+                ColDel1,
+                Collect(
+                    colprocess,
+                    {
+                        Value: If(
+                            Not(IsBlank(ColDel1[@LeaveDate])) && dtReturnDa_1.SelectedDate >= ColDel1[@LeaveDate] && dtLeaveDate_1.SelectedDate <= ColDel1[@ReturnDate],
+                            ColDel1[@ReturnDate]
+                        )
+                    }
+                )
+            );
+            RemoveIf(
+                colprocess,
+                Value = Blank()
+            );
+            Set(
+                varReturn,
+                Concat(
+                    colprocess,
+                    Value,
+                    ","
+                )
+            );
+            // Original Approver Days Check
+            ClearCollect(
+                colDelOrig,
+                Filter(
+                    Delegation,
+                    varUserMail = SubstituteApprover
+                )
+            );
+            ClearCollect(
+                colDelOrig1,
+                Filter(
+                    colDelOrig,
+                    DateDiff(
+                        Today(),
+                        DateValue(ReturnDate)
+                    ) >= 0
+                )
+            );
+            Set(
+                VarDelOrigDates,
+                First(colDelOrig1)
+            );
+            Clear(colDelegationValidation);
+            ClearCollect(
+                colDelegationValidation,
+                {
+                    Errors: If(
+                        IsBlank(cmbDelegationApprover),
+                        LookUp(
+                            ValidationErrorMessage,
+                            Key = "errDelegationApprover",
+                            Value
+                        )
+                    )
+                },
+                {
+                    Errors: If(
+                        (dtLeaveDate_1.SelectedDate < Today() || IsBlank(dtLeaveDate_1.SelectedDate)),
+                        LookUp(
+                            ValidationErrorMessage,
+                            Key = "errDelegationDate",
+                            Value & " for Leave Date"
+                        )
+                    )
+                },
+                {
+                    Errors: If(
+                        (dtReturnDa_1.SelectedDate < dtLeaveDate_1.SelectedDate || IsBlank(dtReturnDa_1.SelectedDate)),
+                        LookUp(
+                            ValidationErrorMessage,
+                            Key = "errDelegationDate",
+                            Value & " for Return Date"
+                        )
+                    )
+                },
+               /* {
+                    Errors: If(
+                        Not IsBlank(VarDelDates.LeaveDate) && dtReturnDa_1.SelectedDate >= DateValue(VarDelDates.LeaveDate) && dtLeaveDate_1.SelectedDate <= DateValue(VarDelDates.ReturnDate),
+                        Substitute(
+                            LookUp(
+                                ValidationErrorMessage,
+                                Key = "errSameSubstituteApp",
+                                Value
+                            ),
+                            "<ReturnDate>",
+                            VarDelDates.ReturnDate
+                        )
+                    )
+                },*/
+                {
+                    Errors: If(
+                        CountRows(colprocess) > 0,
+                        Substitute(
+                            LookUp(
+                                ValidationErrorMessage,
+                                Key = "errSameSubstituteApp",
+                                Value
+                            ),
+                            "<ReturnDate>",
+                            varReturn
+                        )
+                    )
+                },
+                {
+                    Errors: If(
+                        varUserMail in colDelOrig1.SubstituteApprover && Not IsBlank(VarDelOrigDates.LeaveDate) && dtReturnDa_1.SelectedDate >= DateValue(VarDelOrigDates.LeaveDate) && dtLeaveDate_1.SelectedDate <= DateValue(VarDelOrigDates.ReturnDate),
+                        LookUp(
+                            ValidationErrorMessage,
+                            Key = "errSameSubstituteApp1",
+                            Value
+                        )
+                    )
+                },
+                {
+                    Errors: If(
+                        AdminAccess = false && DateDiff(
+                            dtLeaveDate_1.SelectedDate,
+                            dtReturnDa_1.SelectedDate
+                        ) >= Value(
+                            LookUp(
+                                GlobalConfig,
+                                Key = "DelegationCutOffDate"
+                            ).Value
+                        ),
+                        LookUp(
+                            ValidationErrorMessage,
+                            Key = "errDelegationCutOffDate",
+                            Value
+                        )
+                    )
+                }
+            );
+            If(
+               // CountA(colPRValidation) > 0,
+                CountRows(
+                    Filter(
+                        colDelegationValidation,
+                        !IsBlank(Errors)
+                    )
+                ) > 0,
+                UpdateContext(
+                    {
+                        varValidationPopUp: true,
+                        Loading: false
+                    }
+                ),
+                Set(
+                    VarID,
+                    Patch(
+                        Delegation,
+                        Defaults(Delegation),
+                        {
+                            ApproverName: txtApproverName_2.Text,
+                            ApproverEmail: varUserMail,
+                            SubstituteApprover: cmbDelegationApprover.Selected.Mail,
+                            LeaveDate: dtLeaveDate_1.SelectedDate,
+                            ReturnDate: dtReturnDa_1.SelectedDate,
+                            RefId: varRefid
+                        }
+                    ).ID
+                ),
+                UpdateContext(
+                    {
+                        Loading: false,
+                        NewScreenPOPUP: true,
+                        MessageText: LookUp(
+                            ValidationErrorMessage,
+                            Key = "NewFormsuccessMsg",
+                            Value
+                        )
+                    }
+                );
+                Set(
+                    Link,
+                    Concatenate(
+                        LookUp(
+                            GlobalConfig,
+                            Key = "AppLink",
+                            Value
+                        ),
+                        "&source=portal&RequestId=",
+                        varDelegationRecords.ID
+                    )
+                );
+                Set(
+                    MailSubject,
+                    LookUp(
+                        Email,
+                        Key = "DelegationNotify",
+                        Subject
+                    )
+                );
+                Set(
+                    MailBody,
+                    Substitute(
+                        Substitute(
+                            Substitute(
+                                Substitute(
+                                    Substitute(
+                                        LookUp(
+                                            Email,
+                                            Key = "DelegationNotify",
+                                            Body
+                                        ),
+                                        "<ApproverName>",
+                                        txtApproverName_2.Text
+                                    ),
+                                    "<DelegatorName>",
+                                    cmbDelegationApprover.Selected.DisplayName
+                                ),
+                                "<DelegationStDate>",
+                                dtLeaveDate_1.SelectedDate
+                            ),
+                            "<DelegationEndDate>",
+                            dtReturnDa_1.SelectedDate
+                        ),
+                        "<Link>",
+                        Link
+                    )
+                );
+                'MahleGPR-Mail-Flow'.Run(
+                    cmbDelegationApprover.Selected.Mail,
+                    Substitute(
+                        varUserMail,
+                        ";",
+                        "','"
+                    ),
+                    MailSubject,
+                    MailBody
+                );
+                //Notify("Document has saved successfully",NotificationType.Success);
+            UpdateContext(
+                    {
+                        Loading: false,
+                        NewScreenPOPUP: true,
+                        MessageText: LookUp(
+                            ValidationErrorMessage,
+                            Key = "NewFormsuccessMsg",
+                            Value
+                        )
+                    }
+                );
+                
+            );
+                //Navigate(Scr_Delegation);
+        Size: =Apptheme.FontSize
+        Text: ="Save"
+        Visible: =!btn3dot_2.Visible
+        X: |-
+            =//btnPrint_1.X+btnPrint_1.Width*4
+            //btnPrint.X+btnPrint.Width*4
+            If(App.ActiveScreen.Size>2,  Rectangle1_2.X+Rectangle1_2.Width-Self.Width*3)
+        Y: |-
+            =//Rectangle1_1.Y+(Rectangle1_1.Height-Self.Height)/2
+            If(App.ActiveScreen.Size>2, Rectangle1_2.Y+(Rectangle1_2.Height-Self.Height)/2,btn3dot_2.Y+btn3dot_2.Height+5)
+        ZIndex: =5
+
+    btnCancel_1 As button:
+        Font: =Apptheme.FontFamily
+        Height: =30
+        OnSelect: |-
+            =Navigate(Scr_Delegation);
+            Refresh(Delegation);
+        Size: =Apptheme.FontSize
+        Text: ="Cancel"
+        Visible: =!btn3dot_2.Visible
+        X: |-
+            =//btnSave.X+btnSave.Width+20
+            If(App.ActiveScreen.Size>2,  Rectangle1_2.X+Rectangle1_2.Width-Self.Width*1.7)
+        Y: |-
+            =//btnSave.Y+(btnSave.Height-Self.Height)/2
+            If(App.ActiveScreen.Size>2, Rectangle1_2.Y+(Rectangle1_2.Height-Self.Height)/2,btnSave_1.Y+btnSave_1.Height+5)
+        ZIndex: =6
+
+    icnPrint_15 As icon.Print:
+        Color: =RGBA(91, 155, 213, 1)
+        Height: =btnPrint_2.Height-15
+        Icon: =Icon.Print
+        X: =btnPrint_2.X
+        Y: =Rectangle1_2.Y+(Rectangle1_2.Height-Self.Height)/2
+        ZIndex: =7
+
+    btn3dot_2 As button:
+        Color: =RGBA(0, 0, 0, 1)
+        Fill: =RGBA(0, 0, 0, 0)
+        OnSelect: |-
+            =UpdateContext({varDelegationSaveCancel:!varDelegationSaveCancel})
+        Text: =". . ."
+        Visible: =App.ActiveScreen.Size<=2
+        Width: =50
+        X: =Rectangle1_2.X+Rectangle1_2.Width-Self.Width-20
+        Y: =btnPrint_2.Y
+        ZIndex: =8
+
+    HeaderNavigation_5 As HeaderNavigation:
+        Height: |
+            =//HeaderNavigation.HeaderHeight
+            If(HeaderNavigation_5.AdminVisible,480,40)
+        Visible: =App.ActiveScreen.Size>2
+        ZIndex: =9
+
+    lblNewDelegation_2 As label:
+        Font: =Apptheme.FontFamily
+        FontWeight: =FontWeight.Bold
+        Size: =Apptheme.FontHeaderSize
+        Text: ="Delegation"
+        Width: =Parent.Width-Self.X
+        X: =Switch(App.ActiveScreen.Size,4,50,10)
+        Y: =Switch(App.ActiveScreen.Size,4,HeaderNavigation_5.Y+50,icnHamburgerMenu_4.Y+icnHamburgerMenu_4.Height)
+        ZIndex: =10
+
+    mobContainer19 As groupContainer.manualLayoutContainer:
+        BorderColor: =RGBA(149, 149, 149, 1)
+        BorderThickness: =2
+        Height: =btnMobCancel_12.Y+btnMobCancel_12.Height+10
+        Visible: =btn3dot_2.Visible && varDelegationSaveCancel
+        Width: =170
+        X: =btn3dot_2.X-(Self.Width-btn3dot_2.Width)
+        Y: =btn3dot_2.Y-Self.Height
+        ZIndex: =11
+
+        btnMobSave_2 As button:
+            BorderThickness: =0.1
+            Fill: =RGBA(127, 178, 57, 1)
+            Font: =Apptheme.FontFamily
+            Height: =30
+            OnSelect: =Select(btnSave_1);
+            Size: =Apptheme.FontSize
+            Text: ="Save"
+            Visible: =Switch(App.ActiveScreen.Size,4,true,3,true,varDelegationSaveCancel)
+            Y: =5
+            ZIndex: =1
+
+        btnMobCancel_12 As button:
+            Font: =Apptheme.FontFamily
+            Height: =30
+            OnSelect: =Select(btnCancel_1)
+            Size: =Apptheme.FontSize
+            Text: ="Back"
+            Visible: =Switch(App.ActiveScreen.Size,4,true,3,true,varDelegationSaveCancel)
+            Y: =btnMobSave_2.Y+btnMobSave_2.Height+5
+            ZIndex: =2
+
+    LeftNavigation_5 As LeftNavigation:
+        Height: |-
+            =//App.Height
+            Max(App.Height,App.DesignHeight)
+        Visible: =App.ActiveScreen.Size<=2 && varShowNav
+        ZIndex: =12
+
+    icnHamburgerMenu_4 As icon.Hamburger:
+        AccessibleLabel: ="Menu"
+        Height: =30
+        Icon: =If(varShowNav,Icon.Cancel,Icon.Hamburger)
+        OnSelect: |-
+            =UpdateContext({varShowNav:!varShowNav})
+        TabIndex: =0
+        Visible: =App.ActiveScreen.Size<=2
+        Width: =30
+        ZIndex: =13
+
+    POPMessage_4 As group:
+        Height: =5
+        Width: =5
+        X: =-260
+        Y: =-60
+        ZIndex: =14
+
+        rec_BGPopup_14 As rectangle:
+            Fill: =RGBA(0, 0, 0, 0.2)
+            Height: =1030
+            Visible: =NewScreenPOPUP
+            Width: =Parent.Width
+            ZIndex: =24
+
+        Button3_15 As button:
+            Align: =Align.Left
+            DisabledColor: =RGBA(0, 0, 0, 1)
+            DisabledFill: =RGBA(255, 255, 255, 1)
+            DisplayMode: =DisplayMode.Disabled
+            Fill: =RGBA(241, 244, 249, 1)
+            FontWeight: =FontWeight.Normal
+            Height: =200
+            PaddingBottom: =0
+            PaddingLeft: =20
+            PaddingRight: =0
+            PaddingTop: =20
+            Size: =11
+            Text: ="Success"
+            Underline: =true
+            VerticalAlign: =VerticalAlign.Top
+            Visible: =NewScreenPOPUP
+            Width: =Switch(App.ActiveScreen.Size,4,(dtacrd_Requestor.Width-750),3,(dtacrd_Requestor.Width-350),(dtacrd_Requestor.Width-100))
+            X: =(Parent.Width-Self.Width)/2
+            Y: =(Parent.Height-Self.Height)/2
+            ZIndex: =25
+
+        Button3_16 As button:
+            Align: =Align.Left
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =0.1
+            DisabledColor: =RGBA(0, 0, 0, 1)
+            DisabledFill: =RGBA(230, 230, 230, 1)
+            DisplayMode: =DisplayMode.Disabled
+            Fill: =RGBA(241, 244, 249, 1)
+            FontWeight: =FontWeight.Normal
+            Height: =Button3_15.Height-140
+            PaddingBottom: =0
+            PaddingLeft: =20
+            PaddingRight: =0
+            PaddingTop: =20
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Size: =12
+            Text: =""
+            VerticalAlign: =VerticalAlign.Top
+            Visible: =NewScreenPOPUP
+            Width: =Button3_15.Width
+            X: =Button3_15.X
+            Y: =Button3_15.Y+Button3_15.Height-60
+            ZIndex: =26
+
+        btnSubmitNA_13 As button:
+            Color: =RGBA(0, 0, 0, 1)
+            Fill: =RGBA(54, 176, 75, 1)
+            Font: =Apptheme.FontFamily
+            FontWeight: =FontWeight.Bold
+            Height: =25
+            HoverColor: =RGBA(0, 0, 0, 1)
+            HoverFill: =RGBA(204, 204, 204, 1)
+            OnSelect: |-
+                =UpdateContext({NewScreenPOPUP:false});
+                Navigate(Scr_Delegation);
+            PaddingRight: =3.56
+            PaddingTop: =3.56
+            PressedFill: =Color.White
+            RadiusBottomLeft: =5
+            RadiusBottomRight: =5
+            RadiusTopLeft: =5
+            RadiusTopRight: =5
+            Size: =Switch(App.ActiveScreen.Size,4,10,3,10,9)
+            Text: ="OK"
+            Visible: =NewScreenPOPUP
+            Width: =Switch(App.ActiveScreen.Size,4,70,3,70,2,60,60)
+            X: =Button3_15.X+Button3_15.Width/2-Self.Width/2
+            Y: =Button3_16.Y+19
+            ZIndex: =27
+
+        lbl_msg_4 As label:
+            Align: =Align.Center
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =0.1
+            DisabledFill: =RGBA(241, 244, 249, 1)
+            DisplayMode: =DisplayMode.View
+            Fill: =RGBA(255, 255, 255, 1)
+            FontWeight: =FontWeight.Semibold
+            Height: =Button3_16.Y-Self.Y
+            Size: =10
+            Text: =MessageText
+            Visible: =NewScreenPOPUP
+            Width: =Button3_15.Width-2
+            X: =Button3_15.X+2
+            Y: =Button3_15.Y+50
+            ZIndex: =28
+
+    grpVal_3 As group:
+        Height: =5
+        Width: =5
+        X: =-260
+        Y: =-60
+        ZIndex: =17
+
+        rec_PopUPBG_3 As rectangle:
+            Fill: =RGBA(0, 0, 0, 0.2)
+            Height: =Parent.Height
+            Visible: =varValidationPopUp
+            Width: =Parent.Width
+            ZIndex: =15
+
+        btn_ValidationBG_3 As button:
+            BorderColor: =RGBA(196, 196, 196, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =Min(Self.Width,App.Height)
+            HoverFill: =Self.Fill
+            Text: =""
+            Visible: =varValidationPopUp
+            Width: =Switch(App.ActiveScreen.Size,4,Canvas6.Width/3,3,Canvas6.Width/2,2,Canvas6.Width/2,Canvas6.Width-40)
+            X: =Switch(App.ActiveScreen.Size,4,App.Width/2-Self.Width/2,3,Canvas6.X+Canvas6.Width/2-Self.Width/2,Canvas6.X+Canvas6.Width/2-Self.Width/2)
+            Y: =Switch(App.ActiveScreen.Size,4,App.Height/2-Self.Height/2,3,App.Height/2-Self.Height/2,App.Height/2-Self.Height/2)
+            ZIndex: =16
+
+        rec_ValidationLine1_3 As rectangle:
+            Fill: =RGBA(196, 196, 196, 1)
+            Height: =1
+            Visible: =varValidationPopUp
+            Width: =btn_ValidationBG_3.Width-2*Switch(App.ActiveScreen.Size,4,25,3,20,10)
+            X: =btn_ValidationBG_3.X+Switch(App.ActiveScreen.Size,4,25,3,20,10)
+            Y: =lbl_ValidationMsgHeader_3.Y+lbl_ValidationMsgHeader_3.Height+Switch(App.ActiveScreen.Size,4,10,3,10,10)
+            ZIndex: =18
+
+        lbl_ValidationMsgHeader_3 As label:
+            Font: =Apptheme.FontFamily
+            FontWeight: =FontWeight.Semibold
+            Height: =50
+            PaddingLeft: =15
+            Size: =Apptheme.FontSize
+            Text: ="Alert"
+            Visible: =varValidationPopUp
+            Width: =btn_ValidationBG_3.Width-100
+            X: =Img_ValidationIcon_3.X+Img_ValidationIcon_3.Width
+            Y: =Img_ValidationIcon_3.Y
+            ZIndex: =19
+
+        Img_ValidationIcon_3 As image:
+            Height: =Self.Width
+            Image: ='icons8-error-48'
+            Visible: =varValidationPopUp
+            Width: =Switch(App.ActiveScreen.Size,4,40,3,30,30)
+            X: =btn_ValidationBG_3.X+Switch(App.ActiveScreen.Size,4,25,3,20,10)
+            Y: =btn_ValidationBG_3.Y+12.5
+            ZIndex: =20
+
+        rec_validationLine2_3 As rectangle:
+            Fill: =RGBA(196, 196, 196, 1)
+            Height: =1
+            Visible: =varValidationPopUp
+            Width: =rec_ValidationLine1_3.Width
+            X: =rec_ValidationLine1_3.X
+            Y: =btn_ValidationOK_3.Y-Self.Height-Switch(App.ActiveScreen.Size,4,20,3,30,15)
+            ZIndex: =21
+
+        btn_ValidationOK_3 As button:
+            AutoDisableOnSelect: =false
+            Fill: =RGBA(0, 154, 68, 1)
+            Font: =Apptheme.FontFamily
+            Height: =25
+            HoverFill: =
+            OnSelect: |
+                =
+                UpdateContext({varValidationPopUp:false});
+            RadiusBottomLeft: =5
+            RadiusBottomRight: =5
+            RadiusTopLeft: =5
+            RadiusTopRight: =5
+            Size: =Apptheme.FontButtonSize
+            Text: ="OK"
+            Visible: =varValidationPopUp
+            Width: =Switch(App.ActiveScreen.Size,4,70,3,70,2,60,60)
+            X: =btn_ValidationBG_3.X+(btn_ValidationBG_3.Width-Self.Width)/2
+            Y: =btn_ValidationBG_3.Y+btn_ValidationBG_3.Height-Self.Height-Switch(App.ActiveScreen.Size,4,20,3,30,15)
+            ZIndex: =22
+
+        gal_ValidationErrors_3 As listbox:
+            AccessibleLabel: ="Error pop up"
+            DisplayMode: =DisplayMode.View
+            Height: =rec_validationLine2_3.Y-rec_ValidationLine1_3.Y-2*Switch(App.ActiveScreen.Size,4,10,3,15,10)
+            Items: |-
+                =ForAll(Distinct(Filter(colDelegationValidation,!IsBlank(Errors)),Errors), {Result: ThisRecord.Value})
+            Size: =Apptheme.FontSize-2
+            Visible: =varValidationPopUp
+            Width: =rec_ValidationLine1_3.Width
+            X: =rec_ValidationLine1_3.X
+            Y: =rec_ValidationLine1_3.Y+Switch(App.ActiveScreen.Size,4,10,3,15,10)
+            ZIndex: =23
+
+    grp_Loading_14 As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =31
+
+        rec_BGPopup_48 As rectangle:
+            Fill: =RGBA(0, 0, 0, 0.2)
+            Height: =Parent.Height
+            Visible: =Loading
+            Width: =Parent.Width
+            ZIndex: =29
+
+        Image1_20 As image:
+            Image: =slds_spinner_brand
+            Visible: =Loading
+            X: =Parent.Width/2
+            Y: =Parent.Height/2
+            ZIndex: =30
+

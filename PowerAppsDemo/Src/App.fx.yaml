@@ -1,0 +1,251 @@
+App As appinfo:
+    BackEnabled: =false
+    OnError: |-
+        =/*Notify(
+            Concat(
+                Errors(PRForm),
+                Column & ": " & Message
+            ),
+            NotificationType.Error
+        )*/
+    OnStart: |
+        =Concurrent(
+            //Setting the splashscreen variable
+            Set(varSplashScreen,true),
+            //Define the font-related properties for the application theme 
+            Set(
+                Apptheme,
+                {
+                    FontFamily: "'Roboto Condensed',sans-serif",
+                    FontSearch: 10,
+                    FontSize: 11,
+                    FontHeaderSize: 16,
+                    FontGallblHeader: 13.5,
+                    FontSubHeader: 15,
+                    FontButtonSize: 13.5
+                }
+            ),
+            Set(
+                varGlobalConfig,
+                LookUp(
+                    GlobalConfig,
+                    Key = "AppLink",
+                    Value
+                )
+            ),
+            // Set the current user's name
+            Set(
+                varUserName,
+                User().FullName
+            ),
+            // Set the current user's email
+            Set(
+                varUserMail,
+                User().Email
+            ),
+            // Set the RequestId parameter value
+            Set(
+                varRequestID,
+                Param("RequestId")
+            ),
+            // Collect data from ArchiveConfiguration into colArchive collection
+            ClearCollect(
+                colArchive,
+                ArchiveConfiguration
+            )
+        );
+        Concurrent(
+            //Getting Worflow Approval levels
+            ClearCollect(
+                CollWorkFlowConfig,
+                Filter(
+                    WorkflowConfiguration,
+                    ApprovalEnable.Value = "Yes"
+                )
+            ),
+            // Check if the current user has admin access
+            Set(
+                AdminAccess,
+                varUserMail in Filter(
+                    AdminConfig,
+                    Access = "Admin"
+                ).Title
+            ),
+            // Collect delegation data into CollDelegation1 collection based on the current user's email
+            ClearCollect(
+                CollDelegation1,
+                Filter(
+                    Delegation,
+                    SubstituteApprover = varUserMail
+                   //DateValue(ReturnDate)>= Today()
+                )
+            ),
+            ClearCollect(
+                CollDelegationNextApproverCheck,
+                Filter(
+                    Delegation,
+                    LeaveDate <= Now() && ReturnDate >= Now()
+                )
+            )
+            /*ClearCollect(
+                CollDelegationNextApproverCheck,
+                Filter(
+                    Delegation,
+                    DateDiff(
+                        Now(),
+                        DateValue(LeaveDate)
+                    ) <= 0 && DateDiff(
+                        Now(),
+                        DateValue(ReturnDate)
+                    ) >= 0
+                )
+            )*/
+        );
+        // Filter CollDelegation1 to include only active delegations
+        ClearCollect(
+            CollDelegation,
+            Filter(
+                CollDelegation1,
+                DateDiff(
+                    Now(),
+                    DateValue(LeaveDate)
+                ) <= 0 && DateDiff(
+                    Now(),
+                    DateValue(ReturnDate)
+                ) >= 0
+            )
+        );
+        // Collect left navigation data into colLeftNav collection
+        ClearCollect(
+            colLeftNav,
+            Table(
+                {
+                    No: 1,
+                    Title: "Overview",
+                    Screen: Scr_Home
+                },
+                {
+                    No: 2,
+                    Title: "Workload",
+                    Screen: Scr_WorkLoad
+                },
+                {
+                    No: 3,
+                    Title: "All Requests",
+                    Screen: Scr_AllRequests
+                },
+                {
+                    No: 4,
+                    Title: "Pending Requests",
+                    Screen: Scr_PendingRequest
+                },
+                {
+                    No: 5,
+                    Title: "Rejected Requests",
+                    Screen: Scr_RejectedRequest
+                },
+                {
+                    No: 6,
+                    Title: "Cancelled Requests",
+                    Screen: Scr_CancelledRequest
+                },
+                {
+                    No: 7,
+                    Title: "Completed Requests",
+                    Screen: Scr_CompletedRequest
+                },
+                {
+                    No: 8,
+                    Title: "Delegation",
+                    Screen: Scr_Delegation,
+                    Screen2: Scr_CreateDelegationOnBehalf
+                },
+                {
+                    No: 9,
+                    Title: "Admin"
+                }
+            )
+        );
+        Concurrent(
+            // Concatenate delegation data and ApproverEmail to VarOriginalApp
+            Set(
+                VarOriginalApp,
+                Concat(
+                    CollDelegation,
+                    ApproverEmail & ""
+                )
+            ),
+            // Concatenate delegation data and SubstituteApprover to VarSubstituteApp
+            Set(
+                VarSubstituteApp,
+                Concat(
+                    CollDelegation,
+                    SubstituteApprover & ""
+                )
+            ),
+             // Remove the "Admin" menu option from colLeftNav if the current user doesn't have admin access
+            If(
+                AdminAccess = false,
+                RemoveIf(
+                    colLeftNav,
+                    Title = "Admin"
+                )
+            ),
+            If(
+                Not(IsBlank(varRequestID)),// Check if varRequestID is not blank
+                Set(
+                    ViewRecord,
+                    LookUp(
+                        PRForm,
+                        ID = Value(varRequestID)// Look up PRForm record with ID equal to varRequestID
+                    )
+                )
+            )
+        );
+        // Concatenate AppLink, source, and RequestId into Link
+         /*Set(
+                Link,
+                Concatenate(
+                    LookUp(
+                        GlobalConfig,
+                        Key = "AppLink",
+                        Value
+                    ),
+                    "&source=portal&RequestId=",
+                    ViewRecord.ID
+                )
+            );*/
+        If(
+            Not(IsBlank(varRequestID)),
+            If(
+                ViewRecord.CurrentStatus in [
+                    "Draft",
+                    "Pending with Requestor on Query"
+                ] && ViewRecord.InitiatorMail = varUserMail,// Check conditions for "Requestor" button visibility
+                Set(
+                    ButtonVisible,
+                    "Requestor"
+                ),
+                If(
+                    varUserMail in ViewRecord.CurrentApprover || (varUserMail in CollDelegation.SubstituteApprover && VarOriginalApp in ViewRecord.CurrentApprover),
+                    Set(
+                        ButtonVisible,
+                        "Approver"
+                    ),
+                    Set(
+                        ButtonVisible,
+                        "Viewer"
+                    )
+                )
+            )
+        );
+    StartScreen: =Scr_SplashScreen
+    Theme: =PowerAppsTheme
+
+    Host As hostControl.DefaultHostControlVariant:
+        OnCancel: =false
+        OnEdit: =false
+        OnNew: =false
+        OnSave: =false
+        OnView: =false
+

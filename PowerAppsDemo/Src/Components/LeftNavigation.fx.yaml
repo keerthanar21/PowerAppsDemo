@@ -1,0 +1,240 @@
+LeftNavigation As CanvasComponent:
+    AdminVisible: =galAdminSubMenu_1.Visible
+    Fill: =RGBA(0, 0, 0, 0)
+    FontFamily: ="'Roboto Condensed',sans-serif"
+    FontSize: =10
+    Height: =App.Height+10
+    LeftNavigationItems: |-
+        =/*Table({
+            No:1,
+                Title: "Overview",
+                Screen:Scr_Home
+        },
+        {No:2,
+                Title: "Workload",
+                 Screen:Scr_WorkLoad
+        },
+        {No:3,
+                Title: "All Requests",
+                 Screen:Scr_AllRequests
+        },
+        {No:4,
+                Title: "Pending Requests",
+                 Screen:Scr_PendingRequest
+        },
+        {No:5,
+                Title: "Rejected Requests",
+                 Screen:Scr_RejectedRequest
+        },
+        {No:6,
+                Title: "Cancelled Requests",
+                 Screen:Scr_CancelledRequest
+        },
+        {No:7,
+                Title: "Completed Requests",
+                 Screen:Scr_CompletedRequest
+        },
+        {No:8,
+                Title: "Archive Requests",
+                 Screen:Scr_ArchiveRequests
+        },
+        {No:9,
+                Title: "Delegation",
+                 Screen:Scr_Delegation,
+                 Screen2:Scr_CreateDelegationOnBehalf
+        },
+        {No:10,
+                Title: "Admin"
+               // List:LookUp(GlobalConfig,Key="AdminList").Value
+                
+        })*/
+        colLeftNav
+    SubMenuNav: |-
+        =Table(
+                    {
+                        Submenu:"User",
+                        List:LookUp(GlobalConfig,Key="AdminList").Value
+                    },
+                    {
+                        Submenu: "Legal Entity",
+                        List:LookUp(GlobalConfig,Key="AdminList").Value
+                    },
+                    {
+                        Submenu:"Process Owner",
+                        List:LookUp(GlobalConfig,Key="AdminList").Value
+                    },
+                    {
+                        Submenu:"Member Corporate Management Committee",
+                        List:LookUp(GlobalConfig,Key="AdminList").Value
+                    },
+                    {
+                        Submenu:"Country Amendments",
+                        List:LookUp(GlobalConfig,Key="AdminList").Value
+                    },
+                    {
+                        Submenu:"Export Users",
+                        List:LookUp(GlobalConfig,Key="AdminList").Value
+                    },
+                    {
+                        Submenu:"Import Management Entity",
+                        List:LookUp(GlobalConfig,Key="AdminList").Value
+                    },
+                    {
+                        Submenu:"ME Table - Special Approvers",
+                        List:LookUp(GlobalConfig,Key="AdminList").Value
+                    },
+                    {
+                        Submenu:"Archive",
+                        List:LookUp(GlobalConfig,Key="AdminList").Value
+                    },
+                    {
+                        Submenu:"Email",
+                        List:LookUp(GlobalConfig,Key="AdminList").Value
+                    }
+                
+        )
+    Width: |
+        =200
+        //If(LeftNavigation.AdminVisible,400,200)
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    imgLogoLeft As image:
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: |-
+            =//Parent.Height/20
+            30
+        Image: =mahle_logo_2020
+        Width: =170
+        X: =30
+        ZIndex: =3
+
+    "galLeftNavigation As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+        AccessibleLabel: ="Left Navigation"
+        BorderColor: =RGBA(203, 235, 247, 1)
+        BorderThickness: =1
+        Fill: =RGBA(102, 182, 227, 1)
+        Height: =LeftNavigation.Height-Self.Y
+        Items: =LeftNavigation.LeftNavigationItems
+        Layout: =Layout.Vertical
+        TabIndex: =0
+        TemplatePadding: =0
+        TemplateSize: =40
+        Width: =200
+        Y: =imgLogoLeft.Y+imgLogoLeft.Height
+        ZIndex: =4
+
+        btnLeftNavigation As button:
+            Align: =Align.Left
+            BorderColor: =Color.Black//ColorFade(Self.Fill, -15%)
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =1
+            Color: |-
+                =//If(ThisItem.Screen=App.ActiveScreen,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))
+                RGBA(30, 40, 99, 1)
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(30, 40, 99, 1)
+            DisabledFill: =RGBA(0, 0, 0, 0)
+            Fill: |-
+                =If(btnLeftNavigation,RGBA(91, 155, 213, 1),Color.Transparent)
+                //RGBA(255, 255, 255, 1)
+            Font: =LeftNavigation.FontFamily
+            HoverBorderColor: =RGBA(255, 255, 255, 1)
+            HoverColor: =RGBA(30, 40, 99, 1)
+            HoverFill: |-
+                =Color.Transparent
+                //If(ThisItem.Screen=App.ActiveScreen,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))
+                //Self.Fill
+                //ColorFade(Self.Fill, 10%)
+            OnSelect: =If(ThisItem.Title="Admin",Set(varAdminNav,!varAdminNav), Navigate(ThisItem.Screen))
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            PressedBorderColor: |-
+                =//If(ThisItem.Screen=App.ActiveScreen,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))
+                //Self.Fill
+                ColorFade(Self.Fill, 10%)
+            PressedColor: |-
+                =//If(ThisItem.Screen=App.ActiveScreen,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))
+                //Self.Color
+                //ColorFade(Self.Fill, 20%)
+                RGBA(30, 40, 99, 1)
+            PressedFill: |-
+                =Color.Transparent
+                //If(ThisItem.Screen=App.ActiveScreen,RGBA(65, 182, 230, 1),RGBA(30, 40, 99, 1))
+                //Self.Fill
+                //ColorFade(Self.Fill, 20%)
+            Size: =LeftNavigation.FontSize
+            Text: =ThisItem.Title
+            Width: =Parent.Width-Self.X
+            X: =10
+            Y: =5
+            ZIndex: =6
+
+        recLeftNavigation As rectangle:
+            AccessibleLabel: ="Left Navigation"
+            BorderStyle: =BorderStyle.None
+            DisplayMode: =DisplayMode.View
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =1
+            TabIndex: =0
+            Visible: |-
+                =//If(ThisItem.Screen=App.ActiveScreen,true,false)
+                false
+                //varTabSelect=ThisItem.No
+            Width: =btnLeftNavigation.Width
+            X: =btnLeftNavigation.X
+            Y: =Parent.TemplateHeight-Self.Height-1
+            ZIndex: =7
+
+        Icon1 As icon.ChevronDown:
+            AccessibleLabel: ="Expand Admin Options"
+            Height: =25
+            Icon: =If(varAdminNav,Icon.ChevronUp,Icon.ChevronDown)
+            OnSelect: =If(ThisItem.Title="Admin",Set(varAdminNav,!varAdminNav), Navigate(ThisItem.Screen))
+            TabIndex: =0
+            Visible: =ThisItem.Title="Admin"
+            Width: =25
+            X: =btnLeftNavigation.Width-Self.Width
+            Y: =15
+            ZIndex: =8
+
+    "galAdminSubMenu_1 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+        AccessibleLabel: ="Admin Navigation Menu"
+        Fill: =RGBA(102, 182, 227, 1)
+        Height: |-
+            =//If(varAdminNav,CountRows(Self.AllItems)*Self.TemplateHeight,0)
+            CountRows(Self.AllItems)*Self.TemplateHeight
+        Items: =LeftNavigation.SubMenuNav
+        Layout: =Layout.Vertical
+        TabIndex: =0
+        TemplatePadding: =0
+        TemplateSize: |-
+            =//Min(160, Self.Height - 60)
+            40
+        Visible: =If(varAdminNav,true,false)
+        Width: =galLeftNavigation.Width
+        Y: |-
+            =//galNavigation.Y+galNavigation.Height
+            ((CountRows(galLeftNavigation.AllItems)+1)*40)
+        ZIndex: =5
+
+        btnSubMenu_1 As button:
+            Align: =Align.Left
+            BorderStyle: =BorderStyle.None
+            Color: =RGBA(30, 40, 99, 1)
+            Fill: =RGBA(0, 0, 0, 0)
+            Font: =LeftNavigation.FontFamily
+            HoverColor: =RGBA(65, 182, 230, 1)
+            HoverFill: =Self.Fill
+            OnSelect: |-
+                =//Select(Parent)
+                Launch(ThisItem.List)
+            PressedFill: =Self.Fill
+            Size: =LeftNavigation.FontSize
+            Text: =ThisItem.Submenu
+            Width: =Parent.Width
+            ZIndex: =6
+

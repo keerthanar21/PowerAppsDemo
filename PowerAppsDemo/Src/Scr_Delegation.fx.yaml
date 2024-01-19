@@ -1,0 +1,520 @@
+"Scr_Delegation As screen.'phoneLayout_FluidGridWithHeaderPageLayout_ver3.0'":
+    Fill: =RGBA(255, 255, 255, 1)
+    OnVisible: =
+
+    Canvas3 As fluidGrid.fluidGridWithBlankCard:
+        BorderThickness: =0
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =Rectangle1.Y -Rectangle1.Height- Self.Y
+        Width: =Parent.Width
+        Y: =txtSearch_1.Y + txtSearch_1.Height+10
+        ZIndex: =1
+
+        DataCard3 As dataCard:
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderStyle: =BorderStyle.Solid
+            BorderThickness: =0
+            DisplayMode: =DisplayMode.Edit
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =Parent.Height - 100
+            Width: =Parent.Width
+            X: =0
+            Y: =0
+            ZIndex: =1
+
+            Container1_1 As groupContainer.horizontalAutoLayoutContainer:
+                Height: |-
+                    =Parent.Height
+                    //Container2_1.Height
+                LayoutMode: =LayoutMode.Auto
+                LayoutOverflowY: =LayoutOverflow.Scroll
+                PaddingLeft: =10
+                Width: |
+                    =//DataCard2.Width-2*Self.X
+                    Parent.Width-2.3*Self.X
+                X: =lblDelegation.X
+                Y: |-
+                    =//txtSearch_1.Y+70
+                    0
+                ZIndex: =5
+
+                Container2_1 As groupContainer.manualLayoutContainer:
+                    AlignInContainer: =AlignInContainer.SetByContainer
+                    FillPortions: =0
+                    Height: |-
+                        =Parent.Height
+                        //galDelegation.Height+150+galDelegation.Y
+                    LayoutMinHeight: =
+                    LayoutMinWidth: =250
+                    Width: |-
+                        =Parent.Width
+                        //galDelegation.Width
+                        //Parent.Width
+                    X: =Container1_1.X
+                    Y: =Container1_1.Y
+                    ZIndex: =1
+
+                    lblApproverName As label:
+                        Fill: =RGBA(245, 248, 251, 1)
+                        Font: =Apptheme.FontFamily
+                        Size: =Apptheme.FontSize
+                        Text: ="Approver Name"
+                        Width: |-
+                            =350
+                            //Switch(App.ActiveScreen.Size,4,300,200)
+                        Y: =Container2_1.Y
+                        ZIndex: =2
+
+                    lblSubtitleApproverName As label:
+                        Fill: =RGBA(245, 248, 251, 1)
+                        Font: =Apptheme.FontFamily
+                        Size: =Apptheme.FontSize
+                        Text: ="Delegate Approver Name"
+                        Width: =lblApproverName.Width
+                        X: =lblApproverName.X+lblApproverName.Width
+                        Y: =Container2_1.Y
+                        ZIndex: =3
+
+                    lblLeaveDate As label:
+                        Fill: =RGBA(245, 248, 251, 1)
+                        Font: =Apptheme.FontFamily
+                        Size: =Apptheme.FontSize
+                        Text: ="Approver Leave Date"
+                        Width: =lblSubtitleApproverName.Width-50
+                        X: =lblSubtitleApproverName.X+lblSubtitleApproverName.Width
+                        Y: =Container2_1.Y
+                        ZIndex: =4
+
+                    lblReturnDate As label:
+                        Fill: =RGBA(245, 248, 251, 1)
+                        Font: =Apptheme.FontFamily
+                        Size: =Apptheme.FontSize
+                        Text: ="Approver Return Date"
+                        Width: =lblLeaveDate.Width
+                        X: =lblLeaveDate.X+lblLeaveDate.Width
+                        Y: =Container2_1.Y
+                        ZIndex: =5
+
+                    "galDelegation As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+                        AccessibleLabel: ="Delegation"
+                        Fill: =RGBA(255, 255, 255, 1)
+                        Height: =(galDelegation.AllItemsCount+1.5)*Self.TemplateHeight
+                        Items: |-
+                            =SortByColumns(
+                                    Filter(
+                                Delegation,
+                                Created = DateValue(datDelegation.SelectedDate)|| IsBlank(datDelegation.SelectedDate) ,       
+                                    //'Requestor is Cost Center Responsible' = varUserName,
+                                    (StartsWith(
+                                        ApproverName,
+                                        txtSearch_1.Text
+                                    ) || IsBlank(Trim(txtSearch_1))) || (StartsWith(
+                                        SubstituteApprover,
+                                        txtSearch_1.Text
+                                    ) || IsBlank(Trim(txtSearch_1)))
+                                ),
+                                "Modified",
+                                SortOrder.Descending
+                            )
+                        Layout: =Layout.Vertical
+                        TabIndex: =0
+                        TemplatePadding: =0
+                        TemplateSize: |-
+                            =//Min(160, Self.Height - 60)
+                            If(App.ActiveScreen.Size<=3,30,40)
+                        Width: |-
+                            =Parent.Width
+                            //lblReturnDate.X+lblReturnDate.Width
+                        Y: =lblApproverName.Y+lblApproverName.Height
+                        ZIndex: =6
+
+                        lblApproverNameVal As label:
+                            Color: =RGBA(64, 64, 64, 1)
+                            Font: =Apptheme.FontFamily
+                            FontWeight: =FontWeight.Normal
+                            Height: =Parent.TemplateHeight
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =10
+                            PaddingRight: =10
+                            PaddingTop: =10
+                            Size: =Apptheme.FontSize
+                            Text: =ThisItem.ApproverName
+                            VerticalAlign: =VerticalAlign.Top
+                            Width: =lblApproverName.Width
+                            X: =lblApproverName.X
+                            ZIndex: =6
+
+                        lblSubtitileApproverNameVal As label:
+                            Color: =RGBA(64, 64, 64, 1)
+                            Font: =Apptheme.FontFamily
+                            FontWeight: =FontWeight.Normal
+                            Height: =Parent.TemplateHeight
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =10
+                            PaddingRight: =10
+                            PaddingTop: =10
+                            Size: =Apptheme.FontSize
+                            Text: =ThisItem.SubstituteApprover
+                            VerticalAlign: =VerticalAlign.Top
+                            Width: =lblSubtitleApproverName.Width
+                            X: =lblApproverNameVal.X+lblApproverNameVal.Width
+                            ZIndex: =7
+
+                        lblLeaveDateVal As label:
+                            Color: =RGBA(64, 64, 64, 1)
+                            Font: =Apptheme.FontFamily
+                            FontWeight: =FontWeight.Normal
+                            Height: =Parent.TemplateHeight
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =10
+                            PaddingRight: =10
+                            PaddingTop: =10
+                            Size: =Apptheme.FontSize
+                            Text: |-
+                                =//Text(DateTimeValue(ThisItem.LeaveDate,"fr"),"mm/dd/yyyy")
+                                Text(ThisItem.LeaveDate,"mm/dd/yyyy")
+                            VerticalAlign: =VerticalAlign.Top
+                            Width: =lblLeaveDate.Width
+                            X: =lblSubtitileApproverNameVal.X+lblSubtitileApproverNameVal.Width
+                            ZIndex: =8
+
+                        lblReturnDateVal As label:
+                            Color: =RGBA(64, 64, 64, 1)
+                            Font: =Apptheme.FontFamily
+                            FontWeight: =FontWeight.Normal
+                            Height: =Parent.TemplateHeight
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =10
+                            PaddingRight: =10
+                            PaddingTop: =10
+                            Size: =Apptheme.FontSize
+                            Text: |
+                                =//Text(DateTimeValue(ThisItem.ReturnDate,"fr"),"mm/dd/yyyy")
+                                Text(ThisItem.ReturnDate,"mm/dd/yyyy")
+                            VerticalAlign: =VerticalAlign.Top
+                            Width: =lblReturnDate.Width
+                            X: =lblLeaveDateVal.X+lblLeaveDateVal.Width
+                            ZIndex: =9
+
+                        btnNavigate_8 As button:
+                            Color: =
+                            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                            Fill: =RGBA(0, 0, 0, 0)
+                            Height: =35
+                            HoverFill: =//ColorFade(RGBA(56, 96, 178, 1), -20%)
+                            OnSelect: |-
+                                =UpdateContext({Loading: true});
+                                Set(
+                                    varDelegationRecords,
+                                    ThisItem
+                                );
+                                If(
+                                    !IsBlank(varDelegationRecords.OnBehalfApproverName),Navigate(Scr_ViewDelegationOnBehalf),Navigate(Scr_ViewDelegation));
+                                UpdateContext({Loading: false});
+                            Text: =""
+                            Width: =Parent.Width
+                            X: =galWorkload.X
+                            ZIndex: =10
+
+    datDelegation As datepicker:
+        AccessibleLabel: ="Date Rejected"
+        BorderColor: =RGBA(237, 237, 237, 1)
+        BorderThickness: =1
+        DefaultDate: =
+        Font: =Apptheme.FontFamily
+        Format: |-
+            =//DateTimeFormat.ShortDate
+            "dd/mm/yyyy"
+        Height: =30
+        IconBackground: |-
+            =RGBA(56, 96, 178, 1)
+            //RGBA(217, 241, 250, 100)
+        InputTextPlaceholder: |-
+            =//If(IsBlank(Self.SelectedDate), Text(Date(2001,12,31), Self.Format, Self.Language))
+            "Filter By Date With (MM/DD/YYYY) Format"
+        Italic: =true
+        Size: =Apptheme.FontSearch
+        Width: =If(App.ActiveScreen.Size>=4,Container1_1.Width/2,Container1_1.Width)
+        X: =lblDelegation.X+10
+        Y: =lblDelegation.Y+lblDelegation.Height
+        ZIndex: =2
+
+    Rectangle1 As rectangle:
+        Fill: =RGBA(236, 225, 245, 1)
+        Height: =60
+        Width: =Parent.Width-(2*Self.X)
+        X: =If(App.ActiveScreen.Size>3,60,20)
+        Y: |-
+            =//Parent.Height-Self.Height
+            Parent.Height-Self.Height-5
+        ZIndex: =3
+
+    btnPrint As button:
+        Color: =RGBA(91, 155, 213, 1)
+        Fill: =RGBA(255, 255, 255, 1)
+        Font: =Apptheme.FontFamily
+        Height: =30
+        HoverFill: =RGBA(102, 182, 227, 1)
+        PaddingLeft: =20
+        Size: =Apptheme.FontSize
+        Text: ="Print"
+        Width: =130
+        X: |-
+            =//Rectangle1.X+Self.Width-60
+            //lblReferSite.X+Self.Width+20
+            //lblReferSite.X+lblReferSite.Width
+            If(App.ActiveScreen.Size>3, Rectangle1.X+Self.Width-60,Rectangle1.X+10)
+        Y: =Rectangle1.Y+(Rectangle1.Height-Self.Height)/2
+        ZIndex: =5
+
+    icnPrint As icon.Print:
+        Color: =RGBA(91, 155, 213, 1)
+        Height: =btnPrint.Height-15
+        Icon: =Icon.Print
+        X: =btnPrint.X
+        Y: =Rectangle1.Y+(Rectangle1.Height-Self.Height)/2
+        ZIndex: =6
+
+    btnCreateDelegation As button:
+        BorderThickness: =0.1
+        Font: =Apptheme.FontFamily
+        FontWeight: =FontWeight.Normal
+        Height: =btnPrint.Height
+        HoverBorderColor: =//ColorFade(Self.BorderColor, 20%)
+        HoverFill: =RGBA(56, 96, 178, 1)
+        OnSelect: =Navigate(Scr_CreateDelegationOnBehalf)
+        PaddingLeft: =15
+        Size: =Apptheme.FontSize
+        Text: ="Create Delegation On Behalf Of"
+        Visible: =!(App.ActiveScreen.Size<=2)
+        Width: |-
+            =//btnPrint.Width*2
+            Rectangle1.Width/4.5
+        X: |-
+            =//btnPrint.X+btnPrint.Width*4
+            If(App.ActiveScreen.Size>2,  Rectangle1.X+Rectangle1.Width-Self.Width-20)
+        Y: =If(App.ActiveScreen.Size>2, Rectangle1.Y+(Rectangle1.Height-Self.Height)/2,btn3dot.Y+btn3dot.Height+5)
+        ZIndex: =7
+
+    icnCreateDelegation As icon.Add:
+        Color: =RGBA(255, 255, 255, 1)
+        Height: =btnCreateDelegation.Height-20
+        Icon: =Icon.Add
+        Width: =30
+        X: =btnCreateDelegation.X+10
+        Y: =Rectangle1.Y+(Rectangle1.Height-Self.Height)/2
+        ZIndex: =8
+
+    txtSearch_1 As text:
+        AccessibleLabel: ="Search here"
+        Align: =Align.Justify
+        BorderColor: =RGBA(237, 237, 237, 1)
+        BorderThickness: =1
+        Default: =""
+        DisabledBorderColor: =RGBA(241, 244, 249, 1)
+        Font: =Apptheme.FontFamily
+        Height: =30
+        HintText: ="Search Any"
+        HoverBorderColor: =RGBA(215, 223, 240, 1)
+        HoverColor: =RGBA(0, 0, 0, 0)
+        HoverFill: =RGBA(0, 0, 0, 0)
+        Italic: =true
+        PaddingLeft: =5
+        PressedColor: =RGBA(65, 182, 230, 1)
+        Size: =Apptheme.FontSearch
+        Width: |-
+            =//Parent.Width*0.16
+            //Switch(App.ActiveScreen.Size,4,lblDelegation.Width,3,100,50,lblDelegation.Width)
+            //Switch(App.ActiveScreen.Size,4,250,3,100,50,lblDelegation.Width)
+            //Switch(App.ActiveScreen.Size,4,250,3,100,50,2,lblDelegation.Width+Parent.Width/2,1,lblDelegation.Width+Parent.Width/2)
+            If(App.ActiveScreen.Size>=4,Container1_1.Width/2-50,Container1_1.Width)
+        X: |-
+            =//If(App.ActiveScreen.Size=1,lblDelegation.X,Parent.Width-Self.Width-70)
+            If(App.ActiveScreen.Size>=4,datDelegation.X+datDelegation.Width+10,lblDelegation.X)
+        Y: |-
+            =//If(App.ActiveScreen.Size=1,lblDelegation.Y+lblDelegation.Height+10,lblDelegation.Y)
+            If(App.ActiveScreen.Size>=4,lblDelegation.Y+lblDelegation.Height,datDelegation.Y+datDelegation.Height+10)
+        ZIndex: =9
+
+    icnSearch_1 As icon.Search:
+        AccessibleLabel: ="Search"
+        Color: |-
+            =RGBA(56, 96, 178, 1)
+            //RGBA(65, 182, 230, 0.65)
+        Height: =txtSearch_1.Height
+        Icon: =If(IsBlank(txtSearch_1),Icon.Search,Icon.Cancel)
+        OnSelect: =Reset(txtSearch_1)
+        PaddingBottom: =5
+        PaddingLeft: =5
+        PaddingRight: =5
+        PaddingTop: =5
+        TabIndex: =0
+        Width: =30
+        X: =txtSearch_1.X+txtSearch_1.Width-Self.Width
+        Y: =txtSearch_1.Y
+        ZIndex: =10
+
+    lblDelegation As label:
+        Font: =Apptheme.FontFamily
+        FontWeight: =FontWeight.Bold
+        Height: =30
+        PaddingLeft: =10
+        Size: =Apptheme.FontHeaderSize
+        Text: ="Delegation"
+        Width: =Parent.Width/3
+        X: |-
+            =//Switch(App.ActiveScreen.Size,4,50,3,30,icnHamburgerMenu_2.X+icnHamburgerMenu_2.Width+10)
+            Switch(App.ActiveScreen.Size,4,50,10)
+        Y: |-
+            =///Switch(App.ActiveScreen.Size,4,HeaderNavigation_3.Y+60,3,30,20)
+            Switch(App.ActiveScreen.Size,4,HeaderNavigation_3.Y+60,30)
+        ZIndex: =11
+
+    btn3dot As button:
+        Color: =RGBA(0, 0, 0, 1)
+        Fill: =RGBA(0, 0, 0, 0)
+        Height: =30
+        OnSelect: |-
+            =UpdateContext({varNewDelegationShow:!varNewDelegationShow})
+        Text: =". . ."
+        Visible: =App.ActiveScreen.Size<=3
+        Width: =50
+        X: =Rectangle1.X+Rectangle1.Width-Self.Width-20
+        Y: =btnPrint.Y
+        ZIndex: =12
+
+    btnCreateDelegationOnBehalf As button:
+        BorderThickness: =0.1
+        Fill: =RGBA(203, 102, 102, 1)
+        Font: =Apptheme.FontFamily
+        FontWeight: =FontWeight.Normal
+        Height: =btnPrint.Height
+        HoverFill: =RGBA(203, 102, 102, 1)
+        OnSelect: =Navigate(Scr_CreateDelegation)
+        PaddingLeft: =15
+        Size: =Apptheme.FontSize
+        Text: ="Create New Delegation"
+        Visible: =!(App.ActiveScreen.Size<=2)
+        Width: |-
+            =//btnPrint.Width*2
+            Rectangle1.Width/4.5
+        X: |-
+            =btnPrint.X+btnPrint.Width*4
+            //If(App.ActiveScreen.Size>2,  Rectangle1.X+Rectangle1.Width-Self.Width-20,lblReferSite.X)
+        Y: =If(App.ActiveScreen.Size>2, Rectangle1.Y+(Rectangle1.Height-Self.Height)/2,btn3dot.Y+btn3dot.Height+5)
+        ZIndex: =13
+
+    icnCreateDelegationOnBehalf As icon.Add:
+        Color: =RGBA(255, 255, 255, 1)
+        Height: =btnCreateDelegationOnBehalf.Height-20
+        Icon: =Icon.Add
+        Width: =30
+        X: =btnCreateDelegationOnBehalf.X+30
+        Y: =Rectangle1.Y+(Rectangle1.Height-Self.Height)/2
+        ZIndex: =14
+
+    HeaderNavigation_3 As HeaderNavigation:
+        Height: |
+            =//HeaderNavigation.HeaderHeight
+            If(HeaderNavigation_3.AdminVisible,480,40)
+        Visible: =App.ActiveScreen.Size>2
+        ZIndex: =15
+
+    Container12 As groupContainer.manualLayoutContainer:
+        BorderColor: =RGBA(149, 149, 149, 1)
+        BorderThickness: =2
+        Height: =btnCreateDelegation_1.Y+btnCreateDelegation_1.Height+10
+        Visible: =App.ActiveScreen.Size<=2 && varNewDelegationShow
+        Width: =300
+        X: =btn3dot.X-(Self.Width-btn3dot.Width)
+        Y: =btn3dot.Y-Self.Height
+        ZIndex: =16
+
+        btnCreateDelegation_1 As button:
+            Font: =Apptheme.FontFamily
+            FontWeight: =FontWeight.Normal
+            Height: =btnPrint.Height
+            OnSelect: =Navigate(Scr_CreateDelegationOnBehalf)
+            PaddingLeft: =15
+            Size: =Apptheme.FontSize
+            Text: ="Create Delegation On Behalf Of"
+            Visible: =Switch(App.ActiveScreen.Size,4,true,3,true,varNewDelegationShow)
+            Width: =Parent.Width
+            Y: =btnCreateDelegationOnBehalf_1.Y+btnCreateDelegationOnBehalf_1.Height+5
+            ZIndex: =1
+
+        btnCreateDelegationOnBehalf_1 As button:
+            Font: =Apptheme.FontFamily
+            FontWeight: =FontWeight.Normal
+            Height: =btnPrint.Height
+            OnSelect: =Navigate(Scr_CreateDelegation)
+            PaddingLeft: =15
+            Size: =Apptheme.FontSize
+            Text: ="Create New Delegation"
+            Visible: =Switch(App.ActiveScreen.Size,4,true,3,true,varNewDelegationShow)
+            Width: =Parent.Width
+            Y: =5
+            ZIndex: =2
+
+    LeftNavigation_3 As LeftNavigation:
+        Height: |-
+            =//App.Height
+            Max(App.Height,App.DesignHeight)
+        Visible: =App.ActiveScreen.Size<=2 && varShowNav
+        ZIndex: =17
+
+    icnHamburgerMenu_2 As icon.Hamburger:
+        AccessibleLabel: ="Menu"
+        Height: =30
+        Icon: =If(varShowNav,Icon.Cancel,Icon.Hamburger)
+        OnSelect: |-
+            =UpdateContext({varShowNav:!varShowNav})
+        TabIndex: =0
+        Visible: =App.ActiveScreen.Size<=2
+        Width: =30
+        Y: |-
+            =//Switch(App.ActiveScreen.Size,4,HeaderNavigation_3.Y,3,30,20)
+            0
+        ZIndex: =18
+
+    icnReset_8 As icon.Reset:
+        AccessibleLabel: ="Reset"
+        BorderColor: =icnSearch.BorderColor
+        BorderStyle: =BorderStyle.None
+        BorderThickness: =0.1
+        Color: |-
+            =icnSearch.Color
+            //RGBA(0, 18, 107, 1)
+        Height: =icnSearch_1.Height
+        Icon: =Icon.Reset
+        OnSelect: |-
+            =Reset(datDelegation);
+            Reset(txtSearch_1)
+        TabIndex: =0
+        Tooltip: ="Filter Reset"
+        Width: =icnSearch_1.Width-10
+        X: =txtSearch_1.X+txtSearch_1.Width
+        Y: =txtSearch_1.Y
+        ZIndex: =19
+
+    grp_Loading_2 As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =22
+
+        rec_BGPopup_36 As rectangle:
+            Fill: =RGBA(0, 0, 0, 0.2)
+            Height: =Parent.Height
+            Visible: =Loading
+            Width: =Parent.Width
+            ZIndex: =20
+
+        Image1_8 As image:
+            Image: =slds_spinner_brand
+            Visible: =Loading
+            X: =Parent.Width/2
+            Y: =Parent.Height/2
+            ZIndex: =21
+

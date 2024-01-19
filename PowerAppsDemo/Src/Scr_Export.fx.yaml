@@ -1,0 +1,1994 @@
+"Scr_Export As screen.'phoneLayout_FluidGridWithHeaderPageLayout_ver3.0'":
+    OnVisible: |-
+        =Set(varReset,false);
+        Set(varReset,true);
+        //ClearCollect(Colexp,PRForm);
+        Refresh(PRForm);
+        ClearCollect(
+            Colexp,
+            ShowColumns(
+                PRForm,
+                "RequestNumber",
+                "CurrentStatus",
+                "Created",
+                "CreatedDate",
+                "fd_kw_CostcenterResponsible_1",
+                "InitiatorWorkflowDate",
+                "fd_na_ResponsibleCostCenter",
+                "Approver1WorkflowDate",
+                "fd_na_ResponsibleHRPlant",
+                "Approver2WorkflowDate",
+                "fd_kw_BusinessUnit",
+                "fd_na_ResponsibleCOPlant",
+                "CRRCWorkflowDate",
+                "BudgetedOrNonBudgeted",
+                "fd_na_ResponsibleRegion",
+                "Approver3WorkflowDate",
+                "fd_na_SpecialApproval",
+                "Approver4WorkflowDate",
+                "fd_na_SignContract",
+                "SignContractWorkflowDate",
+                "fd_LegalEntity",
+                "fd_Plant",
+                "fd_Plant_Number",
+                "fd_Country",
+                "fd_CountryISO",
+                "fd_kw_ManagementEntity",
+                "fd_Department",
+                "fd_DepartmentDetailed",
+                "fd_CostCenter",
+                "fd_FunctionTitle",
+                "fd_dt_Necessary",
+                "fd_kw_EmployeeType",
+                "fd_kw_HayLevel",
+                "fd_n_NoPositions",
+                "fd_kw_DurationContract",
+                "fd_dt_DurationUntil",
+                "fd_kw_Filled",
+                "MainCommentary",
+                "fd_PositionProfile",
+                "FullTime",
+                "fd_kw_BudgetedPosition",
+                "fd_kw_BudgetedYear",
+                "fd_kw_Replacement",
+                "Approver1WorkflowComment",
+                "fd_Headcount",
+                "fd_thereofInactive",
+                "fd_currentHeadcount",
+                "fd_RequestedPosition",
+                "fd_na_Requestor",
+                "WorkFlowHistory",
+                "fd_na_AddInfoRespHRCountry",
+                "fd_na_AddInfoRespHRRegion",
+                "fd_na_AddInfoRespHRPlant",
+                "fd_na_AddInfoManagement",
+                "Modified",
+                "InitiatorName",
+                "fd_kw_SuitableAssignment",
+                "fd_na_AddInfoRespPlant",
+                "RespCostCenterDirectReporting",
+                "Requisitionerhasanattachment",
+                "fd_kw_PositionType"
+            )
+        );
+
+    Canvas5_1 As fluidGrid.fluidGridWithBlankCard:
+        BorderThickness: =0
+        Fill: =RGBA(241, 244, 249, 1)
+        Height: =(Rectangle1_12.Y-Rectangle1_12.Height -Self.Y)+50
+        Width: =Parent.Width
+        Y: |-
+            =//Switch(App.ActiveScreen.Size,4,HeaderNavigation_5.Y+HeaderNavigation_5.Height,3,30,20)
+            lblExport_1.Y+lblExport_1.Height
+        ZIndex: =1
+
+        DataCard5_1 As dataCard:
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderStyle: =BorderStyle.Solid
+            BorderThickness: =0
+            DisplayMode: =DisplayMode.Edit
+            Fill: =RGBA(241, 244, 249, 1)
+            Height: =Parent.Height 
+            Width: =Parent.Width
+            X: =0
+            Y: =0
+            ZIndex: =1
+
+            Container5_1 As groupContainer.horizontalAutoLayoutContainer:
+                Height: =Parent.Height-Self.Y-10
+                LayoutMode: =LayoutMode.Auto
+                LayoutOverflowY: =LayoutOverflow.Scroll
+                Width: =Parent.Width
+                Y: |
+                    =0
+                ZIndex: =2
+
+                Container7_1 As groupContainer.manualLayoutContainer:
+                    FillPortions: =0
+                    Height: =ComboBox2_11.Y+ComboBox2_11.Height+20
+                    LayoutMinHeight: =drpWorkflow.Y+drpWorkflow.Height+50
+                    LayoutMinWidth: =250
+                    Width: =Parent.Width
+                    Y: |-
+                        =//lblExport.Y+lblExport.Height
+                        0
+                    ZIndex: =1
+
+                    lblLegalEntity_1 As label:
+                        Align: =If(App.ActiveScreen.Size>3,Align.Right,Align.Left)
+                        Font: =Apptheme.FontFamily
+                        Height: =30
+                        Size: =Apptheme.FontSize
+                        Text: |-
+                            ="Legal Entity :"
+                        Width: =If(App.ActiveScreen.Size>3,Parent.Width/2-150,Parent.Width-(2*Self.X))
+                        X: =Switch(App.ActiveScreen.Size,4,100,lblExport_1.X)
+                        Y: |-
+                            =//lblExport.Y+lblExport.Height
+                            Container7_1.Y+20
+                            //If(App.ActiveScreen.Size>2, Container7.Y,Container7.Y+Container7.Height)
+                        ZIndex: =1
+
+                    lblManagementEntity_1 As label:
+                        Align: =If(App.ActiveScreen.Size>3,Align.Right,Align.Left)
+                        Font: =Apptheme.FontFamily
+                        Height: =30
+                        Size: =Apptheme.FontSize
+                        Text: |-
+                            ="Management Entity :"
+                        Width: =If(App.ActiveScreen.Size>3,Parent.Width/2-150,Parent.Width-(2*Self.X))
+                        X: =lblLegalEntity_1.X
+                        Y: |-
+                            =//lblLegalEntity.Y
+                            //If(App.ActiveScreen.Size>2, lblLegalEntity.Y,drpLegalEntity.Y+drpLegalEntity.Height+20)
+                            drpCountryISO_1.Y+drpCountryISO_1.Height+20
+                        ZIndex: =2
+
+                    lblPlant_1 As label:
+                        Align: =If(App.ActiveScreen.Size>3,Align.Right,Align.Left)
+                        Font: =Apptheme.FontFamily
+                        Height: =30
+                        Size: =Apptheme.FontSize
+                        Text: |-
+                            ="Plant :"
+                        Width: =If(App.ActiveScreen.Size>3,Parent.Width/2-150,Parent.Width-(2*Self.X))
+                        X: =lblLegalEntity_1.X
+                        Y: =drpLegalEntity_1.Y+drpLegalEntity_1.Height+20
+                        ZIndex: =3
+
+                    lblPlantNumber_1 As label:
+                        Align: =If(App.ActiveScreen.Size>3,Align.Right,Align.Left)
+                        Font: =Apptheme.FontFamily
+                        Height: =30
+                        Size: =Apptheme.FontSize
+                        Text: |-
+                            ="Plant Number :"
+                        Width: =If(App.ActiveScreen.Size>3,Parent.Width/2-150,Parent.Width-(2*Self.X))
+                        X: =lblLegalEntity_1.X
+                        Y: |-
+                            =drpPlant_1.Y+drpPlant_1.Height+20
+                            //If(App.ActiveScreen.Size>2, lblPlant.Y,drpPlant.Y+drpPlant.Height+20)
+                        ZIndex: =4
+
+                    lblCountry_1 As label:
+                        Align: =If(App.ActiveScreen.Size>3,Align.Right,Align.Left)
+                        Font: =Apptheme.FontFamily
+                        Height: =30
+                        Size: =Apptheme.FontSize
+                        Text: |-
+                            ="Country :"
+                        Width: =If(App.ActiveScreen.Size>3,Parent.Width/2-150,Parent.Width-(2*Self.X))
+                        X: =lblLegalEntity_1.X
+                        Y: =drpPlantNumber_1.Y+drpPlantNumber_1.Height+20
+                        ZIndex: =5
+
+                    lblCountryISO_1 As label:
+                        Align: =If(App.ActiveScreen.Size>3,Align.Right,Align.Left)
+                        Font: =Apptheme.FontFamily
+                        Height: =30
+                        Size: =Apptheme.FontSize
+                        Text: |-
+                            ="Country ISO :"
+                        Width: =If(App.ActiveScreen.Size>3,Parent.Width/2-150,Parent.Width-(2*Self.X))
+                        X: =lblLegalEntity_1.X
+                        Y: |-
+                            =drpCountry_1.Y+drpCountry_1.Height+20
+                            //If(App.ActiveScreen.Size>2, lblCountry.Y,drpCountry.Y+drpCountry.Height+20)
+                        ZIndex: =6
+
+                    lblBUPCSC_1 As label:
+                        Align: =If(App.ActiveScreen.Size>3,Align.Right,Align.Left)
+                        Font: =Apptheme.FontFamily
+                        Height: =30
+                        Size: =Apptheme.FontSize
+                        Text: |-
+                            ="BU/PC/SC :"
+                        Width: =If(App.ActiveScreen.Size>3,Parent.Width/2-150,Parent.Width-(2*Self.X))
+                        X: =lblLegalEntity_1.X
+                        Y: =drpManagementEntity_1.Y+drpManagementEntity_1.Height+20
+                        ZIndex: =7
+
+                    lblCostCenter_1 As label:
+                        Align: =If(App.ActiveScreen.Size>3,Align.Right,Align.Left)
+                        Font: =Apptheme.FontFamily
+                        Height: =30
+                        Size: =Apptheme.FontSize
+                        Text: |-
+                            ="Cost Center :"
+                        Width: =If(App.ActiveScreen.Size>3,Parent.Width/2-150,Parent.Width-(2*Self.X))
+                        X: =lblLegalEntity_1.X
+                        Y: |-
+                            =drpBUPCSC_1.Y+drpBUPCSC_1.Height+20
+                            //If(App.ActiveScreen.Size>2, lblBUPCSC.Y,drpBUPCSC.Y+drpBUPCSC.Height+20)
+                        ZIndex: =8
+
+                    lblApprover2Superior_1 As label:
+                        Align: =If(App.ActiveScreen.Size>3,Align.Right,Align.Left)
+                        Font: =Apptheme.FontFamily
+                        Height: =30
+                        Size: =Apptheme.FontSize
+                        Text: |-
+                            ="Approver2 Next Superior :"
+                        Width: =If(App.ActiveScreen.Size>3,Parent.Width/2-150,Parent.Width-(2*Self.X))
+                        X: =lblLegalEntity_1.X
+                        Y: =drpCostCenter_1.Y+drpCostCenter_1.Height+20
+                        ZIndex: =9
+
+                    lblApprover3BU_1 As label:
+                        Align: =If(App.ActiveScreen.Size>3,Align.Right,Align.Left)
+                        Font: =Apptheme.FontFamily
+                        Height: =30
+                        Size: =Apptheme.FontSize
+                        Text: |-
+                            ="Approver3 BU :"
+                        Width: =If(App.ActiveScreen.Size>3,Parent.Width/2-150,Parent.Width-(2*Self.X))
+                        X: =lblLegalEntity_1.X
+                        Y: |-
+                            =drpApprover2Superior_1.Y+drpApprover2Superior_1.Height+20
+                            //If(App.ActiveScreen.Size>2, lblApprover2Superior.Y,drpApprover2Superior.Y+drpApprover2Superior.Height+20)
+                        ZIndex: =10
+
+                    drpLegalEntity_1 As dropdown:
+                        AccessibleLabel: ="Legal Entity"
+                        BorderStyle: =BorderStyle.None
+                        ChevronDisabledBackground: =RGBA(255, 255, 255, 1)
+                        ChevronDisabledFill: =RGBA(255, 255, 255, 1)
+                        DisplayMode: =DisplayMode.Disabled
+                        Fill: =RGBA(252, 252, 252, 1)
+                        Font: =Apptheme.FontFamily
+                        Height: =30
+                        Items: |-
+                            =Distinct(PRForm,'Legal Entity')
+                            /*Ungroup(
+                                Table(
+                                    {DropdownOptionsExportLegalEntity: Table({Result: "--Please Select--"})},
+                                    {
+                                        DropdownOptionsExportLegalEntity: ForAll(Distinct(LegalEntity,Company), {Result: ThisRecord.Value})
+                                    }
+                                ),
+                                "DropdownOptionsExportLegalEntity"
+                            )*/
+                            //DropdownOptionsExportLegalEntity
+                        OnChange: |-
+                            =Clear(ColexportPlant);
+                            //ClearCollect(ColexportPlant,{Value:"-- Please Select --"});
+                            Collect(ColexportPlant,Filter(PRForm,'Legal Entity'=drpLegalEntity_1.SelectedText.Value).Plant)
+                        SelectionColor: =RGBA(0, 0, 0, 1)
+                        SelectionFill: =RGBA(204, 231, 246, 1)
+                        Size: =Apptheme.FontSize
+                        Width: =If(App.ActiveScreen.Size>3,Parent.Width/2-150,Parent.Width-(2*Self.X))
+                        X: =If(App.ActiveScreen.Size>3,lblLegalEntity_1.X+lblLegalEntity_1.Width+10,lblLegalEntity_1.X)
+                        Y: =If(App.ActiveScreen.Size>3,lblLegalEntity_1.Y,lblLegalEntity_1.Y+lblLegalEntity_1.Height+10)
+                        ZIndex: =11
+
+                    drpManagementEntity_1 As dropdown:
+                        AccessibleLabel: ="Management entity"
+                        BorderStyle: =BorderStyle.None
+                        ChevronDisabledBackground: =RGBA(255, 255, 255, 1)
+                        ChevronDisabledFill: =RGBA(255, 255, 255, 1)
+                        DisplayMode: =DisplayMode.Disabled
+                        Fill: =RGBA(252, 252, 252, 1)
+                        Font: =Apptheme.FontFamily
+                        Height: =30
+                        Items: =Distinct(Filter(PRForm,'Legal Entity'=drpLegalEntity_1.Selected.Value && Plant=drpPlant_1.Selected.Value && 'Plant Number'=drpPlantNumber_1.Selected.Value &&Country=drpCountry_1.Selected.Value && 'Country ISO'=drpCountryISO_1.Selected.Value).'Management Entity','Management Entity')
+                        OnChange: |-
+                            =Clear(ColexporBUPCSC);
+                            //ClearCollect(ColexporBUPCSC,{Value:"-- Please Select --"});
+                            Collect(ColexporBUPCSC,Filter(PRForm,'Legal Entity'=drpLegalEntity_1.SelectedText.Value && Plant=drpPlant_1.SelectedText.Value && 'Plant Number'=drpPlantNumber_1.SelectedText.Value &&Country=drpCountry_1.Selected.Value && 'Country ISO'=drpCountryISO_1.SelectedText.Value && 'Management Entity'=drpManagementEntity_1.SelectedText.Value).BUorPCorSC)
+                        SelectionColor: =RGBA(0, 0, 0, 1)
+                        SelectionFill: =RGBA(204, 231, 246, 1)
+                        Size: =Apptheme.FontSize
+                        Width: =If(App.ActiveScreen.Size>3,Parent.Width/2-150,Parent.Width-(2*Self.X))
+                        X: =drpLegalEntity_1.X
+                        Y: |-
+                            =//lblManagementEntity_1.Y
+                            If(App.ActiveScreen.Size>3,lblManagementEntity_1.Y,lblManagementEntity_1.Y+lblManagementEntity_1.Height+10)
+                        ZIndex: =12
+
+                    drpPlant_1 As dropdown:
+                        AccessibleLabel: ="DropdownPlant"
+                        BorderStyle: =BorderStyle.None
+                        ChevronDisabledBackground: =RGBA(255, 255, 255, 1)
+                        ChevronDisabledFill: =RGBA(255, 255, 255, 1)
+                        DisplayMode: =DisplayMode.Disabled
+                        Fill: =RGBA(252, 252, 252, 1)
+                        Font: =Apptheme.FontFamily
+                        Height: =30
+                        Items: =Distinct(Filter(PRForm,'Legal Entity'=drpLegalEntity_1.SelectedText.Value).Plant,Plant)
+                        OnChange: |-
+                            =Clear(ColexportPlantNumber);
+                            //ClearCollect(ColexportPlantNumber,{Value:"-- Please Select --"});
+                            Collect(ColexportPlantNumber,Filter(PRForm,'Legal Entity'=drpLegalEntity_1.SelectedText.Value && Plant=drpPlant_1.Selected.Value).'Plant Number')
+                        SelectionColor: =RGBA(0, 0, 0, 1)
+                        SelectionFill: =RGBA(204, 231, 246, 1)
+                        Size: =Apptheme.FontSize
+                        Width: =If(App.ActiveScreen.Size>3,Parent.Width/2-150,Parent.Width-(2*Self.X))
+                        X: =drpLegalEntity_1.X
+                        Y: |-
+                            =//lblPlant_1.Y
+                            If(App.ActiveScreen.Size>3,lblPlant_1.Y,lblPlant_1.Y+lblPlant_1.Height+10)
+                        ZIndex: =13
+
+                    drpPlantNumber_1 As dropdown:
+                        AccessibleLabel: ="DropdownPlantnumber"
+                        BorderStyle: =BorderStyle.None
+                        ChevronDisabledBackground: =RGBA(255, 255, 255, 1)
+                        ChevronDisabledFill: =RGBA(255, 255, 255, 1)
+                        DisplayMode: =DisplayMode.Disabled
+                        Fill: =RGBA(252, 252, 252, 1)
+                        Font: =Apptheme.FontFamily
+                        Height: =30
+                        Items: =Distinct(Filter(PRForm,'Legal Entity'=drpLegalEntity_1.SelectedText.Value && Plant=drpPlant_1.Selected.Value).'Plant Number','Plant Number')
+                        OnChange: |-
+                            =Clear(ColexportCountry);
+                            //ClearCollect(ColexportCountry,{Value:"-- Please Select --"});
+                            Collect(ColexportCountry,Filter(PRForm,'Legal Entity'=drpLegalEntity_1.SelectedText.Value && Plant=drpPlant_1.SelectedText.Value && 'Plant Number'=drpPlantNumber_1.SelectedText.Value).Country)
+                        SelectionColor: =RGBA(0, 0, 0, 1)
+                        SelectionFill: =RGBA(204, 231, 246, 1)
+                        Size: =Apptheme.FontSize
+                        Width: =If(App.ActiveScreen.Size>3,Parent.Width/2-150,Parent.Width-(2*Self.X))
+                        X: =drpLegalEntity_1.X
+                        Y: |-
+                            =//lblPlantNumber_1.Y
+                            If(App.ActiveScreen.Size>3,lblPlantNumber_1.Y,lblPlantNumber_1.Y+lblPlantNumber_1.Height+10)
+                        ZIndex: =14
+
+                    drpCountry_1 As dropdown:
+                        AccessibleLabel: ="DropdownCountry"
+                        BorderStyle: =BorderStyle.None
+                        ChevronDisabledBackground: =RGBA(255, 255, 255, 1)
+                        ChevronDisabledFill: =RGBA(255, 255, 255, 1)
+                        DisplayMode: =DisplayMode.Disabled
+                        Fill: =RGBA(252, 252, 252, 1)
+                        Font: =Apptheme.FontFamily
+                        Height: =30
+                        Items: =Distinct(Filter(PRForm,'Legal Entity'=drpLegalEntity_1.SelectedText.Value && Plant=drpPlant_1.SelectedText.Value && 'Plant Number'=drpPlantNumber_1.SelectedText.Value).Country,Country)
+                        OnChange: |-
+                            =Clear(ColexportCountryISO);
+                            //ClearCollect(ColexportCountryISO,{Value:"-- Please Select --"});
+                            Collect(ColexportCountryISO,Filter(PRForm,'Legal Entity'=drpLegalEntity_1.SelectedText.Value && Plant=drpPlant_1.SelectedText.Value && 'Plant Number'=drpPlantNumber_1.SelectedText.Value &&Country=drpCountry_1.Selected.Value).'Country ISO')
+                        SelectionColor: =RGBA(0, 0, 0, 1)
+                        SelectionFill: =RGBA(204, 231, 246, 1)
+                        Size: =Apptheme.FontSize
+                        Width: =If(App.ActiveScreen.Size>3,Parent.Width/2-150,Parent.Width-(2*Self.X))
+                        X: =drpLegalEntity_1.X
+                        Y: |-
+                            =//lblCountry_1.Y
+                            If(App.ActiveScreen.Size>3,lblCountry_1.Y,lblCountry_1.Y+lblCountry_1.Height+10)
+                        ZIndex: =15
+
+                    drpCountryISO_1 As dropdown:
+                        AccessibleLabel: ="DropdownCountryISO"
+                        BorderStyle: =BorderStyle.None
+                        ChevronDisabledBackground: =RGBA(255, 255, 255, 1)
+                        ChevronDisabledFill: =RGBA(255, 255, 255, 1)
+                        DisplayMode: =DisplayMode.Disabled
+                        Fill: =RGBA(252, 252, 252, 1)
+                        Font: =Apptheme.FontFamily
+                        Height: =30
+                        Items: =Distinct(Filter(PRForm,'Legal Entity'=drpLegalEntity_1.SelectedText.Value && Plant=drpPlant_1.SelectedText.Value && 'Plant Number'=drpPlantNumber_1.SelectedText.Value &&Country=drpCountry_1.Selected.Value).'Country ISO','Country ISO')
+                        OnChange: |-
+                            =Clear(ColexportManage);
+                            //ClearCollect(ColexportManage,{Value:"-- Please Select --"});
+                            Collect(ColexportManage,Filter(PRForm,'Legal Entity'=drpLegalEntity_1.Selected.Value && Plant=drpPlant_1.Selected.Value && 'Plant Number'=drpPlantNumber_1.Selected.Value &&Country=drpCountry_1.Selected.Value && 'Country ISO'=drpCountryISO_1.Selected.Value).'Management Entity')
+                        SelectionColor: =RGBA(0, 0, 0, 1)
+                        SelectionFill: =RGBA(204, 231, 246, 1)
+                        Size: =Apptheme.FontSize
+                        Width: =If(App.ActiveScreen.Size>3,Parent.Width/2-150,Parent.Width-(2*Self.X))
+                        X: =drpLegalEntity_1.X
+                        Y: |-
+                            =//lblCountryISO_1.Y
+                            If(App.ActiveScreen.Size>3,lblCountryISO_1.Y,lblCountryISO_1.Y+lblCountryISO_1.Height+10)
+                        ZIndex: =16
+
+                    drpBUPCSC_1 As dropdown:
+                        AccessibleLabel: ="DropdownBUPCSC"
+                        BorderStyle: =BorderStyle.None
+                        ChevronDisabledBackground: =RGBA(255, 255, 255, 1)
+                        ChevronDisabledFill: =RGBA(255, 255, 255, 1)
+                        DisplayMode: =DisplayMode.Disabled
+                        Fill: =RGBA(252, 252, 252, 1)
+                        Font: =Apptheme.FontFamily
+                        Height: =30
+                        Items: =Distinct(Filter(PRForm,'Legal Entity'=drpLegalEntity_1.SelectedText.Value && Plant=drpPlant_1.SelectedText.Value && 'Plant Number'=drpPlantNumber_1.SelectedText.Value &&Country=drpCountry_1.Selected.Value && 'Country ISO'=drpCountryISO_1.SelectedText.Value && 'Management Entity'=drpManagementEntity_1.SelectedText.Value).BUorPCorSC,BUorPCorSC)
+                        OnChange: |-
+                            =Clear(ColexporCostCenter);
+                            //ClearCollect(ColexporCostCenter,{Value:"-- Please Select --"});
+                            Collect(ColexporCostCenter,Filter(PRForm,'Legal Entity'=drpLegalEntity_1.SelectedText.Value && Plant=drpPlant_1.SelectedText.Value && 'Plant Number'=drpPlantNumber_1.SelectedText.Value &&Country=drpCountry_1.Selected.Value && 'Country ISO'=drpCountryISO_1.SelectedText.Value && 'Management Entity'=drpManagementEntity_1.SelectedText.Value && BUorPCorSC=drpBUPCSC_1.Selected.Value).'Cost Center')
+                        SelectionColor: =RGBA(0, 0, 0, 1)
+                        SelectionFill: =RGBA(204, 231, 246, 1)
+                        Size: =Apptheme.FontSize
+                        Width: =If(App.ActiveScreen.Size>3,Parent.Width/2-150,Parent.Width-(2*Self.X))
+                        X: =drpLegalEntity_1.X
+                        Y: |-
+                            =//lblBUPCSC_1.Y
+                            If(App.ActiveScreen.Size>3,lblBUPCSC_1.Y,lblBUPCSC_1.Y+lblBUPCSC_1.Height+10)
+                        ZIndex: =17
+
+                    drpCostCenter_1 As dropdown:
+                        AccessibleLabel: ="DropdownCostCenter"
+                        BorderStyle: =BorderStyle.None
+                        ChevronDisabledBackground: =RGBA(255, 255, 255, 1)
+                        ChevronDisabledFill: =RGBA(255, 255, 255, 1)
+                        ChevronHoverBackground: =//ColorFade(RGBA(56, 96, 178, 1), -20%)
+                        DisplayMode: =DisplayMode.Disabled
+                        Fill: =RGBA(252, 252, 252, 1)
+                        Font: =Apptheme.FontFamily
+                        Height: =30
+                        Items: =Distinct(Filter(PRForm,'Legal Entity'=drpLegalEntity_1.SelectedText.Value && Plant=drpPlant_1.SelectedText.Value && 'Plant Number'=drpPlantNumber_1.SelectedText.Value &&Country=drpCountry_1.Selected.Value && 'Country ISO'=drpCountryISO_1.SelectedText.Value && 'Management Entity'=drpManagementEntity_1.SelectedText.Value && BUorPCorSC=drpBUPCSC_1.Selected.Value).'Cost Center','Cost Center')
+                        OnChange: |-
+                            =Clear(ColexporApprover2Next);
+                            //ClearCollect(ColexporApprover2Next,{Value:"-- Please Select --"});
+                            Collect(ColexporApprover2Next,Filter(PRForm,'Legal Entity'=drpLegalEntity_1.SelectedText.Value && Plant=drpPlant_1.SelectedText.Value && 'Plant Number'=drpPlantNumber_1.SelectedText.Value &&Country=drpCountry_1.Selected.Value && 'Country ISO'=drpCountryISO_1.SelectedText.Value && 'Management Entity'=drpManagementEntity_1.SelectedText.Value && BUorPCorSC=drpBUPCSC_1.SelectedText.Value && 'Cost Center'=drpCostCenter_1.SelectedText.Value).'2� Approval Next Higher Superior')
+                        SelectionColor: =RGBA(0, 0, 0, 1)
+                        SelectionFill: =RGBA(204, 231, 246, 1)
+                        Size: =Apptheme.FontSize
+                        Width: =If(App.ActiveScreen.Size>3,Parent.Width/2-150,Parent.Width-(2*Self.X))
+                        X: =drpLegalEntity_1.X
+                        Y: |-
+                            =//lblCostCenter_1.Y
+                            If(App.ActiveScreen.Size>3,lblCostCenter_1.Y,lblCostCenter_1.Y+lblCostCenter_1.Height+10)
+                        ZIndex: =18
+
+                    drpApprover2Superior_1 As dropdown:
+                        AccessibleLabel: ="Dropdownapproversuperior"
+                        BorderStyle: =BorderStyle.None
+                        ChevronDisabledBackground: =RGBA(255, 255, 255, 1)
+                        ChevronDisabledFill: =RGBA(255, 255, 255, 1)
+                        DisplayMode: =DisplayMode.Disabled
+                        Fill: =RGBA(252, 252, 252, 1)
+                        Font: =Apptheme.FontFamily
+                        Height: =30
+                        Items: =Distinct(Filter(PRForm,'Legal Entity'=drpLegalEntity_1.SelectedText.Value && Plant=drpPlant_1.SelectedText.Value && 'Plant Number'=drpPlantNumber_1.SelectedText.Value &&Country=drpCountry_1.Selected.Value && 'Country ISO'=drpCountryISO_1.SelectedText.Value && 'Management Entity'=drpManagementEntity_1.SelectedText.Value && BUorPCorSC=drpBUPCSC_1.SelectedText.Value && 'Cost Center'=drpCostCenter_1.SelectedText.Value).'2� Approval Next Higher Superior','2� Approval Next Higher Superior')
+                        OnChange: |-
+                            =Clear(ColexporApprover3BU);
+                            //ClearCollect(ColexporApprover3BU,{Value:"-- Please Select --"});
+                            Collect(ColexporApprover3BU,LookUp(PRForm,'Legal Entity'=drpLegalEntity_1.SelectedText.Value && Plant=drpPlant_1.SelectedText.Value && 'Plant Number'=drpPlantNumber_1.SelectedText.Value &&Country=drpCountry_1.Selected.Value && 'Country ISO'=drpCountryISO_1.SelectedText.Value && 'Management Entity'=drpManagementEntity_1.SelectedText.Value && BUorPCorSC=drpBUPCSC_1.SelectedText.Value && 'Cost Center'=drpCostCenter_1.SelectedText.Value && '2� Approval Next Higher Superior'=drpApprover2Superior_1.SelectedText.Value).'3� Approval Responsible BU Region  Responsible PCorDivision  Responsible Function GlobalorRegion')
+                        SelectionColor: =RGBA(0, 0, 0, 1)
+                        SelectionFill: =RGBA(204, 231, 246, 1)
+                        Size: =Apptheme.FontSize
+                        Width: =If(App.ActiveScreen.Size>3,Parent.Width/2-150,Parent.Width-(2*Self.X))
+                        X: =drpLegalEntity_1.X
+                        Y: |-
+                            =//lblApprover2Superior_1.Y
+                            If(App.ActiveScreen.Size>3,lblApprover2Superior_1.Y,lblApprover2Superior_1.Y+lblApprover2Superior_1.Height+10)
+                        ZIndex: =19
+
+                    drpApprover3BU_1 As dropdown:
+                        AccessibleLabel: ="Approver BU"
+                        BorderStyle: =BorderStyle.None
+                        ChevronDisabledBackground: =RGBA(255, 255, 255, 1)
+                        ChevronDisabledFill: =RGBA(255, 255, 255, 1)
+                        DisplayMode: =DisplayMode.Disabled
+                        Fill: =RGBA(252, 252, 252, 1)
+                        Font: =Apptheme.FontFamily
+                        Height: =30
+                        Items: =Distinct(Filter(PRForm,'Legal Entity'=drpLegalEntity_1.SelectedText.Value && Plant=drpPlant_1.SelectedText.Value && 'Plant Number'=drpPlantNumber_1.SelectedText.Value &&Country=drpCountry_1.Selected.Value && 'Country ISO'=drpCountryISO_1.SelectedText.Value && 'Management Entity'=drpManagementEntity_1.SelectedText.Value && BUorPCorSC=drpBUPCSC_1.SelectedText.Value && 'Cost Center'=drpCostCenter_1.SelectedText.Value && '2� Approval Next Higher Superior'=drpApprover2Superior_1.SelectedText.Value).'3� Approval Responsible BU Region  Responsible PCorDivision  Responsible Function GlobalorRegion','3� Approval Responsible BU Region  Responsible PCorDivision  Responsible Function GlobalorRegion')
+                        OnChange: |-
+                            =Clear(ColexporRequest);
+                            //ClearCollect(ColexporRequest,{Value:"-- Please Select --"});
+                            Collect(ColexporRequest,LookUp(PRForm,'Legal Entity'=drpLegalEntity_1.SelectedText.Value && Plant=drpPlant_1.SelectedText.Value && 'Plant Number'=drpPlantNumber_1.SelectedText.Value &&Country=drpCountry_1.Selected.Value && 'Country ISO'=drpCountryISO_1.SelectedText.Value && 'Management Entity'=drpManagementEntity_1.SelectedText.Value && BUorPCorSC=drpBUPCSC_1.SelectedText.Value && 'Cost Center'=drpCostCenter_1.SelectedText.Value && '2� Approval Next Higher Superior'=drpApprover2Superior_1.SelectedText.Value && '3� Approval Responsible BU Region  Responsible PCorDivision  Responsible Function GlobalorRegion'=drpApprover3BU_1.SelectedText.Value).RequestNumber)
+                        SelectionColor: =RGBA(0, 0, 0, 1)
+                        SelectionFill: =RGBA(204, 231, 246, 1)
+                        Size: =Apptheme.FontSize
+                        Width: =If(App.ActiveScreen.Size>3,Parent.Width/2-150,Parent.Width-(2*Self.X))
+                        X: =drpLegalEntity_1.X
+                        Y: |-
+                            =//lblApprover3BU_1.Y
+                            If(App.ActiveScreen.Size>3,lblApprover3BU_1.Y,lblApprover3BU_1.Y+lblApprover3BU_1.Height+10)
+                        ZIndex: =20
+
+                    lblrequestno As label:
+                        Align: =If(App.ActiveScreen.Size>3,Align.Right,Align.Left)
+                        Font: =Apptheme.FontFamily
+                        Height: =30
+                        Size: =Apptheme.FontSize
+                        Text: |-
+                            ="Request No :"
+                        Width: =If(App.ActiveScreen.Size>3,Parent.Width/2-150,Parent.Width-(2*Self.X))
+                        X: =lblLegalEntity_1.X
+                        Y: |-
+                            =drpApprover3BU_1.Y+drpApprover3BU_1.Height+20
+                            //If(App.ActiveScreen.Size>2, lblApprover2Superior.Y,drpApprover2Superior.Y+drpApprover2Superior.Height+20)
+                        ZIndex: =21
+
+                    drprequest As dropdown:
+                        AccessibleLabel: ="Approver BU"
+                        BorderStyle: =BorderStyle.None
+                        ChevronDisabledBackground: =RGBA(255, 255, 255, 1)
+                        ChevronDisabledFill: =RGBA(255, 255, 255, 1)
+                        DisplayMode: =DisplayMode.Disabled
+                        Fill: =RGBA(252, 252, 252, 1)
+                        Font: =Apptheme.FontFamily
+                        Height: =30
+                        Items: =Distinct(Filter(PRForm,'Legal Entity'=drpLegalEntity_1.SelectedText.Value && Plant=drpPlant_1.SelectedText.Value && 'Plant Number'=drpPlantNumber_1.SelectedText.Value &&Country=drpCountry_1.Selected.Value && 'Country ISO'=drpCountryISO_1.SelectedText.Value && 'Management Entity'=drpManagementEntity_1.SelectedText.Value && BUorPCorSC=drpBUPCSC_1.SelectedText.Value && 'Cost Center'=drpCostCenter_1.SelectedText.Value && '2� Approval Next Higher Superior'=drpApprover2Superior_1.SelectedText.Value && '3� Approval Responsible BU Region  Responsible PCorDivision  Responsible Function GlobalorRegion'=drpApprover3BU_1.SelectedText.Value).RequestNumber,RequestNumber)
+                        OnChange: |-
+                            =Clear(ColexporWorkFlow);
+                            //ClearCollect(ColexporWorkFlow,{Value:"-- Please Select --"});
+                            Collect(ColexporWorkFlow,LookUp(PRForm,'Legal Entity'=drpLegalEntity_1.SelectedText.Value && Plant=drpPlant_1.SelectedText.Value && 'Plant Number'=drpPlantNumber_1.SelectedText.Value &&Country=drpCountry_1.Selected.Value && 'Country ISO'=drpCountryISO_1.SelectedText.Value && 'Management Entity'=drpManagementEntity_1.SelectedText.Value && BUorPCorSC=drpBUPCSC_1.SelectedText.Value && 'Cost Center'=drpCostCenter_1.SelectedText.Value && '2� Approval Next Higher Superior'=drpApprover2Superior_1.SelectedText.Value && '3� Approval Responsible BU Region  Responsible PCorDivision  Responsible Function GlobalorRegion'=drpApprover3BU_1.SelectedText.Value && RequestNumber=drprequest.Selected.Value).CurrentStatus)
+                        SelectionColor: =RGBA(0, 0, 0, 1)
+                        SelectionFill: =RGBA(204, 231, 246, 1)
+                        Size: =Apptheme.FontSize
+                        Width: =If(App.ActiveScreen.Size>3,Parent.Width/2-150,Parent.Width-(2*Self.X))
+                        X: =drpLegalEntity_1.X
+                        Y: |-
+                            =//lblrequestno.Y
+                            If(App.ActiveScreen.Size>3,lblrequestno.Y,lblrequestno.Y+lblrequestno.Height+10)
+                        ZIndex: =22
+
+                    lblworkflow As label:
+                        Align: =If(App.ActiveScreen.Size>3,Align.Right,Align.Left)
+                        Font: =Apptheme.FontFamily
+                        Height: =30
+                        Size: =Apptheme.FontSize
+                        Text: |-
+                            ="Workflow Status :"
+                        Width: =If(App.ActiveScreen.Size>3,Parent.Width/2-150,Parent.Width-(2*Self.X))
+                        X: =lblLegalEntity_1.X
+                        Y: |-
+                            =drprequest.Y+drprequest.Height+20
+                            //If(App.ActiveScreen.Size>2, lblApprover2Superior.Y,drpApprover2Superior.Y+drpApprover2Superior.Height+20)
+                        ZIndex: =23
+
+                    drpWorkflow As dropdown:
+                        AccessibleLabel: ="Approver BU"
+                        BorderStyle: =BorderStyle.None
+                        ChevronDisabledBackground: =RGBA(255, 255, 255, 1)
+                        ChevronDisabledFill: =RGBA(255, 255, 255, 1)
+                        DisplayMode: =DisplayMode.Disabled
+                        Fill: =RGBA(252, 252, 252, 1)
+                        Font: =Apptheme.FontFamily
+                        Height: =30
+                        Items: =Distinct(Filter(PRForm,'Legal Entity'=drpLegalEntity_1.SelectedText.Value && Plant=drpPlant_1.SelectedText.Value && 'Plant Number'=drpPlantNumber_1.SelectedText.Value &&Country=drpCountry_1.Selected.Value && 'Country ISO'=drpCountryISO_1.SelectedText.Value && 'Management Entity'=drpManagementEntity_1.SelectedText.Value && BUorPCorSC=drpBUPCSC_1.SelectedText.Value && 'Cost Center'=drpCostCenter_1.SelectedText.Value && '2� Approval Next Higher Superior'=drpApprover2Superior_1.SelectedText.Value && '3� Approval Responsible BU Region  Responsible PCorDivision  Responsible Function GlobalorRegion'=drpApprover3BU_1.SelectedText.Value && RequestNumber=drprequest.Selected.Value).CurrentStatus,CurrentStatus)
+                        OnChange: |-
+                            =Clear(Colexpor);
+                            ClearCollect(Colexpor,Filter(PRForm,'Legal Entity'=drpLegalEntity_1.SelectedText.Value && Plant=drpPlant_1.SelectedText.Value && 'Plant Number'=drpPlantNumber_1.SelectedText.Value &&Country=drpCountry_1.Selected.Value && 'Country ISO'=drpCountryISO_1.SelectedText.Value && 'Management Entity'=drpManagementEntity_1.SelectedText.Value && BUorPCorSC=drpBUPCSC_1.SelectedText.Value && 'Cost Center'=drpCostCenter_1.SelectedText.Value && '2� Approval Next Higher Superior'=drpApprover2Superior_1.SelectedText.Value && '3� Approval Responsible BU Region  Responsible PCorDivision  Responsible Function GlobalorRegion'=drpApprover3BU_1.SelectedText.Value && RequestNumber=drprequest.Selected.Value && CurrentStatus=drpWorkflow.Selected.Value))
+                        SelectionColor: =RGBA(0, 0, 0, 1)
+                        SelectionFill: =RGBA(204, 231, 246, 1)
+                        Size: =Apptheme.FontSize
+                        Width: =If(App.ActiveScreen.Size>3,Parent.Width/2-150,Parent.Width-(2*Self.X))
+                        X: =drpLegalEntity_1.X
+                        Y: |-
+                            =//lblworkflow.Y
+                            If(App.ActiveScreen.Size>3,lblworkflow.Y,lblworkflow.Y+lblworkflow.Height+10)
+                        ZIndex: =24
+
+                    ComboBox2 As combobox:
+                        AccessibleLabel: ="Legal Entity"
+                        BorderThickness: =0
+                        ChevronDisabledFill: =RGBA(255, 255, 255, 1)
+                        ChevronHoverBackground: =
+                        DisabledBorderColor: =RGBA(255, 255, 255, 1)
+                        DisplayFields: =["Value"]
+                        Font: =Apptheme.FontFamily
+                        Height: =30
+                        HoverBorderColor: =RGBA(255, 255, 255, 1)
+                        Items: =If(CountRows(Collentity)>0,Distinct(Collentity,fd_LegalEntity),Distinct(Colexp,fd_LegalEntity))
+                        OnChange: |-
+                            =Clear(ColPlant);
+                            If(CountRows(Collentity)=0,ClearCollect(Collentity,Colexp));
+                            ForAll(
+                                Self.SelectedItems,
+                                Collect(
+                                    ColPlant,
+                                    Filter(
+                                        Collentity,
+                                        fd_LegalEntity = Value
+                                    )
+                                )
+                            );
+                            ClearCollect(
+                                Colexp,
+                                ColPlant
+                            )
+                            //Set(varexportreset,true)*/
+                            /*ForAll(Self.SelectedItems,
+                            //RemoveIf(Colexp,!('Legal Entity'=Value)));
+                            Collect(Colexp,Filter(Colexp,'Legal Entity'=Value)))*/
+                        Reset: =varReset
+                        SearchFields: =["Value"]
+                        SearchItems: =Search(If(CountRows(Collentity)>0,Distinct(Collentity,fd_LegalEntity),Distinct(Colexp,fd_LegalEntity)),ComboBox2.SearchText,"Value")
+                        Size: =Apptheme.FontSize
+                        Width: =If(App.ActiveScreen.Size>3,Parent.Width/2-150,Parent.Width-(2*Self.X))
+                        X: =If(App.ActiveScreen.Size>3,lblLegalEntity_1.X+lblLegalEntity_1.Width+10,lblLegalEntity_1.X)
+                        Y: =If(App.ActiveScreen.Size>3,lblLegalEntity_1.Y,lblLegalEntity_1.Y+lblLegalEntity_1.Height+10)
+                        ZIndex: =25
+
+                    ComboBox2_1 As combobox:
+                        AccessibleLabel: ="Plant"
+                        BorderColor: =ComboBox2.BorderColor
+                        BorderStyle: =ComboBox2.BorderStyle
+                        BorderThickness: =ComboBox2.BorderThickness
+                        ChevronDisabledFill: =RGBA(255, 255, 255, 1)
+                        ChevronHoverBackground: =
+                        DisabledBorderColor: =RGBA(255, 255, 255, 1)
+                        DisplayFields: =["Value"]
+                        Font: =Apptheme.FontFamily
+                        FontWeight: =ComboBox2.FontWeight
+                        Height: =30
+                        HoverBorderColor: =RGBA(255, 255, 255, 1)
+                        Items: =If(CountRows(ColPlant)>0,Distinct(ColPlant,fd_Plant),Distinct(Colexp,fd_Plant))
+                        OnChange: |-
+                            =Clear(ColPlantNumber);
+                            If(CountRows(ColPlant)=0,ClearCollect(ColPlant,Colexp));
+                            ForAll(
+                                Self.SelectedItems,
+                                Collect(
+                                    ColPlantNumber,
+                                    Filter(
+                                        ColPlant,
+                                        fd_Plant = Value
+                                    )
+                                )
+                            );
+                            ClearCollect(
+                                Colexp,
+                                ColPlantNumber
+                            );
+                            /*Set(varexportreset,true)
+                            ForAll(Self.SelectedItems,
+                            Collect(Colexp,Filter(Colexp,Plant=Value)))*/
+                        OnSelect: |-
+                            =//ClearCollect(Colexp,ColPlant);
+                            /*ClearCollect(Colplant,Colexp);
+                            Clear(Colexp);
+                            ForAll(ComboBox2.SelectedItems,
+                            Collect(Colexp,Filter(Colplant,'Legal Entity'=Value)))*/
+                            //ClearCollect(Colexp,Colplant)
+                        Reset: =varReset
+                        SearchFields: =["Value"]
+                        SearchItems: =Search(If(CountRows(ColPlant)>0,Distinct(ColPlant,fd_Plant),Distinct(Colexp,fd_Plant)),ComboBox2_1.SearchText,"Value")
+                        Size: =Apptheme.FontSize
+                        Width: =If(App.ActiveScreen.Size>3,Parent.Width/2-150,Parent.Width-(2*Self.X))
+                        X: =ComboBox2.X
+                        Y: |-
+                            =//lblPlant_1.Y
+                            If(App.ActiveScreen.Size>3,lblPlant_1.Y,lblPlant_1.Y+lblPlant_1.Height+10)
+                        ZIndex: =26
+
+                    ComboBox2_2 As combobox:
+                        AccessibleLabel: ="Plant Number"
+                        BorderColor: =ComboBox2.BorderColor
+                        BorderStyle: =ComboBox2.BorderStyle
+                        BorderThickness: =ComboBox2.BorderThickness
+                        ChevronDisabledFill: =RGBA(255, 255, 255, 1)
+                        ChevronHoverBackground: =
+                        DisabledBorderColor: =RGBA(255, 255, 255, 1)
+                        DisplayFields: =["Value"]
+                        Font: =Apptheme.FontFamily
+                        FontWeight: =ComboBox2.FontWeight
+                        Height: =30
+                        HoverBorderColor: =RGBA(255, 255, 255, 1)
+                        Items: |-
+                            =//Distinct(ColPlantNumber,'Plant Number')
+                            If(CountRows(ColPlantNumber)>0,Distinct(ColPlantNumber,fd_Plant_Number),Distinct(Colexp,fd_Plant_Number))
+                        OnChange: |-
+                            =Clear(ColCountry);
+                            If(CountRows(ColPlantNumber)=0,ClearCollect(ColPlantNumber,Colexp));
+                            ForAll(
+                                Self.SelectedItems,
+                                Collect(
+                                    ColCountry,
+                                    Filter(
+                                        ColPlantNumber,
+                                        fd_Plant_Number = Value
+                                    )
+                                )
+                            );
+                            ClearCollect(
+                                Colexp,
+                                ColCountry
+                            );
+                            /*Set(varexportreset,true)
+                            ForAll(Self.SelectedItems,
+                            Collect(Colexp,Filter(Colexp,'Plant Number'=Value)))*/
+                        OnSelect: |-
+                            =//ClearCollect(Colexp,ColPlant);
+                            //ClearCollect(Colexp,ColPlantNumber);
+                            
+                            //ClearCollect(Colexp,ColPlantNumber);
+                            /*Clear(Colexp);
+                            ForAll(ComboBox2_1.SelectedItems,
+                            Collect(Colexp,Filter(Colplant,Plant=Value)))*/
+                        Reset: =varReset
+                        SearchFields: =["Value"]
+                        SearchItems: |-
+                            =Search(//Distinct(ColPlantNumber,'Plant Number')
+                            If(CountRows(ColPlantNumber)>0,Distinct(ColPlantNumber,fd_Plant_Number),Distinct(Colexp,fd_Plant_Number)),ComboBox2_2.SearchText,"Value")
+                        Size: =Apptheme.FontSize
+                        Width: =If(App.ActiveScreen.Size>3,Parent.Width/2-150,Parent.Width-(2*Self.X))
+                        X: =ComboBox2.X
+                        Y: |-
+                            =//lblPlantNumber_1.Y
+                            If(App.ActiveScreen.Size>3,lblPlantNumber_1.Y,lblPlantNumber_1.Y+lblPlantNumber_1.Height+10)
+                        ZIndex: =27
+
+                    ComboBox2_3 As combobox:
+                        AccessibleLabel: ="Country"
+                        BorderColor: =ComboBox2.BorderColor
+                        BorderStyle: =ComboBox2.BorderStyle
+                        BorderThickness: =ComboBox2.BorderThickness
+                        ChevronDisabledFill: =RGBA(255, 255, 255, 1)
+                        ChevronHoverBackground: =
+                        DisabledBorderColor: =RGBA(255, 255, 255, 1)
+                        DisplayFields: =["Value"]
+                        Font: =Apptheme.FontFamily
+                        FontWeight: =ComboBox2.FontWeight
+                        Height: =30
+                        HoverBorderColor: =RGBA(255, 255, 255, 1)
+                        Items: |-
+                            =//Distinct(ColCountry,Country)
+                            If(CountRows(ColCountry)>0,Distinct(ColCountry,fd_Country),Distinct(Colexp,fd_Country))
+                        OnChange: |-
+                            =Clear(ColCountryISO);
+                            If(CountRows(ColCountry)=0,ClearCollect(ColCountry,Colexp));
+                            ForAll(
+                                Self.SelectedItems,
+                                Collect(
+                                    ColCountryISO,
+                                    Filter(
+                                        ColCountry,
+                                        fd_Country = Value
+                                    )
+                                )
+                            );
+                            ClearCollect(
+                                Colexp,
+                                ColCountryISO
+                            );
+                            /*Set(varexportreset,true)
+                            ForAll(Self.SelectedItems,
+                            Collect(Colexp,Filter(Colexp,Country=Value)))*/
+                        OnSelect: |-
+                            =//ClearCollect(Colexp,ColPlant);
+                            //ClearCollect(Colexp,ColPlantNumber);
+                            //ClearCollect(Colexp,ColCountry);
+                            
+                            //ClearCollect(Colexp,ColCountry);
+                            /*Clear(Colexp);
+                            ForAll(ComboBox2_2.SelectedItems,
+                            Collect(Colexp,Filter(Colplant,'Plant Number'=Value)))*/
+                        Reset: =varReset
+                        SearchFields: =["Value"]
+                        SearchItems: |-
+                            =Search(//Distinct(ColCountry,Country)
+                            If(CountRows(ColCountry)>0,Distinct(ColCountry,fd_Country),Distinct(Colexp,fd_Country)),ComboBox2_3.SearchText,"Value")
+                        Size: =Apptheme.FontSize
+                        Width: =If(App.ActiveScreen.Size>3,Parent.Width/2-150,Parent.Width-(2*Self.X))
+                        X: =ComboBox2.X
+                        Y: |-
+                            =//lblCountry_1.Y
+                            If(App.ActiveScreen.Size>3,lblCountry_1.Y,lblCountry_1.Y+lblCountry_1.Height+10)
+                        ZIndex: =28
+
+                    ComboBox2_4 As combobox:
+                        AccessibleLabel: ="Country ISO"
+                        BorderColor: =ComboBox2.BorderColor
+                        BorderStyle: =ComboBox2.BorderStyle
+                        BorderThickness: =ComboBox2.BorderThickness
+                        ChevronDisabledFill: =RGBA(255, 255, 255, 1)
+                        ChevronHoverBackground: =
+                        DisabledBorderColor: =RGBA(255, 255, 255, 1)
+                        DisplayFields: =["Value"]
+                        Font: =Apptheme.FontFamily
+                        FontWeight: =ComboBox2.FontWeight
+                        Height: =30
+                        HoverBorderColor: =RGBA(255, 255, 255, 1)
+                        Items: |-
+                            =//Distinct(ColCountryISO,'Country ISO')
+                            If(CountRows(ColCountryISO)>0,Distinct(ColCountryISO,fd_CountryISO),Distinct(Colexp,fd_CountryISO))
+                        OnChange: |-
+                            =Clear(Colme);
+                            If(CountRows(ColCountryISO)=0,ClearCollect(ColCountryISO,Colexp));
+                            ForAll(
+                                Self.SelectedItems,
+                                Collect(
+                                    Colme,
+                                    Filter(
+                                        ColCountryISO,
+                                        fd_CountryISO = Value
+                                    )
+                                )
+                            );
+                            ClearCollect(
+                                Colexp,
+                                Colme
+                            );
+                            /*Set(varexportreset,true)
+                            ForAll(Self.SelectedItems,
+                            Collect(Colexp,Filter(Colexp,'Country ISO'=Value)))*/
+                        OnSelect: |-
+                            =//ClearCollect(Colexp,ColPlant);
+                            //ClearCollect(Colexp,ColPlantNumber);
+                            //ClearCollect(Colexp,ColCountry);
+                            //ClearCollect(Colexp,ColCountryISO);
+                            //ClearCollect(Colexp,ColCountryISO);
+                            /*Clear(Colexp);
+                            ForAll(ComboBox2_3.SelectedItems,
+                            Collect(Colexp,Filter(Colplant,Country=Value)))*/
+                        Reset: =varReset
+                        SearchFields: =["Value"]
+                        SearchItems: |-
+                            =Search(//Distinct(ColCountryISO,'Country ISO')
+                            If(CountRows(ColCountryISO)>0,Distinct(ColCountryISO,fd_CountryISO),Distinct(Colexp,fd_CountryISO)),ComboBox2_4.SearchText,"Value")
+                        Size: =Apptheme.FontSize
+                        Width: =If(App.ActiveScreen.Size>3,Parent.Width/2-150,Parent.Width-(2*Self.X))
+                        X: =ComboBox2.X
+                        Y: |-
+                            =//lblCountryISO_1.Y
+                            If(App.ActiveScreen.Size>3,lblCountryISO_1.Y,lblCountryISO_1.Y+lblCountryISO_1.Height+10)
+                        ZIndex: =29
+
+                    ComboBox2_5 As combobox:
+                        AccessibleLabel: ="Management Entity"
+                        BorderColor: =ComboBox2.BorderColor
+                        BorderStyle: =ComboBox2.BorderStyle
+                        BorderThickness: =ComboBox2.BorderThickness
+                        ChevronDisabledFill: =RGBA(255, 255, 255, 1)
+                        ChevronHoverBackground: =
+                        DisabledBorderColor: =RGBA(255, 255, 255, 1)
+                        DisplayFields: =["Value"]
+                        Font: =Apptheme.FontFamily
+                        FontWeight: =ComboBox2.FontWeight
+                        Height: =30
+                        HoverBorderColor: =RGBA(255, 255, 255, 1)
+                        Items: |-
+                            =//Distinct(Colme,'Management Entity')
+                            If(CountRows(Colme)>0,Distinct(Colme,fd_kw_ManagementEntity),Distinct(Colexp,fd_kw_ManagementEntity))
+                        OnChange: |-
+                            =Clear(ColBu);
+                            If(CountRows(Colme)=0,ClearCollect(Colme,Colexp));
+                            ForAll(
+                                Self.SelectedItems,
+                                Collect(
+                                    ColBu,
+                                    Filter(
+                                        Colme,
+                                        fd_kw_ManagementEntity = Value
+                                    )
+                                )
+                            );
+                            ClearCollect(
+                                Colexp,
+                                ColBu
+                            );
+                            /*Set(varexportreset,true)
+                            ForAll(Self.SelectedItems,
+                            Collect(Colexp,Filter(Colexp,'Management Entity'=Value)))*/
+                        OnSelect: |-
+                            =//ClearCollect(Colexp,ColPlant);
+                            //ClearCollect(Colexp,ColPlantNumber);
+                            //ClearCollect(Colexp,ColCountry);
+                            //ClearCollect(Colexp,ColCountryISO);
+                            //ClearCollect(Colexp,Colme);
+                            /*Clear(Colexp);
+                            ForAll(ComboBox2_4.SelectedItems,
+                            Collect(Colexp,Filter(Colplant,'Country ISO'=Value)))*/
+                        Reset: =varReset
+                        SearchFields: =["Value"]
+                        SearchItems: |-
+                            =Search(//Distinct(Colme,'Management Entity')
+                            If(CountRows(Colme)>0,Distinct(Colme,fd_kw_ManagementEntity),Distinct(Colexp,fd_kw_ManagementEntity)),ComboBox2_5.SearchText,"Value")
+                        Size: =Apptheme.FontSize
+                        Width: =If(App.ActiveScreen.Size>3,Parent.Width/2-150,Parent.Width-(2*Self.X))
+                        X: =ComboBox2.X
+                        Y: |-
+                            =//lblManagementEntity_1.Y
+                            If(App.ActiveScreen.Size>3,lblManagementEntity_1.Y,lblManagementEntity_1.Y+lblManagementEntity_1.Height+10)
+                        ZIndex: =30
+
+                    ComboBox2_6 As combobox:
+                        AccessibleLabel: ="BUPCSC"
+                        BorderColor: =ComboBox2.BorderColor
+                        BorderStyle: =ComboBox2.BorderStyle
+                        BorderThickness: =ComboBox2.BorderThickness
+                        ChevronDisabledFill: =RGBA(255, 255, 255, 1)
+                        ChevronHoverBackground: =
+                        DisabledBorderColor: =RGBA(255, 255, 255, 1)
+                        DisplayFields: =["Value"]
+                        Font: =Apptheme.FontFamily
+                        FontWeight: =ComboBox2.FontWeight
+                        Height: =30
+                        HoverBorderColor: =RGBA(255, 255, 255, 1)
+                        Items: |-
+                            =//Distinct(ColBu,BUorPCorSC)
+                            If(CountRows(ColBu)>0,Distinct(ColBu,fd_kw_BusinessUnit),Distinct(Colexp,fd_kw_BusinessUnit))
+                        OnChange: |-
+                            =Clear(Colcc);
+                            If(CountRows(ColBu)=0,ClearCollect(ColBu,Colexp));
+                            ForAll(
+                                Self.SelectedItems,
+                                Collect(
+                                    Colcc,
+                                    Filter(
+                                        ColBu,
+                                        fd_kw_BusinessUnit = Value
+                                    )
+                                )
+                            );
+                            ClearCollect(
+                                Colexp,
+                                Colcc
+                            );
+                            /*Set(varexportreset,true)
+                            ForAll(Self.SelectedItems,
+                            Collect(Colexp,Filter(Colexp,BUorPCorSC=Value)))*/
+                        OnSelect: |-
+                            =//ClearCollect(Colexp,ColPlant);
+                            //ClearCollect(Colexp,ColPlantNumber);
+                            //ClearCollect(Colexp,ColCountry);
+                            //ClearCollect(Colexp,ColCountryISO);
+                            //ClearCollect(Colexp,ColBu);
+                            /*Clear(Colexp);
+                            ForAll(ComboBox2_5.SelectedItems,
+                            Collect(Colexp,Filter(Colplant,'Management Entity'=Value)))*/
+                        Reset: =varReset
+                        SearchFields: =["Value"]
+                        SearchItems: |-
+                            =Search(//Distinct(ColBu,BUorPCorSC)
+                            If(CountRows(ColBu)>0,Distinct(ColBu,fd_kw_BusinessUnit),Distinct(Colexp,fd_kw_BusinessUnit)),ComboBox2_6.SearchText,"Value")
+                        Size: =Apptheme.FontSize
+                        Width: =If(App.ActiveScreen.Size>3,Parent.Width/2-150,Parent.Width-(2*Self.X))
+                        X: =ComboBox2.X
+                        Y: |-
+                            =//lblBUPCSC_1.Y
+                            If(App.ActiveScreen.Size>3,lblBUPCSC_1.Y,lblBUPCSC_1.Y+lblBUPCSC_1.Height+10)
+                        ZIndex: =31
+
+                    ComboBox2_7 As combobox:
+                        AccessibleLabel: ="Cost Center"
+                        BorderColor: =ComboBox2.BorderColor
+                        BorderStyle: =ComboBox2.BorderStyle
+                        BorderThickness: =ComboBox2.BorderThickness
+                        ChevronDisabledFill: =RGBA(255, 255, 255, 1)
+                        ChevronHoverBackground: =
+                        DisabledBorderColor: =RGBA(255, 255, 255, 1)
+                        DisplayFields: =["Value"]
+                        Font: =Apptheme.FontFamily
+                        FontWeight: =ComboBox2.FontWeight
+                        Height: =30
+                        HoverBorderColor: =RGBA(255, 255, 255, 1)
+                        Items: |-
+                            =//Distinct(Colcc,'Cost Center')
+                            If(CountRows(Colcc)>0,Distinct(Colcc,fd_CostCenter),Distinct(Colexp,fd_CostCenter))
+                        OnChange: |-
+                            =Clear(Colapp2);
+                            If(CountRows(Colcc)=0,ClearCollect(Colcc,Colexp));
+                            ForAll(
+                                Self.SelectedItems,
+                                Collect(
+                                    Colapp2,
+                                    Filter(
+                                        Colcc,
+                                        fd_CostCenter = Value
+                                    )
+                                )
+                            );
+                            ClearCollect(
+                                Colexp,
+                                Colapp2
+                            );
+                            /*Set(varexportreset,true)
+                            ForAll(Self.SelectedItems,
+                            Collect(Colexp,Filter(Colexp,'Cost Center'=Value)))*/
+                        OnSelect: |-
+                            =//ClearCollect(Colexp,ColPlant);
+                            //ClearCollect(Colexp,ColPlantNumber);
+                            //ClearCollect(Colexp,ColCountry);
+                            //ClearCollect(Colexp,ColCountryISO);
+                            //ClearCollect(Colexp,Colcc);
+                            /*Clear(Colexp);
+                            ForAll(ComboBox2_6.SelectedItems,
+                            Collect(Colexp,Filter(Colplant,BUorPCorSC=Value)))*/
+                        Reset: =varReset
+                        SearchFields: =["Value"]
+                        SearchItems: |-
+                            =Search(//Distinct(Colcc,'Cost Center')
+                            If(CountRows(Colcc)>0,Distinct(Colcc,fd_CostCenter),Distinct(Colexp,fd_CostCenter)),ComboBox2_7.SearchText,"Value")
+                        Size: =Apptheme.FontSize
+                        Width: =If(App.ActiveScreen.Size>3,Parent.Width/2-150,Parent.Width-(2*Self.X))
+                        X: =ComboBox2.X
+                        Y: |-
+                            =//lblCostCenter_1.Y
+                            If(App.ActiveScreen.Size>3,lblCostCenter_1.Y,lblCostCenter_1.Y+lblCostCenter_1.Height+10)
+                        ZIndex: =32
+
+                    ComboBox2_8 As combobox:
+                        AccessibleLabel: ="Approver 2"
+                        BorderColor: =ComboBox2.BorderColor
+                        BorderStyle: =ComboBox2.BorderStyle
+                        BorderThickness: =ComboBox2.BorderThickness
+                        ChevronDisabledFill: =RGBA(255, 255, 255, 1)
+                        ChevronHoverBackground: =
+                        DisabledBorderColor: =RGBA(255, 255, 255, 1)
+                        DisplayFields: =["Value"]
+                        Font: =Apptheme.FontFamily
+                        FontWeight: =ComboBox2.FontWeight
+                        Height: =30
+                        HoverBorderColor: =RGBA(255, 255, 255, 1)
+                        Items: |-
+                            =//Distinct(Colapp2,'2� Approval Next Higher Superior')
+                            If(CountRows(Colapp2)>0,Distinct(Colapp2,fd_na_ResponsibleHRPlant),Distinct(Colexp,fd_na_ResponsibleHRPlant))
+                        OnChange: |-
+                            =Clear(Colapp3);
+                            If(CountRows(Colapp2)=0,ClearCollect(Colapp2,Colexp));
+                            ForAll(
+                                Self.SelectedItems,
+                                Collect(
+                                    Colapp3,
+                                    Filter(
+                                        Colapp2,
+                                        fd_na_ResponsibleHRPlant = Value
+                                    )
+                                )
+                            );
+                            ClearCollect(
+                                Colexp,
+                                Colapp3
+                            );
+                            /*Set(varexportreset,true)
+                            ForAll(Self.SelectedItems,
+                            Collect(Colexp,Filter(Colexp,'2� Approval Next Higher Superior'=Value)))*/
+                        OnSelect: |-
+                            =//ClearCollect(Colexp,ColPlant);
+                            //ClearCollect(Colexp,ColPlantNumber);
+                            //ClearCollect(Colexp,ColCountry);
+                            //ClearCollect(Colexp,Colapp2);
+                            /*Clear(Colexp);
+                            ForAll(ComboBox2_7.SelectedItems,
+                            Collect(Colexp,Filter(Colplant,'Cost Center'=Value)))*/
+                        Reset: =varReset
+                        SearchFields: =["Value"]
+                        SearchItems: |-
+                            =Search(//Distinct(Colapp2,'2� Approval Next Higher Superior')
+                            If(CountRows(Colapp2)>0,Distinct(Colapp2,fd_na_ResponsibleHRPlant),Distinct(Colexp,fd_na_ResponsibleHRPlant)),ComboBox2_8.SearchText,"Value")
+                        Size: =Apptheme.FontSize
+                        Width: =If(App.ActiveScreen.Size>3,Parent.Width/2-150,Parent.Width-(2*Self.X))
+                        X: =ComboBox2.X
+                        Y: |-
+                            =//lblApprover2Superior_1.Y
+                            If(App.ActiveScreen.Size>3,lblApprover2Superior_1.Y,lblApprover2Superior_1.Y+lblApprover2Superior_1.Height+10)
+                        ZIndex: =33
+
+                    ComboBox2_9 As combobox:
+                        AccessibleLabel: ="Approver 3"
+                        BorderColor: =ComboBox2.BorderColor
+                        BorderStyle: =ComboBox2.BorderStyle
+                        BorderThickness: =ComboBox2.BorderThickness
+                        ChevronDisabledFill: =RGBA(255, 255, 255, 1)
+                        ChevronHoverBackground: =
+                        DisabledBorderColor: =RGBA(255, 255, 255, 1)
+                        DisplayFields: =["Value"]
+                        Font: =Apptheme.FontFamily
+                        FontWeight: =ComboBox2.FontWeight
+                        Height: =30
+                        HoverBorderColor: =RGBA(255, 255, 255, 1)
+                        Items: |-
+                            =//Distinct(Colapp3,'3� Approval Responsible BU Region  Responsible PCorDivision  Responsible Function GlobalorRegion')
+                            If(CountRows(Colapp3)>0,Distinct(Colapp3,fd_na_ResponsibleRegion),Distinct(Colexp,fd_na_ResponsibleRegion))
+                        OnChange: |-
+                            =Clear(ColReq);
+                            If(CountRows(Colapp3)=0,ClearCollect(Colapp3,Colexp));
+                            ForAll(
+                                Self.SelectedItems,
+                                Collect(
+                                    ColReq,
+                                    Filter(
+                                        Colapp3,
+                                       fd_na_ResponsibleRegion = Value
+                                    )
+                                )
+                            );
+                            ClearCollect(
+                                Colexp,
+                                ColReq
+                            );
+                            /*Set(varexportreset,true)
+                            ForAll(Self.SelectedItems,
+                            Collect(Colexp,Filter(Colexp,'3� Approval Responsible BU Region  Responsible PCorDivision  Responsible Function GlobalorRegion'=Value)))*/
+                        OnSelect: |-
+                            =//ClearCollect(Colexp,ColPlant);
+                            //ClearCollect(Colexp,ColPlantNumber);
+                            //ClearCollect(Colexp,ColCountry);
+                            //ClearCollect(Colexp,Colapp3);
+                            /**Clear(Colexp);
+                            ForAll(ComboBox2_8.SelectedItems,
+                            Collect(Colexp,Filter(Colplant,'2� Approval Next Higher Superior'=Value)))*/
+                        Reset: =varReset
+                        SearchFields: =["Value"]
+                        SearchItems: |-
+                            =Search(//Distinct(Colapp3,'3� Approval Responsible BU Region  Responsible PCorDivision  Responsible Function GlobalorRegion')
+                            If(CountRows(Colapp3)>0,Distinct(Colapp3,fd_na_ResponsibleRegion),Distinct(Colexp,fd_na_ResponsibleRegion)),ComboBox2_9.SearchText,"Value")
+                        Size: =Apptheme.FontSize
+                        Width: =If(App.ActiveScreen.Size>3,Parent.Width/2-150,Parent.Width-(2*Self.X))
+                        X: =ComboBox2.X
+                        Y: |-
+                            =//lblApprover3BU_1.Y
+                            If(App.ActiveScreen.Size>3,lblApprover3BU_1.Y,lblApprover3BU_1.Y+lblApprover3BU_1.Height+10)
+                        ZIndex: =34
+
+                    ComboBox2_10 As combobox:
+                        AccessibleLabel: ="Request No"
+                        BorderColor: =ComboBox2.BorderColor
+                        BorderStyle: =ComboBox2.BorderStyle
+                        BorderThickness: =ComboBox2.BorderThickness
+                        ChevronDisabledFill: =RGBA(255, 255, 255, 1)
+                        ChevronHoverBackground: =
+                        DisabledBorderColor: =RGBA(255, 255, 255, 1)
+                        DisplayFields: =["Value"]
+                        Font: =Apptheme.FontFamily
+                        FontWeight: =ComboBox2.FontWeight
+                        Height: =30
+                        HoverBorderColor: =RGBA(255, 255, 255, 1)
+                        Items: |-
+                            =//Distinct(ColReq,RequestNumber)
+                            If(CountRows(ColReq)>0,Distinct(ColReq,RequestNumber),Distinct(Colexp,RequestNumber))
+                        OnChange: |-
+                            =Clear(Colws);
+                            If(CountRows(ColReq)=0,ClearCollect(ColReq,Colexp));
+                            ForAll(
+                                Self.SelectedItems,
+                                Collect(
+                                    Colws,
+                                    Filter(
+                                        ColReq,
+                                        RequestNumber = Value
+                                    )
+                                )
+                            );
+                            ClearCollect(
+                                Colexp,
+                                Colws
+                            );
+                            /*Set(varexportreset,true)
+                            ForAll(Self.SelectedItems,
+                            Collect(Colexp,Filter(Colexp,RequestNumber=Value)))*/
+                        OnSelect: |-
+                            =//ClearCollect(Colexp,ColPlant);
+                            //ClearCollect(Colexp,ColPlantNumber);
+                            //ClearCollect(Colexp,ColCountry);
+                            //ClearCollect(Colexp,ColReq);
+                            /*Clear(Colexp);
+                            ForAll(ComboBox2_9.SelectedItems,
+                            Collect(Colexp,Filter(Colplant,'3� Approval Responsible BU Region  Responsible PCorDivision  Responsible Function GlobalorRegion'=Value)))*/
+                        Reset: =varReset
+                        SearchFields: =["Value"]
+                        SearchItems: |-
+                            =Search(//Distinct(ColReq,RequestNumber)
+                            If(CountRows(ColReq)>0,Distinct(ColReq,RequestNumber),Distinct(Colexp,RequestNumber)),ComboBox2_10.SearchText,"Value")
+                        Size: =Apptheme.FontSize
+                        Width: =If(App.ActiveScreen.Size>3,Parent.Width/2-150,Parent.Width-(2*Self.X))
+                        X: =ComboBox2.X
+                        Y: |-
+                            =//lblrequestno.Y
+                            If(App.ActiveScreen.Size>3,lblrequestno.Y,lblrequestno.Y+lblrequestno.Height+10)
+                        ZIndex: =35
+
+                    ComboBox2_11 As combobox:
+                        AccessibleLabel: ="Workflow Status"
+                        BorderColor: =ComboBox2.BorderColor
+                        BorderStyle: =ComboBox2.BorderStyle
+                        BorderThickness: =ComboBox2.BorderThickness
+                        ChevronDisabledFill: =RGBA(255, 255, 255, 1)
+                        ChevronHoverBackground: =
+                        DisabledBorderColor: =RGBA(255, 255, 255, 1)
+                        DisplayFields: =["Value"]
+                        Font: =Apptheme.FontFamily
+                        FontWeight: =ComboBox2.FontWeight
+                        Height: =30
+                        HoverBorderColor: =RGBA(255, 255, 255, 1)
+                        Items: |-
+                            =//Distinct(Colws,CurrentStatus)
+                            If(CountRows(Colws)>0,Distinct(Colws,CurrentStatus),Distinct(Colexp,CurrentStatus))
+                        OnChange: |-
+                            =Clear(Collf);
+                            If(CountRows(Colws)=0,ClearCollect(Colws,Colexp));
+                            ForAll(
+                                Self.SelectedItems,
+                                Collect(
+                                    Collf,
+                                    Filter(
+                                        Colws,
+                                        CurrentStatus = Value
+                                    )
+                                )
+                            );
+                            ClearCollect(
+                                Colexp,
+                                Collf
+                            );
+                            /*Set(varexportreset,true)*
+                            ForAll(Self.SelectedItems,
+                            Collect(Colexp,Filter(Colexp,CurrentStatus=Value)))*/
+                        OnSelect: |-
+                            =//ClearCollect(Colexp,ColPlant);
+                            //ClearCollect(Colexp,ColPlantNumber);
+                            //ClearCollect(Colexp,ColCountry);
+                            //ClearCollect(Colexp,Colws);
+                            /*Clear(Colexp);
+                            ForAll(ComboBox2_10.SelectedItems,
+                            Collect(Colexp,Filter(Colplant,RequestNumber=Value)))*/
+                        Reset: =varReset
+                        SearchFields: =["Value"]
+                        SearchItems: |-
+                            =Search(//Distinct(Colws,CurrentStatus)
+                            If(CountRows(Colws)>0,Distinct(Colws,CurrentStatus),Distinct(Colexp,CurrentStatus)),ComboBox2_11.SearchText,"Value")
+                        Size: =Apptheme.FontSize
+                        Width: =If(App.ActiveScreen.Size>3,Parent.Width/2-150,Parent.Width-(2*Self.X))
+                        X: =ComboBox2.X
+                        Y: |-
+                            =//lblworkflow.Y
+                            If(App.ActiveScreen.Size>3,lblworkflow.Y,lblworkflow.Y+lblworkflow.Height+10)
+                        ZIndex: =36
+
+    Rectangle1_12 As rectangle:
+        Fill: =RGBA(236, 225, 245, 1)
+        Height: =60
+        Width: =Parent.Width-(2*Self.X)
+        X: =If(App.ActiveScreen.Size>3,60,20)
+        Y: =Parent.Height-Self.Height-5
+        ZIndex: =2
+
+    btnPrint_12 As button:
+        Color: =RGBA(91, 155, 213, 1)
+        Fill: =RGBA(255, 255, 255, 1)
+        Font: =Apptheme.FontFamily
+        Height: =30
+        OnSelect: =Print()
+        PaddingLeft: =20
+        Size: =Apptheme.FontSize
+        Text: ="Print"
+        Width: =150
+        X: |-
+            =//lblReferSite.X+Self.Width+20
+            //Rectangle1_12.X+Self.Width-60
+            If(App.ActiveScreen.Size>3, Rectangle1_12.X+Self.Width-60,Rectangle1_12.X+10)
+        Y: =Rectangle1_12.Y+(Rectangle1_12.Height-Self.Height)/2
+        ZIndex: =3
+
+    btnExport_1 As button:
+        Fill: =RGBA(127, 178, 57, 1)
+        Font: =Apptheme.FontFamily
+        FontWeight: =FontWeight.Bold
+        Height: =30
+        HoverFill: =
+        OnSelect: |
+            =UpdateContext({Loading: true});
+            Clear(Colexpor);
+            ClearCollect(
+                Colexpor,
+                Filter(
+                    PRForm,
+                    'Legal Entity' = drpLegalEntity_1.SelectedText.Value && Plant = drpPlant_1.SelectedText.Value && 'Plant Number' = drpPlantNumber_1.SelectedText.Value && Country = drpCountry_1.Selected.Value && 'Country ISO' = drpCountryISO_1.SelectedText.Value && 'Management Entity' = drpManagementEntity_1.SelectedText.Value && BUorPCorSC = drpBUPCSC_1.SelectedText.Value && 'Cost Center' = drpCostCenter_1.SelectedText.Value && '2� Approval Next Higher Superior' = drpApprover2Superior_1.SelectedText.Value && '3� Approval Responsible BU Region  Responsible PCorDivision  Responsible Function GlobalorRegion' = drpApprover3BU_1.SelectedText.Value && RequestNumber = drprequest.Selected.Value && CurrentStatus = drpWorkflow.Selected.Value
+                )
+            );
+            //ClearCollect(Colexpor,Filter(PRForm,!(ID=0)));
+            ClearCollect(
+                ColExport,
+                ShowColumns(
+                    Colexpor,
+                    "RequestNumber",
+                    "CurrentStatus",
+                    "Created",
+                    "CreatedDate",
+                    "fd_kw_CostcenterResponsible_1",
+                    "InitiatorWorkflowDate",
+                    "fd_na_ResponsibleCostCenter",
+                    "Approver1WorkflowDate",
+                    "fd_na_ResponsibleHRPlant",
+                    "Approver2WorkflowDate",
+                    "fd_kw_BusinessUnit",
+                    "fd_na_ResponsibleCOPlant",
+                    "CRRCWorkflowDate",
+                    "BudgetedOrNonBudgeted",
+                    "fd_na_ResponsibleRegion",
+                    "Approver3WorkflowDate",
+                    "fd_na_SpecialApproval",
+                    "Approver4WorkflowDate",
+                    "fd_na_SignContract",
+                    "SignContractWorkflowDate",
+                    "fd_LegalEntity",
+                    "fd_Plant",
+                    "fd_Plant_Number",
+                    "fd_Country",
+                    "fd_CountryISO",
+                    "fd_kw_ManagementEntity",
+                    "fd_Department",
+                    "fd_DepartmentDetailed",
+                    "fd_CostCenter",
+                    "fd_FunctionTitle",
+                    "fd_dt_Necessary",
+                    "fd_kw_EmployeeType",
+                    "fd_kw_HayLevel",
+                    "fd_n_NoPositions",
+                    "fd_kw_DurationContract",
+                    "fd_dt_DurationUntil",
+                    "fd_kw_Filled",
+                    "MainCommentary",
+                    "fd_PositionProfile",
+                    "FullTime",
+                    "fd_kw_BudgetedPosition",
+                    "fd_kw_BudgetedYear",
+                    "fd_kw_Replacement",
+                    "Approver1WorkflowComment",
+                    "fd_Headcount",
+                    "fd_thereofInactive",
+                    "fd_currentHeadcount",
+                    "fd_RequestedPosition",
+                    "fd_na_Requestor",
+                    "WorkFlowHistory",
+                    "fd_na_AddInfoRespHRCountry",
+                    "fd_na_AddInfoRespHRRegion",
+                    "fd_na_AddInfoRespHRPlant",
+                    "fd_na_AddInfoManagement",
+                    "Modified",
+                    "InitiatorName",
+                    "fd_kw_SuitableAssignment",
+                    "fd_na_AddInfoRespPlant"
+                )
+            );
+            ClearCollect(
+                cc,
+                AddColumns(
+                    ColExport,
+                    "Req",
+                    Coalesce(
+                        RequestNumber,
+                        " "
+                    ),
+                    "Status",
+                    Coalesce(
+                        CurrentStatus,
+                        " "
+                    )
+                )
+            );
+            Clear(ColExportSummary);
+            ForAll(
+                Colexp,
+                Collect(
+                    ColExportSummary,
+                    {
+                        RequestNumber: Coalesce(
+                            RequestNumber,
+                            " "
+                        ),
+                        CurrentStatus: Coalesce(
+                            CurrentStatus,
+                            " "
+                        ),
+                        Created: Created,
+                        /* Coalesce(
+                            Created,
+                            Today()
+                        ),*/
+                        CreatedDate: CreatedDate,
+                        /* Coalesce(
+                            CreatedDate,
+                            Today()
+                        ),*/
+                        fd_kw_CostcenterResponsible_1: Coalesce(
+                            //fd_kw_CostcenterResponsible_1,
+                            fd_kw_CostcenterResponsible_1,
+                            " "
+                        ),
+                        InitiatorWorkflowDate: Coalesce(
+                            InitiatorWorkflowDate,
+                            " "
+                        ),
+                        fd_na_ResponsibleCostCenter: Coalesce(
+                            fd_na_ResponsibleCostCenter,
+                            " "
+                        ),
+                        Approver1WorkflowDate: Coalesce(
+                            Approver1WorkflowDate,
+                            " "
+                        ),
+                        fd_na_ResponsibleHRPlant: Coalesce(
+                            fd_na_ResponsibleHRPlant,
+                            " "
+                        ),
+                        Approver2WorkflowDate: Coalesce(
+                            Approver2WorkflowDate,
+                            " "
+                        ),
+                        fd_kw_BusinessUnit: Coalesce(
+                            fd_kw_BusinessUnit,
+                            " "
+                        ),
+                        fd_na_ResponsibleCOPlant: Coalesce(
+                            fd_na_ResponsibleCOPlant,
+                            " "
+                        ),
+                        CRRCWorkflowDate: Coalesce(
+                            CRRCWorkflowDate,
+                            " "
+                        ),
+                        BudgetedOrNonBudgeted: Coalesce(
+                            BudgetedOrNonBudgeted,
+                            " "
+                        ),
+                        fd_na_ResponsibleRegion: Coalesce(
+                            fd_na_ResponsibleRegion,
+                            " "
+                        ),
+                        Approver3WorkflowDate: Coalesce(
+                            Approver3WorkflowDate,
+                            " "
+                        ),
+                        fd_na_SpecialApproval: Coalesce(
+                            fd_na_SpecialApproval,
+                            " "
+                        ),
+                        Approver4WorkflowDate: Coalesce(
+                            Approver4WorkflowDate,
+                            " "
+                        ),
+                        fd_na_SignContract: Coalesce(
+                            fd_na_SignContract,
+                            " "
+                        ),
+                        SignContractWorkflowDate: Coalesce(
+                            SignContractWorkflowDate,
+                            " "
+                        ),
+                        fd_LegalEntity: Coalesce(
+                            fd_LegalEntity,
+                            " "
+                        ),
+                        fd_Plant: Coalesce(
+                            fd_Plant,
+                            " "
+                        ),
+                        fd_Plant_Number: Coalesce(
+                            fd_Plant_Number,
+                            " "
+                        ),
+                        fd_Country: Coalesce(
+                            fd_Country,
+                            " "
+                        ),
+                        fd_CountryISO: Coalesce(
+                            fd_CountryISO,
+                            " "
+                        ),
+                        fd_kw_ManagementEntity: Coalesce(
+                            fd_kw_ManagementEntity,
+                            " "
+                        ),
+                        fd_Department: Coalesce(
+                            fd_Department,
+                            " "
+                        ),
+                        fd_DepartmentDetailed: Coalesce(
+                            fd_DepartmentDetailed,
+                            " "
+                        ),
+                        fd_CostCenter: Coalesce(
+                            fd_CostCenter,
+                            " "
+                        ),
+                        fd_FunctionTitle: Coalesce(
+                            fd_FunctionTitle,
+                            " "
+                        ),
+                        fd_dt_Necessary: Coalesce(
+                            fd_dt_Necessary,
+                            Today()
+                        ),
+                        fd_kw_EmployeeType: Coalesce(
+                            fd_kw_EmployeeType,
+                            " "
+                        ),
+                        fd_kw_HayLevel: If(
+                            fd_kw_HayLevel = "--Please Select--",
+                            "N/A",
+                            Coalesce(
+                                fd_kw_HayLevel,
+                                " "
+                            )
+                        ),
+                        fd_n_NoPositions: Coalesce(
+                            fd_n_NoPositions,
+                            0
+                        ),
+                        fd_kw_DurationContract: Coalesce(
+                            fd_kw_DurationContract,
+                            " "
+                        ),
+                        fd_dt_DurationUntil: Coalesce(
+                            fd_dt_DurationUntil,
+                            Today()
+                        ),
+                        fd_kw_Filled:If(fd_kw_Filled="--Please Select--","N/A", Coalesce(
+                            fd_kw_Filled,
+                            " "
+                        )),
+                        MainCommentary: Coalesce(
+                            MainCommentary,
+                            " "
+                        ),
+                        fd_PositionProfile: Coalesce(
+                            fd_PositionProfile,
+                            " "
+                        ),
+                        FullTime: If(
+                            FullTime = "--Please Select--",
+                            "N/A",
+                            Coalesce(
+                                FullTime,
+                                " "
+                            )
+                        ),
+                        fd_kw_BudgetedPosition: Coalesce(
+                            fd_kw_BudgetedPosition,
+                            " "
+                        ),
+                        fd_kw_BudgetedYear: Coalesce(
+                            fd_kw_BudgetedYear,
+                            " "
+                        ),
+                        fd_kw_Replacement: Coalesce(
+                            fd_kw_Replacement,
+                            " "
+                        ),
+                        Approver1WorkflowComment: Coalesce(
+                            Approver1WorkflowComment,
+                            " "
+                        ),
+                        fd_Headcount: Coalesce(
+                            fd_Headcount,
+                            " "
+                        ),
+                        fd_thereofInactive: Coalesce(
+                            fd_thereofInactive,
+                            " "
+                        ),
+                        fd_currentHeadcount: Coalesce(
+                            fd_currentHeadcount,
+                            " "
+                        ),
+                        fd_RequestedPosition: Coalesce(
+                            fd_RequestedPosition,
+                            " "
+                        ),
+                        fd_na_Requestor: Coalesce(
+                            fd_na_Requestor,
+                            " "
+                        ),
+                        WorkFlowHistory: Coalesce(
+                            WorkFlowHistory,
+                            " "
+                        ),
+                        fd_na_AddInfoRespHRCountry: Coalesce(
+                            fd_na_AddInfoRespHRCountry,
+                            " "
+                        ),
+                        fd_na_AddInfoRespHRRegion: Coalesce(
+                            fd_na_AddInfoRespHRRegion,
+                            " "
+                        ),
+                        fd_na_AddInfoRespHRPlant: Coalesce(
+                            fd_na_AddInfoRespHRPlant,
+                            " "
+                        ),
+                        fd_na_AddInfoManagement: Coalesce(
+                            fd_na_AddInfoManagement,
+                            " "
+                        ),
+                        Modified: Modified,
+                        /*Coalesce(
+                            Modified,
+                            Today()
+                        ),*/
+                        InitiatorName: Coalesce(
+                            InitiatorName,
+                            " "
+                        ),
+                        fd_kw_SuitableAssignment: If(
+                            fd_kw_SuitableAssignment = "--Please Select--",
+                            "N/A",
+                            Coalesce(
+                                fd_kw_SuitableAssignment,
+                                " "
+                            )
+                        ),
+                        fd_na_AddInfoRespPlant: Coalesce(
+                            fd_na_AddInfoRespPlant,
+                            " "
+                        ),
+                        RespCostCenterDirectReporting: Coalesce(
+                            RespCostCenterDirectReporting,
+                            " "
+                        ),
+                        Requisitionerhasanattachment: Coalesce(Requisitionerhasanattachment," "),
+                        fd_kw_PositionType: Coalesce(
+                            fd_kw_PositionType,
+                            " "
+                        ),
+                        NewDate:Text(fd_dt_DurationUntil,"mm/dd/yyyy")
+                    }
+                )
+            );
+            PRFormExcelExport_V1.Run(
+                JSON(
+                    ColExportSummary,
+                    JSONFormat.IncludeBinaryData
+                ),
+                varUserMail
+            );
+            UpdateContext(
+                {
+                    Loading: false,
+                    ExportScreenPOPUP: true,
+                    MessageText: LookUp(
+                        ValidationErrorMessage,
+                        Key = "ExportMsg",
+                        Value
+                    )
+                }
+            );
+        RadiusBottomLeft: =btnSubmit.RadiusBottomLeft
+        RadiusBottomRight: =btnSubmit.RadiusBottomRight
+        RadiusTopLeft: =btnSubmit.RadiusTopLeft
+        RadiusTopRight: =btnSubmit.RadiusTopRight
+        Size: =Apptheme.FontSize
+        Text: ="Export"
+        Visible: =App.ActiveScreen.Size>3
+        Width: =btnSubmit.Width
+        X: =If(App.ActiveScreen.Size>3,  Rectangle1_12.X+Rectangle1_12.Width-Self.Width*3,btnPrint_12.X)
+        Y: =btnPrint_12.Y
+        ZIndex: =4
+
+    btnCancel_5 As button:
+        Font: =Apptheme.FontFamily
+        FontWeight: =FontWeight.Bold
+        Height: =30
+        HoverFill: =
+        OnSelect: |-
+            =Navigate(Scr_Home);
+            Refresh(PRForm);
+        RadiusBottomLeft: =btnSubmit.RadiusBottomLeft
+        RadiusBottomRight: =btnSubmit.RadiusBottomRight
+        RadiusTopLeft: =btnSubmit.RadiusTopLeft
+        RadiusTopRight: =btnSubmit.RadiusTopRight
+        Size: =Apptheme.FontSize
+        Text: ="Cancel"
+        Visible: =App.ActiveScreen.Size>3
+        Width: =btnSubmit.Width
+        X: |-
+            =//btnExport.X+btnExport.Width+20
+            If(App.ActiveScreen.Size>2,  Rectangle1_12.X+Rectangle1_12.Width-Self.Width*1.7-35,btnPrint_12.X)
+        Y: =btnPrint_12.Y
+        ZIndex: =5
+
+    icnPrint_11 As icon.Print:
+        Color: =RGBA(91, 155, 213, 1)
+        Height: =btnPrint_12.Height-15
+        Icon: =Icon.Print
+        X: =btnPrint_12.X
+        Y: =btnPrint_12.Y+10
+        ZIndex: =6
+
+    btn3dot_5 As button:
+        Color: =RGBA(0, 0, 0, 1)
+        Fill: =RGBA(0, 0, 0, 0)
+        OnSelect: |-
+            =UpdateContext({varExportCancel:!varExportCancel})
+        Text: =". . ."
+        Visible: =App.ActiveScreen.Size<=2
+        Width: =50
+        X: =Rectangle1_12.X+Rectangle1_12.Width-Self.Width-20
+        Y: =btnPrint_12.Y
+        ZIndex: =7
+
+    lblExport_1 As label:
+        Fill: =RGBA(255, 255, 255, 1)
+        Font: =Apptheme.FontFamily
+        FontWeight: =FontWeight.Bold
+        Size: =18
+        Text: ="Export"
+        X: =Switch(App.ActiveScreen.Size,4,50,3,30,20)
+        Y: |-
+            =//Switch(App.ActiveScreen.Size,4,30,3,30,20)
+            HeaderNavigation_20.Y+HeaderNavigation_20.Height
+        ZIndex: =8
+
+    HeaderNavigation_20 As HeaderNavigation:
+        Height: |
+            =//HeaderNavigation.HeaderHeight
+            If(HeaderNavigation_20.AdminVisible,480,40)
+        Visible: =App.ActiveScreen.Size>3
+        ZIndex: =9
+
+    mobContainer16 As groupContainer.manualLayoutContainer:
+        BorderColor: =RGBA(149, 149, 149, 1)
+        BorderThickness: =2
+        Height: =btnMobCancel_9.Y+btnMobCancel_9.Height+10
+        Visible: =varExportCancel && btn3dot_5.Visible
+        Width: =170
+        X: =btn3dot_5.X-(Self.Width-btn3dot_5.Width)
+        Y: =btn3dot_5.Y-Self.Height
+        ZIndex: =12
+
+        btnMobExport_3 As button:
+            Fill: =RGBA(127, 178, 57, 1)
+            Font: =Apptheme.FontFamily
+            OnSelect: =Select(btnExport_1)
+            Size: =Apptheme.FontSize
+            Text: ="Export"
+            Visible: =Parent.Visible
+            X: =5
+            Y: =btnreset.Y+btnreset.Height+10
+            ZIndex: =1
+
+        btnMobCancel_9 As button:
+            Font: =Apptheme.FontFamily
+            OnSelect: =Select(btnCancel_5)
+            Size: =Apptheme.FontSize
+            Text: ="Cancel"
+            Visible: =Parent.Visible
+            X: =5
+            Y: =btnMobExport_3.Y+btnMobExport_3.Height+10
+            ZIndex: =2
+
+        btnreset As button:
+            Font: =Apptheme.FontFamily
+            Height: =30
+            OnSelect: =Select(btnReset_18)
+            Size: =Apptheme.FontSize
+            Text: ="Reset"
+            Visible: =Parent.Visible
+            X: =5
+            Y: =10
+            ZIndex: =3
+
+    btnReset_18 As button:
+        Fill: =RGBA(255, 191, 0, 1)
+        Font: =Apptheme.FontFamily
+        FontWeight: =FontWeight.Bold
+        Height: =30
+        HoverFill: =
+        OnSelect: |-
+            =Set(varReset,false);
+            Set(varReset,true);
+            //ClearCollect(Colexp,PRForm);
+            ClearCollect(
+                Colexp,
+                ShowColumns(
+                    PRForm,
+                    "RequestNumber",
+                    "CurrentStatus",
+                    "Created",
+                    "CreatedDate",
+                    "fd_kw_CostcenterResponsible_1",
+                    "InitiatorWorkflowDate",
+                    "fd_na_ResponsibleCostCenter",
+                    "Approver1WorkflowDate",
+                    "fd_na_ResponsibleHRPlant",
+                    "Approver2WorkflowDate",
+                    "fd_kw_BusinessUnit",
+                    "fd_na_ResponsibleCOPlant",
+                    "CRRCWorkflowDate",
+                    "BudgetedOrNonBudgeted",
+                    "fd_na_ResponsibleRegion",
+                    "Approver3WorkflowDate",
+                    "fd_na_SpecialApproval",
+                    "Approver4WorkflowDate",
+                    "fd_na_SignContract",
+                    "SignContractWorkflowDate",
+                    "fd_LegalEntity",
+                    "fd_Plant",
+                    "fd_Plant_Number",
+                    "fd_Country",
+                    "fd_CountryISO",
+                    "fd_kw_ManagementEntity",
+                    "fd_Department",
+                    "fd_DepartmentDetailed",
+                    "fd_CostCenter",
+                    "fd_FunctionTitle",
+                    "fd_dt_Necessary",
+                    "fd_kw_EmployeeType",
+                    "fd_kw_HayLevel",
+                    "fd_n_NoPositions",
+                    "fd_kw_DurationContract",
+                    "fd_dt_DurationUntil",
+                    "fd_kw_Filled",
+                    "MainCommentary",
+                    "fd_PositionProfile",
+                    "FullTime",
+                    "fd_kw_BudgetedPosition",
+                    "fd_kw_BudgetedYear",
+                    "fd_kw_Replacement",
+                    "Approver1WorkflowComment",
+                    "fd_Headcount",
+                    "fd_thereofInactive",
+                    "fd_currentHeadcount",
+                    "fd_RequestedPosition",
+                    "fd_na_Requestor",
+                    "WorkFlowHistory",
+                    "fd_na_AddInfoRespHRCountry",
+                    "fd_na_AddInfoRespHRRegion",
+                    "fd_na_AddInfoRespHRPlant",
+                    "fd_na_AddInfoManagement",
+                    "Modified",
+                    "InitiatorName",
+                    "fd_kw_SuitableAssignment",
+                    "fd_na_AddInfoRespPlant"
+                )
+            );
+        RadiusBottomLeft: =btnSubmit.RadiusBottomLeft
+        RadiusBottomRight: =btnSubmit.RadiusBottomRight
+        RadiusTopLeft: =btnSubmit.RadiusTopLeft
+        RadiusTopRight: =btnSubmit.RadiusTopRight
+        Size: =Apptheme.FontSize
+        Text: ="Reset"
+        Visible: =App.ActiveScreen.Size>3
+        Width: =btnSubmit.Width
+        X: |-
+            =//btnExport.X+btnExport.Width+20
+            If(App.ActiveScreen.Size>2,  Rectangle1_12.X+Rectangle1_12.Width-Self.Width*4-10,btnPrint_12.X)
+        Y: =btnPrint_12.Y
+        ZIndex: =18
+
+    LeftNavigation_14 As LeftNavigation:
+        Height: =1030
+        Visible: =App.ActiveScreen.Size<=2 && varShowNav
+        ZIndex: =19
+
+    Group1_1 As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =19
+
+        rec_BGPopup_31 As rectangle:
+            Fill: =RGBA(0, 0, 0, 0.2)
+            Height: =Parent.Height
+            Visible: =Loading
+            Width: =Parent.Width
+            ZIndex: =10
+
+        Image1_2 As image:
+            Image: =slds_spinner_brand
+            Visible: =Loading
+            X: =Parent.Width/2
+            Y: =Parent.Height/2
+            ZIndex: =11
+
+    icnHamburgerMenu_13 As icon.Hamburger:
+        AccessibleLabel: ="Menu"
+        Height: =30
+        Icon: =If(varShowNav,Icon.Cancel,Icon.Hamburger)
+        OnSelect: |-
+            =UpdateContext({varShowNav:!varShowNav})
+        TabIndex: =0
+        Visible: =App.ActiveScreen.Size<=3
+        Width: =30
+        ZIndex: =20
+
+    POPMessage_2 As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =20
+
+        rec_BGPopup_12 As rectangle:
+            Fill: =RGBA(0, 0, 0, 0.2)
+            Height: =1030
+            Visible: =ExportScreenPOPUP
+            Width: =Parent.Width
+            ZIndex: =13
+
+        Button3_11 As button:
+            Align: =Align.Left
+            DisabledColor: =RGBA(0, 0, 0, 1)
+            DisabledFill: =RGBA(255, 255, 255, 1)
+            DisplayMode: =DisplayMode.Disabled
+            Fill: =RGBA(241, 244, 249, 1)
+            FontWeight: =FontWeight.Normal
+            Height: =200
+            PaddingBottom: =0
+            PaddingLeft: =20
+            PaddingRight: =0
+            PaddingTop: =20
+            Size: =11
+            Text: ="Success"
+            Underline: =true
+            VerticalAlign: =VerticalAlign.Top
+            Visible: =ExportScreenPOPUP
+            Width: =Switch(App.ActiveScreen.Size,4,(dtacrd_Requestor.Width-750),3,(dtacrd_Requestor.Width-350),(dtacrd_Requestor.Width-100))
+            X: =(Parent.Width-Self.Width)/2
+            Y: =(Parent.Height-Self.Height)/2
+            ZIndex: =14
+
+        Button3_12 As button:
+            Align: =Align.Left
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =0.1
+            DisabledColor: =RGBA(0, 0, 0, 1)
+            DisabledFill: =RGBA(230, 230, 230, 1)
+            DisplayMode: =DisplayMode.Disabled
+            Fill: =RGBA(241, 244, 249, 1)
+            FontWeight: =FontWeight.Normal
+            Height: =Button3_11.Height-140
+            PaddingBottom: =0
+            PaddingLeft: =20
+            PaddingRight: =0
+            PaddingTop: =20
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Size: =12
+            Text: =""
+            VerticalAlign: =VerticalAlign.Top
+            Visible: =ExportScreenPOPUP
+            Width: =Button3_11.Width
+            X: =Button3_11.X
+            Y: =Button3_11.Y+Button3_11.Height-60
+            ZIndex: =15
+
+        btnSubmitNA_11 As button:
+            Color: =RGBA(0, 0, 0, 1)
+            Fill: =RGBA(54, 176, 75, 1)
+            Font: =Apptheme.FontFamily
+            FontWeight: =FontWeight.Bold
+            Height: =25
+            HoverColor: =RGBA(0, 0, 0, 1)
+            HoverFill: =RGBA(204, 204, 204, 1)
+            OnSelect: |-
+                =UpdateContext({ExportScreenPOPUP:false});
+                Navigate(Scr_Home);
+            PaddingRight: =3.56
+            PaddingTop: =3.56
+            PressedFill: =Color.White
+            RadiusBottomLeft: =5
+            RadiusBottomRight: =5
+            RadiusTopLeft: =5
+            RadiusTopRight: =5
+            Size: =Switch(App.ActiveScreen.Size,4,10,3,10,9)
+            Text: ="OK"
+            Visible: =ExportScreenPOPUP
+            Width: =Switch(App.ActiveScreen.Size,4,70,3,70,2,60,60)
+            X: =Button3_11.X+Button3_11.Width/2-Self.Width/2
+            Y: =Button3_12.Y+19
+            ZIndex: =16
+
+        lbl_msg_2 As label:
+            Align: =Align.Center
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =0.1
+            DisabledFill: =RGBA(241, 244, 249, 1)
+            DisplayMode: =DisplayMode.View
+            Fill: =RGBA(255, 255, 255, 1)
+            FontWeight: =FontWeight.Semibold
+            Height: =Button3_12.Y-Self.Y
+            Size: =10
+            Text: =MessageText
+            Visible: =ExportScreenPOPUP
+            Width: =Button3_11.Width-2
+            X: =Button3_11.X+2
+            Y: =Button3_11.Y+50
+            ZIndex: =17
+

@@ -1,0 +1,24 @@
+Scr_SplashScreen As screen:
+
+    Image2 As image:
+        Height: =Parent.Height
+        Image: ='Untitled-1'
+        ImagePosition: =ImagePosition.Stretch
+        Width: =Parent.Width
+        ZIndex: =1
+
+    Timer1 As timer:
+        Duration: =3000
+        OnTimerEnd: |-
+            =//Navigation based on a request ID
+            If(
+                Not(IsBlank(Param("RequestId"))), // Check if RequestId parameter is not blank
+                Navigate( Scr_EditRequest), // If RequestId is not blank, navigate to Scr_EditRequest screen
+                Navigate( Scr_Home)  // If RequestId is blank, navigate to Scr_Home screen
+            )
+        Start: =varSplashScreen
+        Visible: =false
+        X: =40
+        Y: =40
+        ZIndex: =2
+

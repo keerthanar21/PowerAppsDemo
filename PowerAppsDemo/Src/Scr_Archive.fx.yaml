@@ -1,0 +1,693 @@
+"Scr_Archive As screen.'phoneLayout_FluidGridWithHeaderPageLayout_ver3.0'":
+    OnVisible: =
+
+    Canvas1_2 As fluidGrid.fluidGridWithBlankCard:
+        BorderThickness: =0
+        Height: =(Rectangle1_11.Y-Rectangle1_11.Height -Self.Y)+50
+        Width: =Parent.Width
+        Y: =lblArchiveHeader.Y+lblArchiveHeader.Height
+        ZIndex: =1
+
+        DataCard1_2 As dataCard:
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderStyle: =BorderStyle.Solid
+            BorderThickness: =0
+            DisplayMode: =DisplayMode.Edit
+            Fill: =RGBA(241, 244, 249, 1)
+            Height: |-
+                =//galArchiveConfig.Y+galArchiveConfig.Height+50
+                Parent.Height
+            Width: =Parent.Width
+            X: =0
+            Y: =0
+            ZIndex: =1
+
+            Container13 As groupContainer.horizontalAutoLayoutContainer:
+                Height: =Container14.Height
+                LayoutMode: =LayoutMode.Auto
+                LayoutOverflowX: =LayoutOverflow.Scroll
+                Width: =Parent.Width
+                ZIndex: =7
+
+                Container14 As groupContainer.manualLayoutContainer:
+                    AlignInContainer: =AlignInContainer.SetByContainer
+                    FillPortions: =0
+                    Height: =txtFrequencydays.Y+txtFrequencydays.Height+50
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    Width: =lbl_Months.X+lbl_Months.Width+50
+                    ZIndex: =1
+
+                    Lbl_RequisitionStatusHeader_2 As label:
+                        BorderColor: =RGBA(0, 0, 0, 1)
+                        BorderThickness: =1
+                        Fill: =RGBA(102, 182, 227, 1)
+                        Font: =Apptheme.FontFamily
+                        FontWeight: =FontWeight.Semibold
+                        Size: =Apptheme.FontSize
+                        Text: ="Requisition Status(Simple Status)"
+                        Width: =330
+                        X: =Switch(App.ActiveScreen.Size,4,60,3,30,20)
+                        Y: =40
+                        ZIndex: =1
+
+                    lbl_PositionTypeHeader_2 As label:
+                        BorderColor: =RGBA(0, 0, 0, 1)
+                        BorderThickness: =1
+                        Fill: =RGBA(102, 182, 227, 1)
+                        Font: =Apptheme.FontFamily
+                        FontWeight: =FontWeight.Semibold
+                        Height: =Lbl_RequisitionStatusHeader_2.Height
+                        Size: =Apptheme.FontSize
+                        Text: ="Position Type"
+                        Width: =330
+                        X: =Lbl_RequisitionStatusHeader_2.X+Lbl_RequisitionStatusHeader_2.Width
+                        Y: =40
+                        ZIndex: =2
+
+                    lbl_BudgetedorNotHeader_2 As label:
+                        BorderColor: =RGBA(0, 0, 0, 1)
+                        BorderThickness: =1
+                        Fill: =RGBA(102, 182, 227, 1)
+                        Font: =Apptheme.FontFamily
+                        FontWeight: =FontWeight.Semibold
+                        Height: =lbl_PositionTypeHeader_2.Height
+                        Size: =Apptheme.FontSize
+                        Text: ="Budgeted or Not?"
+                        Width: =330
+                        X: =lbl_PositionTypeHeader_2.X+lbl_PositionTypeHeader_2.Width
+                        Y: =40
+                        ZIndex: =3
+
+                    lbl_Months As label:
+                        BorderColor: =RGBA(0, 0, 0, 1)
+                        BorderThickness: =1
+                        Fill: =RGBA(102, 182, 227, 1)
+                        Font: =Apptheme.FontFamily
+                        FontWeight: =FontWeight.Semibold
+                        Height: =lbl_BudgetedorNotHeader_2.Height
+                        Size: =Apptheme.FontSize
+                        Text: ="When the request can be moved to archive?"
+                        Width: =330
+                        X: =lbl_BudgetedorNotHeader_2.X+lbl_BudgetedorNotHeader_2.Width
+                        Y: =40
+                        ZIndex: =4
+
+                    galArchiveConfig As gallery.galleryVertical:
+                        AccessibleLabel: ="Gallery Archive"
+                        BorderThickness: =0.5
+                        Height: |-
+                            =(galArchiveConfig.AllItemsCount*40)+1
+                            //CountRows(galArchiveConfig.AllItems)*53+1
+                        Items: =ArchiveConfiguration
+                        Layout: =Layout.Vertical
+                        ShowScrollbar: =false
+                        TabIndex: =0
+                        TemplatePadding: =0
+                        TemplateSize: =40
+                        Width: =lbl_Months.X+lbl_Months.Width-Self.X
+                        WrapCount: =0
+                        X: =Lbl_RequisitionStatusHeader_2.X
+                        Y: =Lbl_RequisitionStatusHeader_2.Y+Lbl_RequisitionStatusHeader_2.Height
+                        ZIndex: =5
+
+                        lblRequisitionstatus_1 As label:
+                            BorderColor: =RGBA(202, 202, 202, 1)
+                            Font: =Apptheme.FontFamily
+                            OnSelect: =Select(Parent)
+                            Size: =Apptheme.FontSize
+                            Text: =ThisItem.Title
+                            Width: =Lbl_RequisitionStatusHeader_2.Width
+                            ZIndex: =1
+
+                        lblpositiontype_1 As label:
+                            BorderColor: =RGBA(202, 202, 202, 1)
+                            Font: =Apptheme.FontFamily
+                            Height: =lblRequisitionstatus_1.Height
+                            OnSelect: =Select(Parent)
+                            PaddingRight: =20
+                            Size: =Apptheme.FontSize
+                            Text: =ThisItem.PositionType
+                            Width: =lbl_PositionTypeHeader_2.Width
+                            X: =lblRequisitionstatus_1.X+lblRequisitionstatus_1.Width
+                            ZIndex: =2
+
+                        lblBudgeted_1 As label:
+                            BorderColor: =RGBA(202, 202, 202, 1)
+                            Font: =Apptheme.FontFamily
+                            Height: =lblRequisitionstatus_1.Height
+                            OnSelect: =Select(Parent)
+                            Size: =Apptheme.FontSize
+                            Text: =ThisItem.BudgetedOrNot
+                            Width: =lbl_BudgetedorNotHeader_2.Width
+                            X: =lblpositiontype_1.X+lblpositiontype_1.Width
+                            ZIndex: =3
+
+                        txtMonths As text:
+                            AccessibleLabel: ="Mon"
+                            BorderThickness: =0
+                            Default: =If(!VarEditData,ThisItem.Months,"")
+                            DisplayMode: =If(!VarEditData,DisplayMode.View,DisplayMode.Edit)
+                            Fill: =If(!VarEditData,RGBA(235, 235, 235, 1),Color.FloralWhite)
+                            Font: =Apptheme.FontFamily
+                            Height: =lblRequisitionstatus_1.Height
+                            HintText: =If(VarEditData,ThisItem.Months)
+                            OnSelect: =Select(Parent)
+                            RadiusBottomLeft: =0
+                            RadiusBottomRight: =0
+                            RadiusTopLeft: =0
+                            RadiusTopRight: =0
+                            Size: =Apptheme.FontSize
+                            Width: =70
+                            X: =lblBudgeted_1.X+lblBudgeted_1.Width
+                            ZIndex: =4
+
+                        lblDescription_1 As label:
+                            BorderColor: =RGBA(202, 202, 202, 1)
+                            Font: =Apptheme.FontFamily
+                            Height: =lblRequisitionstatus_1.Height
+                            OnSelect: =Select(Parent)
+                            Size: =Apptheme.FontSize
+                            Text: =ThisItem.Description
+                            Width: =lbl_Months.Width-txtMonths.Width
+                            X: =txtMonths.X+txtMonths.Width
+                            ZIndex: =5
+
+                        Rectangle3_8 As rectangle:
+                            Height: =0.5
+                            Width: =Parent.Width
+                            Y: =lblRequisitionstatus_1.Y+lblRequisitionstatus_1.Height
+                            ZIndex: =6
+
+                        Rectangle3_5 As rectangle:
+                            Height: =lblRequisitionstatus_1.Height
+                            OnSelect: =Select(Parent)
+                            Width: =0.5
+                            X: =lblRequisitionstatus_1.Width
+                            ZIndex: =7
+
+                        Rectangle3_6 As rectangle:
+                            Height: =lblRequisitionstatus_1.Height
+                            OnSelect: =Select(Parent)
+                            Width: =0.5
+                            X: =lblBudgeted_1.X
+                            ZIndex: =8
+
+                        Rectangle3_7 As rectangle:
+                            Height: =lblRequisitionstatus_1.Height
+                            OnSelect: =Select(Parent)
+                            Width: =0.5
+                            X: =txtMonths.X
+                            ZIndex: =9
+
+                    lblFrequnecySet As label:
+                        BorderColor: =RGBA(0, 0, 0, 1)
+                        BorderThickness: =1
+                        Fill: =RGBA(102, 182, 227, 1)
+                        Font: =Apptheme.FontFamily
+                        FontWeight: =FontWeight.Semibold
+                        Height: =lbl_BudgetedorNotHeader_2.Height
+                        Size: =Apptheme.FontSize
+                        Text: ="Frequency Setup"
+                        Width: =Lbl_RequisitionStatusHeader_2.Width
+                        X: =galArchiveConfig.X
+                        Y: =galArchiveConfig.Y+galArchiveConfig.Height+50
+                        ZIndex: =6
+
+                    lblFrequencyArchiveActivity As label:
+                        BorderThickness: =0.5
+                        Font: =Apptheme.FontFamily
+                        FontWeight: =FontWeight.Semibold
+                        Height: =53
+                        Size: =Apptheme.FontSize
+                        Text: ="Frequency of Archive Activity"
+                        Width: =330
+                        X: =galArchiveConfig.X
+                        Y: =lblFrequnecySet.Y+lblFrequnecySet.Height
+                        ZIndex: =7
+
+                    lblNoDays As label:
+                        BorderColor: =RGBA(0, 0, 0, 1)
+                        BorderThickness: =1
+                        Fill: =RGBA(102, 182, 227, 1)
+                        Font: =Apptheme.FontFamily
+                        FontWeight: =FontWeight.Semibold
+                        Height: =lbl_BudgetedorNotHeader_2.Height
+                        Size: =Apptheme.FontSize
+                        Text: ="In Days"
+                        Width: =txtFrequencydays.Width+2
+                        X: =lblFrequnecySet.X+lblFrequnecySet.Width
+                        Y: =galArchiveConfig.Y+galArchiveConfig.Height+50
+                        ZIndex: =8
+
+                    txtFrequencydays As text:
+                        AccessibleLabel: ="Mon"
+                        BorderThickness: =0.5
+                        Default: =If(!VarEditData,First(Filter(ArchiveConfigurationFrequencySet, ID = 1)).Frequency,"")
+                        DisabledBorderColor: =RGBA(0, 18, 107, 1)
+                        DisplayMode: =If(!VarEditData,DisplayMode.View,DisplayMode.Edit)
+                        Fill: =If(!VarEditData,RGBA(235, 235, 235, 1),Color.FloralWhite)
+                        Font: =Apptheme.FontFamily
+                        Height: =lblFrequencyArchiveActivity.Height
+                        HintText: =If(VarEditData,First(Filter(ArchiveConfigurationFrequencySet, ID = 1)).Frequency,"")
+                        OnSelect: =
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Size: =Apptheme.FontSize
+                        Width: =100-2
+                        X: =lblFrequencyArchiveActivity.X+lblFrequencyArchiveActivity.Width+1
+                        Y: =lblFrequencyArchiveActivity.Y
+                        ZIndex: =10
+
+                    Rectangle3_9 As rectangle:
+                        BorderThickness: =0.2
+                        Height: =0.5
+                        OnSelect: =
+                        Width: =txtFrequencydays.Width+2
+                        X: =txtFrequencydays.X-2
+                        Y: =txtFrequencydays.Y+txtFrequencydays.Height-2
+                        ZIndex: =11
+
+                    Rectangle3_10 As rectangle:
+                        Height: =lblRequisitionstatus_1.Height+10
+                        OnSelect: =
+                        Width: =0.5
+                        X: =txtFrequencydays.X+txtFrequencydays.Width
+                        Y: =txtFrequencydays.Y
+                        ZIndex: =12
+
+    Rectangle1_11 As rectangle:
+        Fill: =RGBA(236, 225, 245, 1)
+        Height: =60
+        Width: =Parent.Width-100
+        X: =If(App.ActiveScreen.Size>3,60,20)
+        Y: =Parent.Height-Self.Height-5
+        ZIndex: =2
+
+    btnPrint_11 As button:
+        Color: =RGBA(91, 155, 213, 1)
+        Fill: =RGBA(255, 255, 255, 1)
+        Font: =Apptheme.FontFamily
+        Height: =30
+        HoverFill: =RGBA(153, 207, 236, 1)
+        OnSelect: =Print()
+        PaddingLeft: =20
+        Size: =Apptheme.FontSize
+        Text: ="Print"
+        Width: =130
+        X: |-
+            =//Rectangle1_11.X+Self.Width-60
+            //lblReferSite.X+Self.Width+20
+            //lblReferSite_3.X+lblReferSite_3.Width
+            If(App.ActiveScreen.Size>3, Rectangle1_11.X+Self.Width-60,Rectangle1_11.X+10)
+        Y: |-
+            =Rectangle1_11.Y+(Rectangle1_11.Height-Self.Height)/2
+            //lblReferSite_3.Y+lblReferSite_3.Height-40
+        ZIndex: =3
+
+    btnUpdate As button:
+        BorderThickness: =0.1
+        Fill: =RGBA(127, 178, 57, 1)
+        Font: =Apptheme.FontFamily
+        Height: =30
+        HoverFill: =RGBA(127, 178, 57, 1)
+        OnSelect: |-
+            =If(
+                VarEditData,
+                If(
+                    !IsBlank(txtMonths),
+                    UpdateContext({Loading: true});
+                    ForAll(
+                        galArchiveConfig.AllItems,
+                        Patch(
+                            ArchiveConfiguration,
+                            ThisRecord,
+                            {Months: If(!IsBlank(txtMonths.Text),txtMonths.Text,txtMonths.HintText)}
+                        )
+                    )
+                );
+                UpdateContext({VarEditData: !VarEditData});
+                Set(VarID,
+                Patch(ArchiveConfigurationFrequencySet,LookUp(ArchiveConfigurationFrequencySet,ID=1),{Frequency:Value(txtFrequencydays.Text)}).ID);
+                UpdateContext({Loading: false});
+                
+            )
+        RadiusBottomLeft: =5
+        RadiusBottomRight: =5
+        RadiusTopLeft: =5
+        RadiusTopRight: =5
+        Size: =Apptheme.FontSize
+        Text: ="Update"
+        Visible: =App.ActiveScreen.Size>3 && VarEditData
+        X: |-
+            =If(App.ActiveScreen.Size>2,  Rectangle1_11.X+Rectangle1_11.Width-Self.Width-(2*Self.Width))
+            //btnPrint_3.X+btnPrint_3.Width*4
+        Y: |-
+            =//If(App.ActiveScreen.Size>2, Rectangle1_11.Y+(Rectangle1_11.Height-Self.Height)/2,btn3dot_3.Y+btn3dot_3.Height+5)
+            //Rectangle1_3.Y+30
+            btnPrint_11.Y
+        ZIndex: =4
+
+    btnCancel_4 As button:
+        BorderThickness: =0.1
+        Font: =Apptheme.FontFamily
+        Height: =30
+        HoverFill: =RGBA(56, 96, 178, 1)
+        OnSelect: |-
+            =Navigate(Scr_Home);
+            Refresh(ArchiveConfiguration);
+        RadiusBottomLeft: =5
+        RadiusBottomRight: =5
+        RadiusTopLeft: =5
+        RadiusTopRight: =5
+        Size: =Apptheme.FontSize
+        Text: ="Cancel"
+        Visible: =App.ActiveScreen.Size>3
+        X: |-
+            =If(App.ActiveScreen.Size>2, btnUpdate.X+btnUpdate.Width+20)
+            //btnSave_1.X+btnSave_1.Width+20
+        Y: |-
+            =//If(App.ActiveScreen.Size>2, Rectangle1_11.Y+(Rectangle1_11.Height-Self.Height)/2,btn3dot_3.Y+btn3dot_3.Height+5)
+            //Rectangle1_3.Y+30
+            btnPrint_11.Y
+        ZIndex: =5
+
+    btnEdit As button:
+        BorderThickness: =0.1
+        Fill: =RGBA(255, 191, 0, 1)
+        Font: =Apptheme.FontFamily
+        Height: =30
+        HoverFill: =RGBA(255, 191, 0, 1)
+        OnSelect: |-
+            =/*UpdateContext({Loading: true});
+            Set(yearVal,Year(Now()));
+            ClearCollect(
+                    yearIndexCol,
+                    Filter(
+                        PRForm,
+                        Plant = txtPlantNo.Text,
+                        Year(CreatedDate) = Text(yearVal),
+                        (RequestNumber <> Blank())
+                    )
+                );
+                 If(
+                    CountRows(yearIndexCol) = 0,
+                    Set(
+                        YIncrVal,
+                        "00001"
+                    ),
+                     Set(
+                        Yval2,
+                        ForAll(Split(
+                            Last(yearIndexCol).RequestNumber,
+                            "-"
+                        ), {Result: ThisRecord.Value}).Result
+                    );
+                    Set(
+                        Yval3,
+                        Last(Yval2.Result)
+                    );
+                    Set(
+                        YIncrNumb,
+                        Text(Yval3.Result + 1)
+                    );
+                    Set(
+                        YIncrVal,
+                        If(
+                            Len(YIncrNumb) = 1,
+                            "00" & YIncrNumb,
+                            Len(YIncrNumb) = 2,
+                            "0" & YIncrNumb,
+                            YIncrNumb
+                        )
+                    );
+                );
+                  Set(
+                    varReqID,
+                    Concatenate(
+                        Text(
+                            Now(),
+                            "[$-en-US]yyyy"
+                        ),
+                        "-",
+                        txtCountryISO.Text,
+                        "-",
+                        txtPlantNo.Text,
+                        "-",
+                        YIncrVal
+                    )
+                );
+            Notify(varReqID,NotificationType.Information);
+             Set(
+                    VarID,
+                    Patch(
+                        PRForm,
+                        Defaults(PRForm),
+                        {
+                            'Requestor is Cost Center Responsible': txtRequsitioner.Text,
+                            'Name Requisitioner Req': chkCostRespYes.Value,
+                            'Legal Entity': drpLegalEntity_2.Selected.Result,
+                            'Management Entity': drpManagementEntity_2.Selected.Value,
+                            Plant: txtPlant.Text,
+                            'Plant Number': txtPlantNo.Text,
+                            Country: txtCountry.Text,
+                            'Country ISO': txtCountryISO.Text,
+                            BUorPCorSC: drpBUPCSC_2.Selected.Result,
+                            'Cost Center': drpCostCenter_2.SelectedText.Value,
+                            Department: drpDepartment.Selected.Result,
+                            'Department detailed': txtDepartmentDetail.Text,
+                            'Position Type': drpPositionType.Selected.Result,
+                            'Number of equal positions to be filled': Value(txtFilledPosition.Text),
+                            'Duration of contract (fd_kw_DurationContract)': drpDurationofContract.Selected.Result,
+                            'Position can be Filled': drpPositionCanFilled.Selected.Result,
+                            'Position necessary as of':datPostionNecessary.SelectedDate,
+                            'Function or Job Title - Regarding requested position':txtFunctionJobTitle.Text,
+                            'Suitable for international assignment': drpInternalAssignment.Selected.Result,
+                            FullTime:drpFullTime.Selected.Result,
+                            'Position Profile': txtPositionProfile.Text,
+                            'Position budgeted on Cost Center0000052400': drpPositionBudgeted.Selected.Result,
+                            'Replacement for existing position': drpReplacement.Selected.Result,
+                            'Expected headcount of cost center 0000052400per31 12without the requested position  including the sign contracts  approved requisitioners and known exits': txtExpectedCount.Text,
+                            'Thereof inactive (fd_thereofInactive)': txtThereOfInActive.Text,
+                            'Current headcount of costcenter 0000052400 end of last month  active and inactive': txtCurrentHeadCount.Text,
+                            'Thereof inactive (fd_RequestedPosition)': txtThereOfInActive_1.Text,
+                            'Concerning Eco Plan For Calendar Year':txtConcerningEcoPlan_1.Text,
+                            '1� Approval Responsible Cost Center':cmbApprover1.Selected.Mail,
+                            '2� Approval Next Higher Superior': cmbApprover2.Selected.Mail,
+                            '3� Approval Responsible BU Region  Responsible PCorDivision  Responsible Function GlobalorRegion': cmbApprover3.Selected.Mail,
+                            'Responsible HR Plant': cmbHRPlant.Selected.Mail,
+                            'Responsible HR Country': cmbHRCountry.Selected.Mail,
+                            'Responsible HR Region': cmbHRRegion.Selected.Mail,
+                            'Responsible Plantor Responsible Departmentor Responsible Function': cmbRespPDF.Selected.Mail,
+                            'Additional notification': cmbAdditionalNotify.Selected.Mail,
+                            'Respective Member of Corporate Management Committee': cmbRespectiveMembCorpMgmt.Selected.Mail,
+                           ERA:txtERA.Text,
+                            Zeil:txtZeil.Text,
+                            CurrentStatus:"Submitted"
+                        }
+                    ).ID
+                );
+            /*ClearCollect(colPRValidation,{Error:(If(IsBlank(txtRequsitioner),LookUp(ValidationErrorMessage,Key="errNameRequisitionerReq",Value)))});
+            If(CountA(colPRValidation)>0,UpdateContext({varValidationErrorMessage:true}),
+            Patch(
+                PRForm,
+                Defaults(PRForm),
+                {
+                    'Requestor is Cost Center Responsible': txtRequsitioner.Text,
+                    'Name Requisitioner Req': chkCostRespYes.Value,
+                    'Legal Entity':drpLegalEntity_2.Selected.Title,
+                    'Management Entity':drpManagementEntity_2.Selected.Value,
+                    Plant:drpPlant_2.Selected.Result,
+                    'Plant Number':drpPlantNumber_2.Selected.Title,
+                    Country:drpCountry_2.Selected.Title,
+                    'Country ISO':drpCountryISO_2.Selected.Title,
+                    BUorPCorSC:drpBUPCSC_2.Selected.Title,
+                    'Cost Center':drpCostCenter_2.Selected.Title,
+                    Department:drpDepartment.Selected.Title,
+                    'Department detailed':txtDepartmentDetail.Text,
+                    'Position Type':drpPositionType.Selected.Value,
+                    'Number of equal positions to be filled':Value(txtFilledPosition.Text),
+                    'Duration of contract (fd_kw_DurationContract)':drpDurationofContract.Selected.Title,
+                    'Position can be Filled':drpPositionCanFilled.Selected.Value,
+                    'Suitable for international assignment':drpInternalAssignment.Selected.Value,
+                    'Position Profile':txtPositionProfile.Text,
+                    'Position budgeted on Cost Center0000052400':drpPositionBudgeted.Selected.Value,
+                    'Replacement for existing position':drpReplacement.Selected.Value,
+                    'Expected headcount of cost center 0000052400per31 12without the requested position  including the sign contracts  approved requisitioners and known exits':txtExpectedCount.Text,
+                    'Thereof inactive (fd_thereofInactive)':txtThereOfInActive.Text,
+                    'Current headcount of costcenter 0000052400 end of last month  active and inactive':txtCurrentHeadCount.Text,
+                    'Thereof inactive (fd_RequestedPosition)':txtThereOfInActive_1.Text,
+                    '1� Approval Responsible Cost Center':cmbApprover1.Selected.Mail,
+            
+                    '2� Approval Next Higher Superior':cmbApprover2.Selected.Mail,
+                    '3� Approval Responsible BU Region  Responsible PCorDivision  Responsible Function GlobalorRegion':cmbApprover3.Selected.Mail,
+                    'Responsible HR Plant':cmbHRPlant.Selected.Mail,
+                    'Responsible HR Country':cmbHRCountry.Selected.Mail,
+                    'Responsible HR Region':cmbHRRegion.Selected.Mail,
+                    'Responsible Plantor Responsible Departmentor Responsible Function':cmbRespPDF.Selected.Mail,
+                    'Additional notification':cmbAdditionalNotify.Selected.Mail,
+                    'Respective Member of Corporate Management Committee':cmbRespectiveMembCorpMgmt.Selected.Mail
+                }
+            ));
+            Notify( "Document has been submitted successfully", NotificationType.Success, 0 );*/
+            //Set(VarEditData,true);
+            UpdateContext({VarEditData:!VarEditData});
+        RadiusBottomLeft: =5
+        RadiusBottomRight: =5
+        RadiusTopLeft: =5
+        RadiusTopRight: =5
+        Size: =Apptheme.FontSize
+        Text: ="Edit"
+        Visible: =App.ActiveScreen.Size>3 && !VarEditData
+        X: |-
+            =If(App.ActiveScreen.Size>2,  Rectangle1_11.X+Rectangle1_11.Width-Self.Width-(2*Self.Width),btnPrint_11.X)
+            //btnPrint_3.X+btnPrint_3.Width*4
+        Y: |-
+            =//If(App.ActiveScreen.Size>2, Rectangle1_11.Y+(Rectangle1_11.Height-Self.Height)/2,btn3dot_3.Y+btn3dot_3.Height+5)
+            //Rectangle1_3.Y+30
+            btnPrint_11.Y
+        ZIndex: =6
+
+    lblArchiveHeader As label:
+        Font: =Apptheme.FontFamily
+        FontWeight: =FontWeight.Bold
+        PaddingLeft: =10
+        Size: =Apptheme.FontHeaderSize
+        Text: ="Archive Configuration"
+        Width: =250
+        X: =Switch(App.ActiveScreen.Size,4,60,3,30,20)
+        Y: =Switch(App.ActiveScreen.Size,4,HeaderNavigation_13.Y+60,3,30,20)
+        ZIndex: =7
+
+    HeaderNavigation_19 As HeaderNavigation:
+        Height: |
+            =//HeaderNavigation.HeaderHeight
+            If(HeaderNavigation_19.AdminVisible,480,40)
+        Visible: =App.ActiveScreen.Size>3
+        ZIndex: =8
+
+    btn3dot_7 As button:
+        Color: =RGBA(0, 0, 0, 1)
+        Fill: =RGBA(0, 0, 0, 0)
+        Height: =30
+        OnSelect: |-
+            =UpdateContext({varSaveCancel:!varSaveCancel})
+        Text: =". . ."
+        Visible: =App.ActiveScreen.Size<=2
+        Width: =50
+        X: =Rectangle1_11.X+Rectangle1_11.Width-Self.Width-20
+        Y: =btnPrint_11.Y
+        ZIndex: =11
+
+    mobContainer15 As groupContainer.manualLayoutContainer:
+        BorderColor: =RGBA(149, 149, 149, 1)
+        BorderThickness: =2
+        Height: =btnMobCancel_7.Y+btnMobCancel_7.Height+10
+        Visible: =varSaveCancel && btn3dot_7.Visible
+        Width: =170
+        X: =btn3dot_7.X-(Self.Width-btn3dot_7.Width)
+        Y: =btn3dot_7.Y-Self.Height
+        ZIndex: =12
+
+        btnUpdate_1 As button:
+            BorderThickness: =0.1
+            Fill: =RGBA(127, 178, 57, 1)
+            Font: =Apptheme.FontFamily
+            Height: =30
+            HoverFill: =RGBA(127, 178, 57, 1)
+            OnSelect: =Select(btnUpdate)
+            RadiusBottomLeft: =5
+            RadiusBottomRight: =5
+            RadiusTopLeft: =5
+            RadiusTopRight: =5
+            Size: =Apptheme.FontSize
+            Text: ="Update"
+            Visible: =Parent.Visible
+            X: =5
+            Y: =btnMobEdit_1.Y+btnMobEdit_1.Height+10
+            ZIndex: =1
+
+        btnMobCancel_7 As button:
+            BorderThickness: =0.1
+            Font: =Apptheme.FontFamily
+            Height: =30
+            HoverFill: =RGBA(56, 96, 178, 1)
+            OnSelect: =Select(btnCancel_4)
+            RadiusBottomLeft: =5
+            RadiusBottomRight: =5
+            RadiusTopLeft: =5
+            RadiusTopRight: =5
+            Size: =Apptheme.FontSize
+            Text: ="Cancel"
+            Visible: =Parent.Visible
+            X: =5
+            Y: =btnUpdate_1.Y+btnUpdate_1.Height+10
+            ZIndex: =2
+
+        btnMobEdit_1 As button:
+            BorderThickness: =0.1
+            Fill: =RGBA(203, 102, 102, 1)
+            Font: =Apptheme.FontFamily
+            Height: =30
+            HoverFill: =RGBA(203, 102, 102, 1)
+            OnSelect: |-
+                =UpdateContext({VarEditData:!VarEditData});
+            RadiusBottomLeft: =3
+            RadiusBottomRight: =3
+            RadiusTopLeft: =3
+            RadiusTopRight: =3
+            Size: =Apptheme.FontSize
+            Text: ="Edit"
+            Visible: =Parent.Visible
+            X: =5
+            Y: =10
+            ZIndex: =3
+
+    LeftNavigation_2 As LeftNavigation:
+        Height: =1030
+        Visible: =App.ActiveScreen.Size<=2 && varShowNav
+        ZIndex: =13
+
+    icnHamburgerMenu_18 As icon.Hamburger:
+        AccessibleLabel: ="Menu"
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =30
+        Icon: =If(varShowNav,Icon.Cancel,Icon.Hamburger)
+        OnSelect: |-
+            =UpdateContext({varShowNav:!varShowNav})
+        TabIndex: =0
+        Visible: =App.ActiveScreen.Size<=2
+        Width: =30
+        ZIndex: =14
+
+    icnPrint_1 As icon.Print:
+        Color: =RGBA(91, 155, 213, 1)
+        Height: =btnPrint_11.Height-15
+        Icon: =Icon.Print
+        X: =btnPrint_11.X
+        Y: =Rectangle1_11.Y+(Rectangle1_11.Height-Self.Height)/2
+        ZIndex: =15
+
+    Group1_3 As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =15
+
+        rec_BGPopup_33 As rectangle:
+            Fill: =RGBA(0, 0, 0, 0.2)
+            Height: =Parent.Height
+            Visible: =Loading
+            Width: =Parent.Width
+            ZIndex: =9
+
+        Image1_4 As image:
+            Image: =slds_spinner_brand
+            Visible: =Loading
+            X: =Parent.Width/2
+            Y: =Parent.Height/2
+            ZIndex: =10
+

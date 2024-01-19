@@ -1,0 +1,1388 @@
+"Scr_Home_2 As screen.'phoneLayout_FluidGridWithHeaderPageLayout_ver3.0'":
+    Fill: =RGBA(255, 255, 255, 1)
+    OnVisible: |
+        =//Set variable to load the image and the live count
+        Set(
+            varLazyLoadCompleted,
+            true
+        );
+        //Getting the All values from PRForm List
+        Concurrent(
+            ClearCollect(
+                colPRForm,
+                PRForm
+            ),
+            ClearCollect(
+                colDelegationList,
+                Delegation
+            )
+        );
+        //varCountRows gets all the count of records from PRForm
+        Set(
+            varCountRows,
+            CountRows(colPRForm)
+        );
+        //Getting total count for new request
+        ClearCollect(
+            colDocumentCounts,
+            {
+                NewRequestCount: CountRows(
+                    Filter(
+                        colPRForm,
+                        CurrentStatus = "1 Approval Responsible Cost Center" || CurrentStatus = "Draft"
+                    )
+                ),
+                PendingRequestCount: CountRows(
+                    Filter(
+                        colPRForm,
+                        CurrentStatus = "1 Approval Responsible Cost Center" || CurrentStatus = "2 Approval Next Higher Superior" || CurrentStatus = "Check Respective Responsible CO" || CurrentStatus = "3 Approval Responsible BU Region-Responsible PC/Division-Responsible Function Global/Region" || CurrentStatus = "4 Approval (Description Extra Level Approval)" || CurrentStatus = "Pending with Requestor on Query"
+                    )
+                ),
+                NewRequestUserCount: CountRows(
+                    Filter(
+                        colPRForm,
+                        (CurrentStatus = "1 Approval Responsible Cost Center" || CurrentStatus = "Draft"),
+                        varUserMail in InitiatorMail
+                    )
+                ),
+                AllRequestCountUser: CountRows(
+                    Filter(
+                        colPRForm,
+                        varUserMail in CurrentApprover
+                    )
+                ),
+                PendingRequestUserCount: CountRows(
+                    Filter(
+                        colPRForm,
+                        CurrentStatus = "1 Approval Responsible Cost Center" || CurrentStatus = "2 Approval Next Higher Superior" || CurrentStatus = "Check Respective Responsible CO" || CurrentStatus = "3 Approval Responsible BU Region-Responsible PC/Division-Responsible Function Global/Region" || CurrentStatus = "4 Approval (Description Extra Level Approval)" || CurrentStatus = "Pending with Requestor on Query" && varUserMail in CurrentApprover
+                    )
+                ),
+                RejectedRequestCount: CountRows(
+                    Filter(
+                        colPRForm,
+                        CurrentStatus = "Rejected"
+                    )
+                ),
+                RejectedRequestUserCount: CountRows(
+                    Filter(
+                        colPRForm,
+                        (CurrentStatus = "Rejected") && varUserMail in CurrentApprover
+                    )
+                ),
+                CancelledRequestCount: CountRows(
+                    Filter(
+                        colPRForm,
+                        CurrentStatus = "Cancelled"
+                    )
+                ),
+                CancelledRequestUserCount: CountRows(
+                    Filter(
+                        colPRForm,
+                        (CurrentStatus = "Cancelled") && varUserMail in CurrentApprover
+                    )
+                ),
+                CompletedRequestCount: CountRows(
+                    Filter(
+                        colPRForm,
+                        CurrentStatus = "Completed"
+                    )
+                ),
+                CompletedRequestUserCount: CountRows(
+                    Filter(
+                        colPRForm,
+                        (CurrentStatus = "Completed") && varUserMail in InitiatorMail
+                    )
+                ),
+                DelegationCount: CountRows(
+                    Filter(
+                        colDelegationList,
+                        ApproverEmail <> ""
+                    )
+                ),
+                SignContractCount: CountRows(
+                    Filter(
+                        colPRForm,
+                        CurrentStatus = "Sign Contract"
+                    )
+                )
+            }
+        );
+        //Based on admin access and user access getting the total count of all the status
+        If(
+            varCountRows >= 2000,
+            Set(
+                varTotalCount,
+                If(
+                    AdminAccess = true,
+                    DashboardCountsPowerappswithSPSearchFlow.Run("Admin"),
+                    DashboardCountsPowerappswithSPSearchFlow.Run(varUserMail)
+                )
+            ),
+            ClearCollect(
+                colGalleryNav,
+                {
+                    No: 1,
+                    Title: "All Requests",
+                    Count: If(
+                        AdminAccess,
+                        varCountRows,
+                        First(colDocumentCounts).NewRequestUserCount
+                    ),
+                    Navigate: "View All Requests",
+                    Image: 'Group 13074',
+                    Screen: Scr_AllRequests
+                },
+                {
+                    No: 2,
+                    Title: "New Request",
+                    Count: If(
+                        AdminAccess,
+                        First(colDocumentCounts).NewRequestCount,
+                        First(colDocumentCounts).NewRequestUserCount
+                    ),
+                    Navigate: "Create New Requests",
+                    Image: 'Group 13074 (1)',
+                    Screen: Scr_NewRequest
+                },
+                {
+                    No: 3,
+                    Title: "Pending Requests",
+                    Count: If(
+                        AdminAccess,
+                        First(colDocumentCounts).PendingRequestCount,
+                        First(colDocumentCounts).PendingRequestUserCount
+                    ),
+                    Navigate: "View Pending Requests",
+                    Image: 'Group 13074 (2)',
+                    Screen: Scr_PendingRequest
+                },
+                {
+                    No: 4,
+                    Title: "Rejected Requests",
+                    Count: If(
+                        AdminAccess,
+                        First(colDocumentCounts).RejectedRequestCount,
+                        First(colDocumentCounts).RejectedRequestUserCount
+                    ),
+                    Navigate: "View Rejected Requests",
+                    Image: 'Group 13074_1',
+                    Screen: Scr_RejectedRequest
+                },
+                {
+                    No: 5,
+                    Title: "Cancelled Requests",
+                    Count: If(
+                        AdminAccess,
+                        First(colDocumentCounts).CancelledRequestCount,
+                        First(colDocumentCounts).CancelledRequestUserCount
+                    ),
+                    Navigate: "View Cancelled Requests",
+                    Image: 'Group 13074 (4)',
+                    Screen: Scr_CancelledRequest
+                },
+                {
+                    No: 6,
+                    Title: "Completed Requests",
+                    Count: If(
+                        AdminAccess,
+                        First(colDocumentCounts).CompletedRequestCount,
+                        First(colDocumentCounts).CompletedRequestUserCount
+                    ),
+                    Navigate: "View Completed Requests",
+                    Image: 'Group 13074 (3)',
+                    Screen: Scr_CompletedRequest
+                },
+                {
+                    No: 7,
+                    Title: "Workload",
+                    Count: CountRows(
+                        Filter(
+                            colPRForm,
+                            InitiatorMail = varUserMail
+                        )
+                    ),
+                    Navigate: "View All Workload",
+                    Image: 'Group 13074 (2)',
+                    Screen: Scr_WorkLoad
+                },
+                {
+                    No: 8,
+                    Title: "Delegation",
+                    Count: First(colDocumentCounts).DelegationCount,
+                    Navigate: "View Delegations",
+                    Image: 'Group 13074 (1)_1',
+                    Screen: Scr_Delegation
+                },
+                {
+                    No: 9,
+                    Title: "Export",
+                    Count: Blank(),
+                    Navigate: "Export",
+                    Image: 'Excel Export',
+                    Screen: Scr_Export
+                },
+                {
+                    No: 10,
+                    Title: "Archive Configuration",
+                    Count: CountRows(
+                        Filter(
+                            colArchive,
+                            Title <> ""
+                        )
+                    ),
+                    Navigate: "Update Archive Configuration",
+                    Image: 'Archive Configuration',
+                    Screen: Scr_Archive
+                },
+                {
+                    No: 11,
+                    Title: "Archive Export",
+                    Count: Blank(),
+                    Navigate: "Export Archive Requests",
+                    Image: 'Archive Export_New',
+                    Screen: Scr_ArchiveExport
+                },
+                {
+                    No: 12,
+                    Title: "Archive Request",
+                    Count: Value(
+                        LookUp(
+                            ValidationErrorMessage,
+                            Key = "ArchivePRFormCount",
+                            Value
+                        )
+                    ),
+                    Navigate: "Archive Request",
+                    Image: 'Archive Request',
+                    Screen: Scr_ArchiveRequests
+                },
+                {
+                    No: 13,
+                    Title: "Contract Signed",
+                    Count: First(colDocumentCounts).SignContractCount,
+                    Navigate: "Contract Signed",
+                    Image: contract,
+                    Screen: Scr_ContractSigned
+                },
+                {
+                    No: 14,
+                    Title: "Completed Requests Details",
+                    Count: First(colDocumentCounts).CompletedRequestCount,
+                    Navigate: "View Completed Requests Details",
+                    Image: 'verification (1)',
+                    Screen: Scr_CompletedRequestDetails
+                }
+            )
+        );
+        //Dashboard that are only visible to the admin
+        If(
+            AdminAccess = false,
+            RemoveIf(
+                colGalleryNav,
+                //No:13 = "Contract Signed,No:14 = "Completed Requests Details", No:1 ="All Requests"
+                No = 13 || No = 14 || No = 1
+            )
+        );
+        //If the total records were more than 2000 powerautomate will be triggered
+        If(
+            (Len(varTotalCount.result) >= 2000),
+            ClearCollect(
+                colGalleryNav,
+                {
+                    No: 1,
+                    Title: "All Requests",
+                    Count: First(
+                        ForAll(
+                            Split(
+                                Substitute(
+                                    varTotalCount.result,
+                                    "[",
+                                    ""
+                                ),
+                                ","
+                            ),
+                            {Result: ThisRecord.Value}
+                        )
+                    ).Result + Last(
+                        FirstN(
+                            ForAll(
+                                Split(
+                                    Substitute(
+                                        varTotalCount.result,
+                                        "[",
+                                        ""
+                                    ),
+                                    ","
+                                ),
+                                {Result: ThisRecord.Value}
+                            ),
+                            2
+                        )
+                    ).Result + Last(
+                        FirstN(
+                            ForAll(
+                                Split(
+                                    Substitute(
+                                        varTotalCount.result,
+                                        "[",
+                                        ""
+                                    ),
+                                    ","
+                                ),
+                                {Result: ThisRecord.Value}
+                            ),
+                            3
+                        )
+                    ).Result + Last(
+                        FirstN(
+                            ForAll(
+                                Split(
+                                    Substitute(
+                                        varTotalCount.result,
+                                        "[",
+                                        ""
+                                    ),
+                                    ","
+                                ),
+                                {Result: ThisRecord.Value}
+                            ),
+                            4
+                        )
+                    ).Result + Last(
+                        FirstN(
+                            ForAll(
+                                Split(
+                                    Substitute(
+                                        varTotalCount.result,
+                                        "[",
+                                        ""
+                                    ),
+                                    ","
+                                ),
+                                {Result: ThisRecord.Value}
+                            ),
+                            5
+                        )
+                    ).Result + Last(
+                        FirstN(
+                            ForAll(
+                                Split(
+                                    Substitute(
+                                        varTotalCount.result,
+                                        "[",
+                                        ""
+                                    ),
+                                    ","
+                                ),
+                                {Result: ThisRecord.Value}
+                            ),
+                            6
+                        )
+                    ).Result + Last(
+                        FirstN(
+                            ForAll(
+                                Split(
+                                    Substitute(
+                                        varTotalCount.result,
+                                        "[",
+                                        ""
+                                    ),
+                                    ","
+                                ),
+                                {Result: ThisRecord.Value}
+                            ),
+                            7
+                        )
+                    ).Result + Last(
+                        FirstN(
+                            ForAll(
+                                Split(
+                                    Substitute(
+                                        varTotalCount.result,
+                                        "[",
+                                        ""
+                                    ),
+                                    ","
+                                ),
+                                {Result: ThisRecord.Value}
+                            ),
+                            8
+                        )
+                    ).Result + Last(
+                        FirstN(
+                            ForAll(
+                                Split(
+                                    Substitute(
+                                        varTotalCount.result,
+                                        "[",
+                                        ""
+                                    ),
+                                    ","
+                                ),
+                                {Result: ThisRecord.Value}
+                            ),
+                            9
+                        )
+                    ).Result + Last(
+                        FirstN(
+                            ForAll(
+                                Split(
+                                    Substitute(
+                                        varTotalCount.result,
+                                        "[",
+                                        ""
+                                    ),
+                                    ","
+                                ),
+                                {Result: ThisRecord.Value}
+                            ),
+                            10
+                        )
+                    ).Result + Last(
+                        ForAll(
+                            Split(
+                                Substitute(
+                                    varTotalCount.result,
+                                    "]",
+                                    ""
+                                ),
+                                ","
+                            ),
+                            {Result: ThisRecord.Value}
+                        )
+                    ).Result,
+                    Navigate: "View All Requests",
+                    Image: 'Group 13074',
+                    Screen: Scr_AllRequests
+                },
+                {
+                    No: 2,
+                    Title: "New Request",
+                    Count: CountRows(
+                        Filter(
+                            colPRForm,
+                            CurrentStatus = "1 Approval Responsible Cost Center" || CurrentStatus = "Draft"
+                        )
+                    ),
+                    Navigate: "Create New Requests",
+                    Image: 'Group 13074 (1)',
+                    Screen: Scr_NewRequest
+                },
+                {
+                    No: 3,
+                    Title: "Pending Requests",
+                    Count: First(
+                        ForAll(
+                            Split(
+                                Substitute(
+                                    varTotalCount.result,
+                                    "[",
+                                    ""
+                                ),
+                                ","
+                            ),
+                            {Result: ThisRecord.Value}
+                        )
+                    ).Result + Last(
+                        FirstN(
+                            ForAll(
+                                Split(
+                                    Substitute(
+                                        varTotalCount.result,
+                                        "[",
+                                        ""
+                                    ),
+                                    ","
+                                ),
+                                {Result: ThisRecord.Value}
+                            ),
+                            2
+                        )
+                    ).Result + Last(
+                        FirstN(
+                            ForAll(
+                                Split(
+                                    Substitute(
+                                        varTotalCount.result,
+                                        "[",
+                                        ""
+                                    ),
+                                    ","
+                                ),
+                                {Result: ThisRecord.Value}
+                            ),
+                            3
+                        )
+                    ).Result + Last(
+                        FirstN(
+                            ForAll(
+                                Split(
+                                    Substitute(
+                                        varTotalCount.result,
+                                        "[",
+                                        ""
+                                    ),
+                                    ","
+                                ),
+                                {Result: ThisRecord.Value}
+                            ),
+                            4
+                        )
+                    ).Result + Last(
+                        FirstN(
+                            ForAll(
+                                Split(
+                                    Substitute(
+                                        varTotalCount.result,
+                                        "[",
+                                        ""
+                                    ),
+                                    ","
+                                ),
+                                {Result: ThisRecord.Value}
+                            ),
+                            5
+                        )
+                    ).Result + Last(
+                        FirstN(
+                            ForAll(
+                                Split(
+                                    Substitute(
+                                        varTotalCount.result,
+                                        "[",
+                                        ""
+                                    ),
+                                    ","
+                                ),
+                                {Result: ThisRecord.Value}
+                            ),
+                            6
+                        )
+                    ).Result + Last(
+                        FirstN(
+                            ForAll(
+                                Split(
+                                    Substitute(
+                                        varTotalCount.result,
+                                        "[",
+                                        ""
+                                    ),
+                                    ","
+                                ),
+                                {Result: ThisRecord.Value}
+                            ),
+                            7
+                        )
+                    ).Result + Last(
+                        FirstN(
+                            ForAll(
+                                Split(
+                                    Substitute(
+                                        varTotalCount.result,
+                                        "[",
+                                        ""
+                                    ),
+                                    ","
+                                ),
+                                {Result: ThisRecord.Value}
+                            ),
+                            8
+                        )
+                    ).Result,
+                    Navigate: "View Pending Requests",
+                    Image: 'Group 13074 (2)',
+                    Screen: Scr_PendingRequest
+                },
+                {
+                    No: 4,
+                    Title: "Rejected Requests",
+                    Count: Value(
+                        Last(
+                            FirstN(
+                                ForAll(
+                                    Split(
+                                        Substitute(
+                                            varTotalCount.result,
+                                            "[",
+                                            ""
+                                        ),
+                                        ","
+                                    ),
+                                    {Result: ThisRecord.Value}
+                                ),
+                                9
+                            )
+                        ).Result
+                    ),
+                    Navigate: "View Rejected Requests",
+                    Image: 'Group 13074_1',
+                    Screen: Scr_RejectedRequest
+                },
+                {
+                    No: 5,
+                    Title: "Cancelled Requests",
+                    Count: Value(
+                        Last(
+                            ForAll(
+                                Split(
+                                    Substitute(
+                                        varTotalCount.result,
+                                        "]",
+                                        ""
+                                    ),
+                                    ","
+                                ),
+                                {Result: ThisRecord.Value}
+                            )
+                        ).Result
+                    ),
+                    Navigate: "View Cancelled Requests",
+                    Image: 'Group 13074 (4)',
+                    Screen: Scr_CancelledRequest
+                },
+                {
+                    No: 6,
+                    Title: "Completed Requests",
+                    Count: Value(
+                        Last(
+                            FirstN(
+                                ForAll(
+                                    Split(
+                                        Substitute(
+                                            varTotalCount.result,
+                                            "[",
+                                            ""
+                                        ),
+                                        ","
+                                    ),
+                                    {Result: ThisRecord.Value}
+                                ),
+                                10
+                            )
+                        ).Result
+                    ),
+                    Navigate: "View Completed Requests",
+                    Image: 'Group 13074 (3)',
+                    Screen: Scr_CompletedRequest
+                },
+                {
+                    No: 7,
+                    Title: "Workload",
+                    Count: CountRows(
+                        Filter(
+                            colPRForm,
+                            CurrentApprover = varUserMail
+                        )
+                    ),
+                    Navigate: "View All Workload",
+                    Image: 'Group 13074 (2)',
+                    Screen: Scr_WorkLoad
+                },
+                {
+                    No: 8,
+                    Title: "Delegation",
+                    Count: CountRows(
+                        Filter(
+                            colDelegationList,
+                            ApproverEmail <> ""
+                        )
+                    ),
+                    Navigate: "View Delegations",
+                    Image: 'Group 13074 (1)_1',
+                    Screen: Scr_Delegation
+                },
+                {
+                    No: 9,
+                    Title: "Export",
+                    Count: Blank(),
+                    Navigate: "Export",
+                    Image: 'Excel Export',
+                    Screen: Scr_Export
+                },
+                {
+                    No: 10,
+                    Title: "Archive Configuration",
+                    Count: CountRows(
+                        Filter(
+                            colArchive,
+                            Title <> ""
+                        )
+                    ),
+                    Navigate: "Update Archive Configuration",
+                    Image: 'Archive Configuration',
+                    Screen: Scr_Archive
+                },
+                {
+                    No: 11,
+                    Title: "Archive Export",
+                    Count: Blank(),
+                    Navigate: "Export Archive Requests",
+                    Image: 'Archive Export_New',
+                    Screen: Scr_ArchiveExport
+                },
+                {
+                    No: 12,
+                    Title: "Archive Request",
+                    Count: Value(
+                        LookUp(
+                            ValidationErrorMessage,
+                            Key = "ArchivePRFormCount",
+                            Value
+                        )
+                    ),
+                    Navigate: "Archive Request",
+                    Image: 'Archive Request',
+                    Screen: Scr_ArchiveRequests
+                },
+                {
+                    No: 13,
+                    Title: "Contract Signed",
+                    Count: Value(
+                        Last(
+                            FirstN(
+                                ForAll(
+                                    Split(
+                                        Substitute(
+                                            varTotalCount.result,
+                                            "[",
+                                            ""
+                                        ),
+                                        ","
+                                    ),
+                                    {Result: ThisRecord.Value}
+                                ),
+                                7
+                            )
+                        ).Result
+                    ),
+                    Navigate: "Contract Signed",
+                    Image: contract,
+                    Screen: Scr_ContractSigned
+                },
+                {
+                    No: 14,
+                    Title: "Completed Requests Details",
+                    Count: Value(
+                        Last(
+                            FirstN(
+                                ForAll(
+                                    Split(
+                                        Substitute(
+                                            varTotalCount.result,
+                                            "[",
+                                            ""
+                                        ),
+                                        ","
+                                    ),
+                                    {Result: ThisRecord.Value}
+                                ),
+                                10
+                            )
+                        ).Result
+                    ),
+                    Navigate: "View Completed Requests Details",
+                    Image: 'verification (1)',
+                    Screen: Scr_CompletedRequestDetails
+                }
+            );
+            //Dashboard that are visibile to Admin
+            If(
+                AdminAccess = false,
+                RemoveIf(
+                    colGalleryNav,
+                //No:13 = "Contract Signed,No:14 = "Completed Requests Details", No:1 ="All Requests"
+                    No = 13 || No = 14 || No = 1
+                )
+            )
+        );
+        //Getting ExportUser Values
+        ClearCollect(
+            collExportKeyUser,
+            Filter(
+                ExportUsers,
+                'ExportUser (ExportUser0)' = varUserMail
+            )
+        );
+            If(
+               CountRows(collExportKeyUser)>0,
+                Collect(
+                    colGalleryNav,
+                    {
+                        
+                        No:If(AdminAccess,15,12),                
+                        Title: "Key User Export",
+                        Count: Blank(),
+                        Navigate: "Click to Export >",
+                        Image: 'Archive Export'
+                    }
+                )
+            );
+        Set(
+            varLazyLoadCompleted,
+            false
+        );
+
+    Canvas1_4 As fluidGrid.fluidGridWithBlankCard:
+        BorderThickness: =0
+        Fill: =RGBA(235, 235, 235, 1)
+        Height: =Parent.Height - Self.Y
+        Width: =Parent.Width
+        X: =0.00
+        Y: |
+            =lblOverview_3.Y + lblOverview_3.Height+5
+        ZIndex: =1
+
+        DataCard1_4 As dataCard:
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderStyle: =BorderStyle.Solid
+            BorderThickness: =0
+            DisplayMode: =DisplayMode.Edit
+            Fill: =RGBA(241, 244, 249, 1)
+            Height: =Parent.Height - 100
+            Width: =Parent.Width
+            X: =0.00
+            Y: =0
+            ZIndex: =1
+
+            "galDashboard_3 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+                AccessibleLabel: ="Dashboard"
+                Fill: =RGBA(241, 244, 249, 1)
+                Height: =CountRows(colGalleryNav)/2*150
+                Items: =colGalleryNav
+                Layout: =Layout.Vertical
+                ShowScrollbar: =false
+                TabIndex: =0
+                TemplatePadding: =0
+                TemplateSize: =250
+                Width: =Parent.Width-Self.X*2
+                WrapCount: |-
+                    =//Wrap responsively
+                    Switch(App.ActiveScreen.Size,4,4,3,2,2,2,1,1)
+                X: =lblOverview_3.X
+                ZIndex: =2
+
+                btnRectangle_2 As button:
+                    BorderColor: =RGBA(197, 220, 230, 1)
+                    BorderThickness: =0.1
+                    Fill: =Color.White
+                    Height: =Parent.TemplateHeight-Self.Y*1
+                    HoverFill: =RGBA(255, 255, 255, 1)
+                    OnSelect: =Select(Parent)
+                    RadiusBottomLeft: =25
+                    RadiusBottomRight: =25
+                    RadiusTopLeft: =25
+                    RadiusTopRight: =25
+                    Text: =""
+                    Width: =Parent.TemplateWidth-Self.X*2
+                    X: =10
+                    Y: =20
+                    ZIndex: =1
+
+                lblReqCount_3 As label:
+                    Font: =Apptheme.FontFamily
+                    FontWeight: =FontWeight.Bold
+                    Height: =imgDashboard_3.Height/2
+                    OnSelect: =Select(Parent)
+                    PaddingLeft: =15
+                    PaddingRight: =50
+                    Size: =Apptheme.FontSubHeader
+                    Text: =ThisItem.Count
+                    Visible: =If(!varLazyLoadCompleted,true,false)
+                    Width: =btnRectangle_2.X+btnRectangle_2.Width-Self.X-10
+                    X: =imgDashboard_3.X+imgDashboard_3.Width
+                    Y: =lblRequests_3.Y+lblRequests_3.Height
+                    ZIndex: =2
+
+                lblRequests_3 As label:
+                    Font: =Apptheme.FontFamily
+                    FontWeight: =FontWeight.Semibold
+                    Height: =imgDashboard_3.Height/2
+                    OnSelect: =Select(Parent)
+                    PaddingLeft: =15
+                    PaddingRight: =15
+                    Size: =Apptheme.FontSize
+                    Text: =ThisItem.Title
+                    VerticalAlign: =VerticalAlign.Top
+                    Width: =btnRectangle_2.X+btnRectangle_2.Width-Self.X-10
+                    X: =imgDashboard_3.X+imgDashboard_3.Width
+                    Y: =imgDashboard_3.Y
+                    ZIndex: =3
+
+                recRequestBorder_3 As rectangle:
+                    BorderColor: =RGBA(0, 134, 208, 1)
+                    BorderThickness: =0.2
+                    Fill: =RGBA(197, 220, 230, 1)
+                    Height: =0.5
+                    OnSelect: =Select(Parent)
+                    Width: =btnRectangle_2.Width
+                    X: =btnRectangle_2.X
+                    Y: =btnView_3.Y-10
+                    ZIndex: =4
+
+                imgDashboard_3 As image:
+                    Height: =80
+                    Image: =ThisItem.Image
+                    OnSelect: =Select(Parent)
+                    Width: =80
+                    X: =btnRectangle_2.X+30
+                    Y: =(btnRectangle_2.Y+btnRectangle_2.Height)/2-Self.Height+20
+                    ZIndex: =5
+
+                btnView_3 As button:
+                    AutoDisableOnSelect: =false
+                    BorderStyle: =BorderStyle.None
+                    Color: =RGBA(0, 0, 0, 1)
+                    Fill: =RGBA(255, 255, 255, 1)
+                    Font: =Apptheme.FontFamily
+                    Height: =50
+                    HoverColor: =Self.Color
+                    HoverFill: =Self.Fill
+                    OnSelect: |-
+                        =If(
+                            ThisItem.No = If(AdminAccess,15,12), 
+                            UpdateContext({Loading: true});
+                            ClearCollect(
+                                ColKeyExport,
+                                Filter(
+                                    colPRForm,
+                                    Plant = LookUp(
+                                        ExportUsers,
+                                        'ExportUser (ExportUser0)' = varUserMail
+                                    ).Country && BUorPCorSC = LookUp(
+                                        ExportUsers,
+                                        'ExportUser (ExportUser0)' = varUserMail
+                                    ).'Business Unit'
+                                )
+                            );
+                            // Collect filtered data from 'colPRForm' into 'ColKeyExport' collection
+                            Clear(ColKeyExportSummary);
+                            ForAll(
+                                ColKeyExport,
+                                Collect(
+                                    ColKeyExportSummary,
+                                    {
+                                        RequestNumber: Coalesce(
+                                            RequestNumber,
+                                            "None"
+                                        ),
+                                        CurrentStatus: Coalesce(
+                                            CurrentStatus,
+                                            " None"
+                                        ),
+                                        Created: Coalesce(
+                                            Created,
+                                            Today()
+                                        ),
+                                        CreatedDate: Coalesce(
+                                            CreatedDate,
+                                            Today()
+                                        ),
+                                        fd_kw_CostcenterResponsible_1: Coalesce(
+                                            'Requestor is Cost Center Responsible',
+                                            " None"
+                                        ),
+                                        InitiatorWorkflowDate: Coalesce(
+                                            InitiatorWorkflowDate,
+                                            " None"
+                                        ),
+                                        fd_na_ResponsibleCostCenter: Coalesce(
+                                            '1� Approval Responsible Cost Center',
+                                            " None"
+                                        ),
+                                        Approver1WorkflowDate: Coalesce(
+                                            Approver1WorkflowDate,
+                                            " None"
+                                        ),
+                                        fd_na_ResponsibleHRPlant: Coalesce(
+                                            '2� Approval Next Higher Superior',
+                                            " None"
+                                        ),
+                                        Approver2WorkflowDate: Coalesce(
+                                            Approver2WorkflowDate,
+                                            " None"
+                                        ),
+                                        fd_kw_BusinessUnit: Coalesce(
+                                            BUorPCorSC,
+                                            "None"
+                                        ),
+                                        fd_na_ResponsibleCOPlant: Coalesce(
+                                            'Check Respective Responsible CO',
+                                            " None"
+                                        ),
+                                        CRRCWorkflowDate: Coalesce(
+                                            CRRCWorkflowDate,
+                                            " None"
+                                        ),
+                                        BudgetedOrNonBudgeted: Coalesce(
+                                            BudgetedOrNonBudgeted,
+                                            " None"
+                                        ),
+                                        fd_na_ResponsibleRegion: Coalesce(
+                                            '3� Approval Responsible BU Region  Responsible PCorDivision  Responsible Function GlobalorRegion',
+                                            " None"
+                                        ),
+                                        Approver3WorkflowDate: Coalesce(
+                                            Approver3WorkflowDate,
+                                            " None"
+                                        ),
+                                        fd_na_SpecialApproval: Coalesce(
+                                            '4� Approval Respective Member of Corporate Management Committee',
+                                            " None"
+                                        ),
+                                        Approver4WorkflowDate: Coalesce(
+                                            Approver4WorkflowDate,
+                                            " None"
+                                        ),
+                                        fd_na_SignContract: Coalesce(
+                                            'Sign Contract',
+                                            " None"
+                                        ),
+                                        SignContractWorkflowDate: Coalesce(
+                                            SignContractWorkflowDate,
+                                            " None"
+                                        ),
+                                        fd_LegalEntity: Coalesce(
+                                            'Legal Entity',
+                                            " None"
+                                        ),
+                                        fd_Plant: Coalesce(
+                                            Plant,
+                                            " None"
+                                        ),
+                                        fd_Plant_Number: Coalesce(
+                                            'Plant Number',
+                                            "0"
+                                        ),
+                                        fd_Country: Coalesce(
+                                            Country,
+                                            " None"
+                                        ),
+                                        fd_CountryISO: Coalesce(
+                                            'Country ISO',
+                                            " None"
+                                        ),
+                                        fd_kw_ManagementEntity: Coalesce(
+                                            'Management Entity',
+                                            " None"
+                                        ),
+                                        fd_Department: Coalesce(
+                                            Department,
+                                            " None"
+                                        ),
+                                        fd_DepartmentDetailed: Coalesce(
+                                            'Department detailed',
+                                            " None"
+                                        ),
+                                        fd_CostCenter: Coalesce(
+                                            'Cost Center',
+                                            " None"
+                                        ),
+                                        fd_FunctionTitle: Coalesce(
+                                            'Function or Job Title - Regarding requested position',
+                                            " None"
+                                        ),
+                                        fd_dt_Necessary: Coalesce(
+                                            'Position necessary as of',
+                                            Today()
+                                        ),
+                                        fd_kw_EmployeeType: Coalesce(
+                                            'Employee Position type',
+                                            " None"
+                                        ),
+                                        fd_kw_HayLevel: Coalesce(
+                                            'Mahle grading',
+                                            " None"
+                                        ),
+                                        fd_n_NoPositions: Coalesce(
+                                            'Number of equal positions to be filled',
+                                            0
+                                        ),
+                                        fd_kw_DurationContract: Coalesce(
+                                            'Duration of contract (fd_kw_DurationContract)',
+                                            " None"
+                                        ),
+                                        fd_dt_DurationUntil: Coalesce(
+                                            'Duration Until',
+                                            Today()
+                                        ),
+                                        fd_kw_Filled: Coalesce(
+                                            'Position can be Filled',
+                                            " None"
+                                        ),
+                                        MainCommentary: Coalesce(
+                                            MainCommentary,
+                                            " None"
+                                        ),
+                                        fd_PositionProfile: Coalesce(
+                                            'Position Profile',
+                                            " None"
+                                        ),
+                                        FullTime: Coalesce(
+                                            FullTime,
+                                            " None"
+                                        ),
+                                        fd_kw_BudgetedPosition: Coalesce(
+                                            'Position budgeted on Cost Center0000052400',
+                                            " None"
+                                        ),
+                                        fd_kw_BudgetedYear: Coalesce(
+                                            'Concerning Eco Plan For Calendar Year',
+                                            " None"
+                                        ),
+                                        fd_kw_Replacement: Coalesce(
+                                            'Replacement for existing position',
+                                            " None"
+                                        ),
+                                        Approver1WorkflowComment: Coalesce(
+                                            Approver1WorkflowComment,
+                                            " None"
+                                        ),
+                                        fd_Headcount: Coalesce(
+                                            'Expected headcount of cost center 0000052400per31 12without the requested position  including the sign contracts  approved requisitioners and known exits',
+                                            " None"
+                                        ),
+                                        fd_thereofInactive: Coalesce(
+                                            'Thereof inactive (fd_thereofInactive)',
+                                            " None"
+                                        ),
+                                        fd_currentHeadcount: Coalesce(
+                                            'Current headcount of costcenter 0000052400 end of last month  active and inactive',
+                                            " None"
+                                        ),
+                                        fd_RequestedPosition: Coalesce(
+                                            'Thereof inactive (fd_RequestedPosition)',
+                                            " None"
+                                        ),
+                                        fd_na_Requestor: Coalesce(
+                                            'Name Requisitioner Req',
+                                            " None"
+                                        ),
+                                        WorkFlowHistory: Coalesce(
+                                            WorkFlowHistory,
+                                            " None"
+                                        ),
+                                        fd_na_AddInfoRespHRCountry: Coalesce(
+                                            'Responsible HR Country',
+                                            " None"
+                                        ),
+                                        fd_na_AddInfoRespHRRegion: Coalesce(
+                                            'Responsible HR Region',
+                                            " None"
+                                        ),
+                                        fd_na_AddInfoRespHRPlant: Coalesce(
+                                            'Responsible HR Plant',
+                                            " None"
+                                        ),
+                                        fd_na_AddInfoManagement: Coalesce(
+                                            'Respective Member of Corporate Management Committee',
+                                            " None"
+                                        ),
+                                        Modified: Coalesce(
+                                            Modified,
+                                            Today()
+                                        ),
+                                        InitiatorName: Coalesce(
+                                            InitiatorName,
+                                            " None"
+                                        ),
+                                        fd_kw_SuitableAssignment: Coalesce(
+                                            'Suitable for international assignment',
+                                            " None"
+                                        ),
+                                        fd_na_AddInfoRespPlant: Coalesce(
+                                            'Responsible Plantor Responsible Departmentor Responsible Function',
+                                            " None"
+                                        ),
+                                        RespCostCenterDirectReporting: Coalesce(
+                                            RespCostCenterDirectReporting,
+                                            " "
+                                        ),
+                                        Requisitionerhasanattachment: Coalesce('Requisitioner has an attachment'," "),
+                                        fd_kw_PositionType: Coalesce(
+                                            'Position Type',
+                                            " "
+                                        )
+                                    }
+                                )
+                            );
+                            //KeyExport powerautomate trigger
+                            Set(
+                                VarLink,
+                                KeyExport_V1.Run(
+                                    JSON(
+                                        ColKeyExportSummary,
+                                        JSONFormat.IncludeBinaryData
+                                    ),
+                                    varUserMail
+                                ).filelink
+                            );
+                        Download("https://maargasystems007.sharepoint.com/sites/MahleGPR_Dev/_layouts/15/download.aspx?sourceurl=https://maargasystems007.sharepoint.com/sites/MahleGPR_Dev" & VarLink);
+                            UpdateContext({Loading: false});
+                            ,
+                            Navigate(ThisItem.Screen);
+                            
+                        )
+                    PressedColor: =Self.Color
+                    PressedFill: =Self.Fill
+                    Size: =Apptheme.FontSize
+                    Text: =ThisItem.Navigate
+                    Width: =btnRectangle_2.Width-40
+                    X: =btnRectangle_2.X+10
+                    Y: =btnRectangle_2.Y+btnRectangle_2.Height-Self.Height-10
+                    ZIndex: =7
+
+                Image1_6 As image:
+                    Height: =lblReqCount_3.Height
+                    Image: ='icons8-dots-loading'
+                    OnSelect: =Select(Parent)
+                    Visible: =If(varLazyLoadCompleted,true,false)
+                    X: =lblReqCount_3.X
+                    Y: =lblReqCount_3.Y
+                    ZIndex: =8
+
+    lblOverview_3 As label:
+        Fill: =RGBA(255, 255, 255, 1)
+        Font: =Apptheme.FontFamily
+        FontWeight: =FontWeight.Bold
+        PaddingLeft: =10
+        Size: =Apptheme.FontHeaderSize
+        Text: ="Overview"
+        X: |-
+            =//Adjust X Position responsively
+            Switch(App.ActiveScreen.Size,4,50,3,30,icnHamburgerMenu_23.X+icnHamburgerMenu_23.Width+10)
+        Y: |-
+            =//Adjust Y Position responsively
+            Switch(App.ActiveScreen.Size,4,lblTitle_7.Y+60,3,lblTitle_7.Y+60,lblTitle_7.Y+60)
+        ZIndex: =2
+
+    HeaderNavigation_18 As HeaderNavigation:
+        Height: |
+            =//HeaderNavigation.HeaderHeight
+            If(HeaderNavigation_18.AdminVisible,480,40)
+        Visible: |-
+            =
+            //App.ActiveScreen.Size>2
+        ZIndex: =3
+
+    LeftNavigation_23 As LeftNavigation:
+        Height: |-
+            =//App.Height
+            Max(App.Height,App.DesignHeight)
+        Visible: =App.ActiveScreen.Size<=2 && varShowNav
+        ZIndex: =4
+
+    icnHamburgerMenu_23 As icon.Hamburger:
+        AccessibleLabel: ="Menu"
+        Height: =30
+        Icon: |-
+            =// Conditionally selects the icon to display
+            If(varShowNav,Icon.Cancel,Icon.Hamburger)
+        OnSelect: |-
+            =UpdateContext({varShowNav:!varShowNav})
+        TabIndex: =0
+        Visible: =App.ActiveScreen.Size<=2
+        Width: =30
+        X: =10
+        Y: |-
+            =//Adjust Y position responsively
+            Switch(App.ActiveScreen.Size,4,HeaderNavigation_18.Y,3,30,20)
+        ZIndex: =5
+
+    lblTitle_7 As label:
+        Align: =Align.Center
+        Color: =RGBA(30, 42, 99, 1)
+        Fill: =RGBA(102, 182, 227, 1)
+        Font: =Apptheme.FontFamily
+        FontWeight: =FontWeight.Semibold
+        Height: |-
+            =//Adjust height responsively
+            Switch(App.ActiveScreen.Size,4,40,3,30,50)
+        Size: =Switch(App.ActiveScreen.Size,4,Apptheme.FontHeaderSize,3,Apptheme.FontHeaderSize,2,12)
+        Text: ="MAHLE - GPR - Global Personnel Requisition"
+        Width: =Parent.Width-(imgLogo_6.Width+imgProfile_6.Width+25)
+        X: =imgLogo_6.X+imgLogo_6.Width+5
+        ZIndex: =9
+
+    Group1_5 As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =9
+
+        rec_BGPopup_35 As rectangle:
+            Fill: =RGBA(0, 0, 0, 0.2)
+            Height: =Parent.Height
+            Visible: =Loading
+            Width: =Parent.Width
+            ZIndex: =7
+
+        Image1_7 As image:
+            Image: =slds_spinner_brand
+            Visible: =Loading
+            X: =Parent.Width/2
+            Y: =Parent.Height/2
+            ZIndex: =8
+
+    imgProfile_6 As image:
+        Fill: =RGBA(102, 182, 227, 1)
+        Height: |-
+            =//Adjust height responsively
+            Switch(App.ActiveScreen.Size,4,40,3,30,50)
+        Image: |
+            =//Display user image
+            If(IsBlankOrError(User().Image),'user-male-circle--v1',User().Image)
+        PaddingBottom: =5
+        PaddingTop: =5
+        Tooltip: =User().FullName
+        Width: =50
+        X: =lblTitle_7.X+lblTitle_7.Width
+        ZIndex: =10
+
+    imgLogo_6 As image:
+        BorderColor: =RGBA(102, 182, 227, 1)
+        BorderStyle: =BorderStyle.None
+        BorderThickness: =0.2
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: |-
+            =//Adjust Height responsively
+            Switch(App.ActiveScreen.Size,4,40,3,30,50)
+        Image: =mahle_logo_2020
+        Width: =105
+        X: =20
+        ZIndex: =11
+
+    recLogo_13 As rectangle:
+        AccessibleLabel: ="Navigation"
+        BorderStyle: =BorderStyle.None
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(102, 182, 227, 1)
+        Height: =2
+        OnSelect: =
+        TabIndex: =0
+        Width: =imgLogo_6.Width+25
+        Y: =imgLogo_6.Y+imgLogo_6.Height-2
+        ZIndex: =12
+
+    recLogo_11 As rectangle:
+        AccessibleLabel: ="Navigation"
+        BorderStyle: =BorderStyle.None
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(102, 182, 227, 1)
+        Height: =2
+        OnSelect: =
+        TabIndex: =0
+        Width: =imgLogo_6.Width+25
+        ZIndex: =13
+
+    recLogo_12 As rectangle:
+        AccessibleLabel: ="Navigation"
+        BorderStyle: =BorderStyle.None
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(102, 182, 227, 1)
+        Height: =imgLogo_6.Height
+        OnSelect: =
+        TabIndex: =0
+        Width: =imgLogo_6.X-7
+        ZIndex: =14
+

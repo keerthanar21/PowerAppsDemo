@@ -1,0 +1,639 @@
+"Scr_CompletedRequest As screen.'phoneLayout_FluidGridWithHeaderPageLayout_ver3.0'":
+    BackgroundImage: =
+    Fill: =RGBA(255, 255, 255, 1)
+    ImagePosition: =ImagePosition.Fill
+    OnVisible: |
+        =Set(
+            varReset,
+            false
+        );
+        Set(
+            varReset,
+            true
+        );
+
+    Canvas2_5 As fluidGrid.fluidGridWithBlankCard:
+        BorderThickness: =0
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: |-
+            =//Parent.Height - Self.Y
+            Rectangle1_9.Y-Rectangle1_9.Height-Self.Y
+        Width: =Parent.Width
+        X: =0.00
+        Y: |-
+            =//HeaderNavigation_2.Y + HeaderNavigation_2.Height
+            //If(App.ActiveScreen.Size<=2,0,HeaderNavigation_2.Y + HeaderNavigation_2.Height)
+            txtSearch_6.Y+txtSearch_6.Height+10
+        ZIndex: =1
+
+        DataCard2_5 As dataCard:
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderStyle: =BorderStyle.Solid
+            BorderThickness: =0
+            DisplayMode: =DisplayMode.Edit
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =Parent.Height - 100
+            Width: =Parent.Width
+            X: =0.00
+            Y: =0
+            ZIndex: =1
+
+            Container1_6 As groupContainer.horizontalAutoLayoutContainer:
+                Height: =Container2_6.Height
+                LayoutMode: =LayoutMode.Auto
+                LayoutOverflowX: =LayoutOverflow.Scroll
+                PaddingLeft: =10
+                Width: |
+                    =//DataCard2.Width-2*Self.X
+                    Parent.Width-2.3*Self.X
+                X: =lblCompleted.X
+                Y: |-
+                    =//txtSearch.Y+70
+                    0
+                ZIndex: =17
+
+                Container2_6 As groupContainer.manualLayoutContainer:
+                    AlignInContainer: =AlignInContainer.SetByContainer
+                    FillPortions: =0
+                    Height: =galCompleted.Height+galCompleted.Y
+                    LayoutMinHeight: =
+                    LayoutMinWidth: =250
+                    PaddingLeft: =10
+                    Width: |-
+                        =galCompleted.Width
+                        //Parent.Width
+                    X: =Container1_6.X
+                    Y: =Container1_6.Y
+                    ZIndex: =1
+
+                    "galCompleted As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+                        AccessibleLabel: ="Workload Gallery"
+                        Fill: =RGBA(255, 255, 255, 1)
+                        Height: |-
+                            =//(15*Self.TemplateHeight)+100
+                            galCompleted.AllItemsCount*Self.TemplateHeight
+                        Items: |
+                            =SortByColumns(
+                                Filter(
+                                    PRForm,
+                                    CreatedDate = Text(datCompleted.SelectedDate,"mm/dd/yyyy") || IsBlank(datCompleted.SelectedDate),
+                                    CurrentStatus = "Completed",
+                                    (StartsWith(
+                                        'Requestor is Cost Center Responsible',
+                                        txtSearch_6.Text
+                                    ) || IsBlank(Trim(txtSearch_6))) || (StartsWith(
+                                        RequestNumber,
+                                        txtSearch_6.Text
+                                    ) || IsBlank(Trim(txtSearch_6))) || StartsWith(
+                                        'Function or Job Title - Regarding requested position',
+                                        txtSearch_6.Text
+                                    ) || IsBlank(Trim(txtSearch_6)) 
+                                ), 
+                                "Modified",
+                                SortOrder.Descending
+                            )
+                        Layout: =Layout.Vertical
+                        TabIndex: =0
+                        TemplatePadding: =0
+                        TemplateSize: =If(App.ActiveScreen.Size<=2,30,35)+10
+                        Width: =lblContractSigned_5.X+lblContractSigned_5.Width
+                        Y: =lblNo_5.Y+lblNo_5.Height
+                        ZIndex: =1
+
+                        lblNoVal_5 As label:
+                            Color: =RGBA(64, 64, 64, 1)
+                            Font: =Apptheme.FontFamily
+                            FontWeight: =FontWeight.Normal
+                            Height: =45
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =10
+                            PaddingRight: =10
+                            PaddingTop: =10
+                            Size: =Apptheme.FontSize
+                            Text: =ThisItem.RequestNumber
+                            VerticalAlign: =VerticalAlign.Top
+                            Width: =lblNo_5.Width
+                            X: =lblNo_5.X+5
+                            ZIndex: =1
+
+                        lblRequesterVal_5 As label:
+                            Color: =RGBA(64, 64, 64, 1)
+                            Font: =Apptheme.FontFamily
+                            FontWeight: =FontWeight.Normal
+                            Height: =45
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =10
+                            PaddingRight: =10
+                            PaddingTop: =10
+                            Size: =Apptheme.FontSize
+                            Text: =ThisItem.'Requestor is Cost Center Responsible'
+                            VerticalAlign: =VerticalAlign.Top
+                            Width: =lblRequester_5.Width
+                            X: =lblNoVal_5.X+lblNoVal_5.Width
+                            Y: =lblNoVal_5.Y
+                            ZIndex: =2
+
+                        lblJobTitleVal_5 As label:
+                            Color: =RGBA(64, 64, 64, 1)
+                            Font: =Apptheme.FontFamily
+                            FontWeight: =FontWeight.Normal
+                            Height: =45
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =10
+                            PaddingRight: =10
+                            PaddingTop: =10
+                            Size: =Apptheme.FontSize
+                            Text: =ThisItem.'Function or Job Title - Regarding requested position'
+                            VerticalAlign: =VerticalAlign.Top
+                            Width: =lblJobTitle_5.Width
+                            X: =lblRequesterVal_5.X+lblRequesterVal_5.Width
+                            Y: =lblNoVal_5.Y
+                            ZIndex: =3
+
+                        lblRequestedatVal_5 As label:
+                            Color: =RGBA(64, 64, 64, 1)
+                            Font: =Apptheme.FontFamily
+                            FontWeight: =FontWeight.Normal
+                            Height: =45
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =10
+                            PaddingRight: =10
+                            PaddingTop: =10
+                            Size: =Apptheme.FontSize
+                            Text: |-
+                                =//Text(DateTimeValue(ThisItem.CreatedDate,"fr"),"mm/dd/yyyy")
+                                Text(ThisItem.CreatedDate,"mm/dd/yyyy")
+                            VerticalAlign: =VerticalAlign.Top
+                            Width: =lblRequestedat_5.Width
+                            X: =lblJobTitleVal_5.X+lblJobTitleVal_5.Width
+                            Y: =lblNoVal_5.Y
+                            ZIndex: =4
+
+                        imgRequsitioner_5 As image:
+                            Height: =45
+                            Image: =Switch(ThisItem.InitiatorWorkflowActivity,"Request for Approval",'Vector 16',"Draft",'Group 13073')
+                            ImagePosition: =ImagePosition.Center
+                            OnSelect: =Select(Parent)
+                            Width: =lblCompleted_5.Width
+                            X: =lblRequestedatVal_5.X+lblRequestedatVal_5.Width
+                            ZIndex: =5
+
+                        imgApproval1RCC_5 As image:
+                            Height: =45
+                            Image: =Switch(ThisItem.Approver1WorkflowActivity,Blank(),'Group 13073',"Approved", 'Vector 16',"Rejected",ThumbsdownUpdate_1,"Skipped",Forwardresized)
+                            ImagePosition: =ImagePosition.Center
+                            OnSelect: =Select(Parent)
+                            Width: =lblApproval1RCC_5.Width
+                            X: =imgRequsitioner_5.X+imgRequsitioner_5.Width
+                            ZIndex: =6
+
+                        imgApproval2NHS_5 As image:
+                            Height: =45
+                            Image: =Switch(ThisItem.Approver2WorkflowActivity,Blank(),'Group 13073',"Approved", 'Vector 16',"Rejected",ThumbsdownUpdate_1)
+                            ImagePosition: =ImagePosition.Center
+                            OnSelect: =Select(Parent)
+                            Width: =lblApproval2NHS_5.Width
+                            X: =imgApproval1RCC_5.X+imgApproval1RCC_5.Width
+                            ZIndex: =7
+
+                        imgCRRC_5 As image:
+                            Height: =45
+                            Image: =Switch(ThisItem.CRRCWorkflowActivity,Blank(),'Group 13073',"Approved", 'Vector 16',"Rejected",ThumbsdownUpdate_1)
+                            ImagePosition: =ImagePosition.Center
+                            OnSelect: =Select(Parent)
+                            Width: =lblCRRC_5.Width
+                            X: =imgApproval2NHS_5.X+imgApproval2NHS_5.Width
+                            ZIndex: =8
+
+                        imgApproval3BU_4 As image:
+                            Height: =45
+                            Image: =Switch(ThisItem.Approver3WorkflowActivity,Blank(),'Group 13073',"Approved", 'Vector 16',"Rejected",ThumbsdownUpdate_1,"N/A",A)
+                            ImagePosition: =ImagePosition.Center
+                            OnSelect: =Select(Parent)
+                            Width: =lblApproval3BU_5.Width
+                            X: =imgCRRC_5.X+imgCRRC_5.Width
+                            ZIndex: =9
+
+                        imgApproval4DEL_5 As image:
+                            Height: =45
+                            Image: =Switch(ThisItem.Approver4WorkflowActivity,Blank(),'Group 13073',"Approved", 'Vector 16',"Rejected",ThumbsdownUpdate_1,"N/A",A)
+                            ImagePosition: =ImagePosition.Center
+                            OnSelect: =Select(Parent)
+                            Width: =lblApproval4DEL_5.Width
+                            X: =imgApproval3BU_4.X+imgApproval3BU_4.Width
+                            ZIndex: =10
+
+                        imgRequestCompleted_5 As image:
+                            Height: =45
+                            Image: |-
+                                =If((ThisItem.Approver3WorkflowActivity = "N/A" && ThisItem.Approver4WorkflowActivity = "N/A" && ThisItem.CRRCWorkflowActivity ="Approved") || (ThisItem.Approver4WorkflowActivity = "Approved") ||((ThisItem.Approver3WorkflowActivity ="N/A" || ThisItem.Approver4WorkflowActivity = "N/A")&& (ThisItem.Approver3WorkflowActivity ="Approved" || ThisItem.Approver4WorkflowActivity = "Approved" )),'Vector 16','Group 13073')
+                                //Switch(ThisItem.SignContractWorkflowActivity,Blank(),'Group 13073',"Approved", 'Vector 16',"Rejected",ThumbsdownUpdate_1)
+                            ImagePosition: =ImagePosition.Center
+                            OnSelect: =Select(Parent)
+                            Width: =lblRequestCompleted_5.Width
+                            X: =imgApproval4DEL_5.X+imgApproval4DEL_5.Width
+                            ZIndex: =11
+
+                        imgContractSigned_5 As image:
+                            Height: =45
+                            Image: =Switch(ThisItem.SignContractWorkflowActivity,Blank(),'Group 13073',"Approved", 'Vector 16',"Rejected",ThumbsdownUpdate_1)
+                            ImagePosition: =ImagePosition.Center
+                            OnSelect: =Select(Parent)
+                            Width: =lblContractSigned_5.Width
+                            X: =imgRequestCompleted_5.X+imgRequestCompleted_5.Width
+                            ZIndex: =12
+
+                        btnNavigate_5 As button:
+                            Color: =
+                            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                            Fill: =RGBA(0, 0, 0, 0)
+                            HoverFill: =//ColorFade(RGBA(56, 96, 178, 1), -20%)
+                            OnSelect: |-
+                                =UpdateContext({Loading: true});
+                                If(
+                                    ThisItem.CurrentStatus in [
+                                        "Draft",
+                                        "Pending with Requestor on Query"
+                                    ] && ThisItem.InitiatorMail = varUserMail,
+                                    Set(
+                                        ButtonVisible,
+                                        "Requestor"
+                                    ),
+                                    If(
+                                        varUserMail in ThisItem.CurrentApprover || varUserMail in CollDelegation.SubstituteApprover,
+                                        Set(
+                                            ButtonVisible,
+                                            "Approver"
+                                        ),
+                                        Set(
+                                            ButtonVisible,
+                                            "Viewer"
+                                        )
+                                    )
+                                );
+                                Set(
+                                    ViewRecord,
+                                    ThisItem
+                                );
+                                UpdateContext({Loading: false});
+                                Navigate(Scr_EditRequest);
+                            Text: =""
+                            Width: =Parent.Width
+                            X: =galWorkload.X
+                            Y: =5
+                            ZIndex: =13
+
+                    lblNo_5 As label:
+                        BorderStyle: =BorderStyle.None
+                        Fill: =RGBA(245, 248, 251, 1)
+                        Font: =Apptheme.FontFamily
+                        Height: =150
+                        Size: =Apptheme.FontSize
+                        Text: ="No."
+                        Width: =170
+                        Y: =Container2_6.Y
+                        ZIndex: =2
+
+                    lblRequester_5 As label:
+                        BorderStyle: =BorderStyle.None
+                        Fill: =RGBA(245, 248, 251, 1)
+                        Font: =Apptheme.FontFamily
+                        Height: =lblNo_5.Height
+                        Size: =Apptheme.FontSize
+                        Text: ="Name Requisitioner (Req.)"
+                        Width: =lblNo_5.Width-20
+                        X: =lblNo_5.X+lblNo_5.Width
+                        Y: =Container2_6.Y
+                        ZIndex: =3
+
+                    lblJobTitle_5 As label:
+                        BorderStyle: =BorderStyle.None
+                        Fill: =RGBA(245, 248, 251, 1)
+                        Font: =Apptheme.FontFamily
+                        Height: =lblNo_5.Height
+                        Size: =Apptheme.FontSize
+                        Text: |-
+                            ="Function/ 
+                            Job Title"
+                        Width: =lblNo_5.Width-50
+                        X: =lblRequester_5.X+lblRequester_5.Width
+                        Y: =lblRequester_5.Y
+                        ZIndex: =4
+
+                    lblRequestedat_5 As label:
+                        BorderStyle: =BorderStyle.None
+                        Fill: =RGBA(245, 248, 251, 1)
+                        Font: =Apptheme.FontFamily
+                        Height: =lblNo_5.Height
+                        Size: =Apptheme.FontSize
+                        Text: ="Requested On (mm/dd/yyyy)"
+                        Width: =lblNo_5.Width-50
+                        X: =lblJobTitle_5.X+lblJobTitle_5.Width
+                        Y: =Container2_6.Y
+                        ZIndex: =5
+
+                    lblCompleted_5 As label:
+                        Align: =Align.Center
+                        BorderStyle: =BorderStyle.None
+                        Fill: =RGBA(245, 248, 251, 1)
+                        Font: =Apptheme.FontFamily
+                        Height: =lblNo_5.Height
+                        Size: =Apptheme.FontSize
+                        Text: ="Req"
+                        Width: =lblNo_5.Width-100
+                        X: =lblRequestedat_5.X+lblRequestedat_5.Width
+                        Y: =Container2_6.Y
+                        ZIndex: =6
+
+                    lblApproval1RCC_5 As label:
+                        Align: =Align.Center
+                        BorderStyle: =BorderStyle.None
+                        Fill: =RGBA(245, 248, 251, 1)
+                        Font: =Apptheme.FontFamily
+                        Height: =lblNo_5.Height
+                        Size: =Apptheme.FontSize
+                        Text: ="1° Approval Responsible Cost Center"
+                        Width: =lblNo_5.Width-100
+                        X: =lblCompleted_5.X+lblCompleted_5.Width
+                        Y: =Container2_6.Y
+                        ZIndex: =7
+
+                    lblApproval2NHS_5 As label:
+                        Align: =Align.Center
+                        BorderStyle: =BorderStyle.None
+                        Fill: =RGBA(245, 248, 251, 1)
+                        Font: =Apptheme.FontFamily
+                        Height: =lblNo_5.Height
+                        Size: =Apptheme.FontSize
+                        Text: ="2° Approval Next Higher Superior"
+                        Width: =lblNo_5.Width-100
+                        X: =lblApproval1RCC_5.X+lblApproval1RCC_5.Width
+                        Y: =Container2_6.Y
+                        ZIndex: =8
+
+                    lblApproval3BU_5 As label:
+                        Align: =Align.Center
+                        BorderStyle: =BorderStyle.None
+                        Fill: =RGBA(245, 248, 251, 1)
+                        Font: =Apptheme.FontFamily
+                        Height: =lblNo_5.Height
+                        Size: =Apptheme.FontSize
+                        Text: |-
+                            ="3° Approval Responsible BU Region,
+                            Responsible PC/Division,
+                            Responsible Function Global/Region"
+                        Width: =lblNo_5.Width-50
+                        X: =lblCRRC_5.X+lblCRRC_5.Width
+                        Y: =Container2_6.Y
+                        ZIndex: =9
+
+                    lblApproval4DEL_5 As label:
+                        Align: =Align.Center
+                        BorderStyle: =BorderStyle.None
+                        Fill: =RGBA(245, 248, 251, 1)
+                        Font: =Apptheme.FontFamily
+                        Height: =lblNo_5.Height
+                        Size: =Apptheme.FontSize
+                        Text: ="4° Approval (Description Extra Level Approval)"
+                        Width: =lblNo_5.Width-80
+                        X: =lblApproval3BU_5.X+lblApproval3BU_5.Width
+                        Y: =Container2_6.Y
+                        ZIndex: =10
+
+                    lblCRRC_5 As label:
+                        Align: =Align.Center
+                        BorderStyle: =BorderStyle.None
+                        Fill: =RGBA(245, 248, 251, 1)
+                        Font: =Apptheme.FontFamily
+                        Height: =lblNo_5.Height
+                        Size: =Apptheme.FontSize
+                        Text: ="Check Respective Responsible CO"
+                        Width: =lblNo_5.Width-80
+                        X: =lblApproval2NHS_5.X+lblApproval2NHS_5.Width
+                        Y: =Container2_6.Y
+                        ZIndex: =11
+
+                    lblContractSigned_5 As label:
+                        Align: =Align.Center
+                        BorderStyle: =BorderStyle.None
+                        Fill: =RGBA(245, 248, 251, 1)
+                        Font: =Apptheme.FontFamily
+                        Height: =lblNo_5.Height
+                        Size: =Apptheme.FontSize
+                        Text: ="Contract Signed"
+                        Width: =lblNo_5.Width-100
+                        X: =lblRequestCompleted_5.X+lblRequestCompleted_5.Width
+                        Y: =Container2_6.Y
+                        ZIndex: =12
+
+                    lblRequestCompleted_5 As label:
+                        Align: =Align.Center
+                        BorderStyle: =BorderStyle.None
+                        Fill: =RGBA(245, 248, 251, 1)
+                        Font: =Apptheme.FontFamily
+                        Height: =lblNo_5.Height
+                        Size: =Apptheme.FontSize
+                        Text: ="Request Completed"
+                        Width: =lblNo_5.Width-80
+                        X: =lblApproval4DEL_5.X+lblApproval4DEL_5.Width
+                        Y: =Container2_6.Y
+                        ZIndex: =13
+
+    Rectangle1_9 As rectangle:
+        Fill: =RGBA(236, 225, 245, 1)
+        Height: =60
+        Width: =Container2_6.Width-10
+        X: |-
+            =//lblMyWorkload.X
+            Switch(App.ActiveScreen.Size,4,60,3,30,20)
+        Y: |-
+            =Parent.Height-Self.Height-5
+            //Switch(App.ActiveScreen.Size,4,60,3,30,20)
+        ZIndex: =2
+
+    btnPrint_9 As button:
+        Color: =RGBA(91, 155, 213, 1)
+        Fill: =RGBA(255, 255, 255, 1)
+        Font: =Apptheme.FontFamily
+        Height: =30
+        HoverFill: =RGBA(102, 182, 227, 1)
+        OnSelect: =Print()
+        PaddingLeft: =20
+        Size: =Apptheme.FontSize
+        Text: ="Print"
+        Width: =130
+        X: |-
+            =Rectangle1_9.X+Self.Width-60
+            //lblReferSite.X+Self.Width+20
+            //lblReferSite_9.X+lblReferSite_9.Width
+        Y: =Rectangle1_9.Y+(Rectangle1_9.Height-Self.Height)/2
+        ZIndex: =3
+
+    icnPrint_9 As icon.Print:
+        Color: =RGBA(91, 155, 213, 1)
+        Height: =btnPrint_9.Height-15
+        Icon: =Icon.Print
+        X: =btnPrint_9.X
+        Y: =btnPrint_9.Y+(btnPrint_9.Height-Self.Height)/2
+        ZIndex: =4
+
+    txtSearch_6 As text:
+        AccessibleLabel: ="SearchBox"
+        Align: =Align.Justify
+        BorderColor: =RGBA(237, 237, 237, 1)
+        BorderThickness: =1
+        Default: =""
+        DisabledBorderColor: =RGBA(241, 244, 249, 1)
+        DisabledColor: =RGBA(0, 0, 0, 1)
+        Font: =Apptheme.FontFamily
+        Height: =30
+        HintText: ="Search Any"
+        HoverBorderColor: =RGBA(215, 223, 240, 1)
+        HoverFill: =RGBA(0, 0, 0, 0)
+        Italic: =true
+        PaddingLeft: =5
+        PressedColor: =RGBA(0, 0, 0, 1)
+        Size: =Apptheme.FontSearch
+        Width: |
+            =//Parent.Width*0.16
+            //Switch(App.ActiveScreen.Size,4,250,3,100,50,2,lblPending.Width+Parent.Width/2,1,lblPending.Width+Parent.Width/2)
+            If(App.ActiveScreen.Size>=4,Container1_6.Width/2-50,Container1_6.Width)
+        X: |-
+            =If(App.ActiveScreen.Size>=4,datCompleted.X+datCompleted.Width+10,datCompleted.X)
+            //Switch(App.ActiveScreen.Size,4,50,3,30,20)
+        Y: |-
+            =//lblMyWorkload.Y
+            //If(App.ActiveScreen.Size=1,(lblMyWorkload.Y+lblMyWorkload.Height),lblMyWorkload.Y)
+            //If(App.ActiveScreen.Size=1,lblPending.Y+lblPending.Height+10,lblPending.Y)
+            //Switch(App.ActiveScreen.Size,4,50,3,30,20)
+            If(App.ActiveScreen.Size>=4,lblCompleted.Y+lblCompleted.Height,datCompleted.Y+datCompleted.Height+10)
+        ZIndex: =5
+
+    icnSearch_6 As icon.Search:
+        AccessibleLabel: ="Search"
+        Color: |-
+            =RGBA(56, 96, 178, 1)
+            //RGBA(65, 182, 230, 0.65)
+        Height: =txtSearch_6.Height
+        Icon: =If(IsBlank(txtSearch_6),Icon.Search,Icon.Cancel)
+        OnSelect: =Reset(txtSearch_6)
+        PaddingBottom: =5
+        PaddingLeft: =5
+        PaddingRight: =5
+        PaddingTop: =5
+        TabIndex: =0
+        Width: =30
+        X: =txtSearch_6.X+txtSearch_6.Width-Self.Width
+        Y: =txtSearch_6.Y
+        ZIndex: =6
+
+    lblCompleted As label:
+        Font: =Apptheme.FontFamily
+        FontWeight: =FontWeight.Bold
+        Height: =30
+        PaddingLeft: =10
+        Size: =Apptheme.FontHeaderSize
+        Text: ="Completed Requests"
+        Width: |-
+            =If(App.ActiveScreen.Size>=4,Parent.Width/4,Parent.Width)
+            //150
+        X: |-
+            =//Switch(App.ActiveScreen.Size,4,50,3,30,icnHamburgerMenu_12.X+icnHamburgerMenu_12.Width+10)
+            Switch(App.ActiveScreen.Size,4,50,10)
+        Y: |-
+            =//BreadcrumbWorkload.Y+BreadcrumbWorkload.Height+10
+            Switch(App.ActiveScreen.Size,4,HeaderNavigation_15.Y+60,30)
+        ZIndex: =7
+
+    datCompleted As datepicker:
+        AccessibleLabel: ="Date Pending"
+        BorderColor: =RGBA(237, 237, 237, 1)
+        BorderThickness: =1
+        DefaultDate: =
+        Font: =Apptheme.FontFamily
+        Format: |-
+            =//DateTimeFormat.ShortDate
+            "dd/mm/yyyy"
+        Height: =30
+        IconBackground: |-
+            =RGBA(56, 96, 178, 1)
+            //RGBA(217, 241, 250, 100)
+        InputTextPlaceholder: |-
+            =//If(IsBlank(Self.SelectedDate), Text(Date(2001,12,31), Self.Format, Self.Language))
+            "Filter by Requested On"
+        Italic: =true
+        Size: =Apptheme.FontSearch
+        Width: =If(App.ActiveScreen.Size>=4,Container1_6.Width/2,Container1_6.Width)
+        X: =lblCompleted.X+10
+        Y: =lblCompleted.Y+lblCompleted.Height
+        ZIndex: =8
+
+    LeftNavigation_13 As LeftNavigation:
+        Height: |-
+            =//App.Height
+            Max(App.Height,App.DesignHeight)
+        Visible: =App.ActiveScreen.Size<=2 && varShowNav
+        ZIndex: =9
+
+    icnHamburgerMenu_12 As icon.Hamburger:
+        AccessibleLabel: ="Menu"
+        Height: =30
+        Icon: =If(varShowNav,Icon.Cancel,Icon.Hamburger)
+        OnSelect: |-
+            =UpdateContext({varShowNav:!varShowNav})
+        TabIndex: =0
+        Visible: =App.ActiveScreen.Size<=2
+        Width: =30
+        Y: |-
+            =//Switch(App.ActiveScreen.Size,4,HeaderNavigation_15.Y,3,30,20)
+            0
+        ZIndex: =10
+
+    icnReset_5 As icon.Reset:
+        AccessibleLabel: ="Reset"
+        BorderColor: =icnSearch.BorderColor
+        BorderStyle: =BorderStyle.None
+        BorderThickness: =0.1
+        Color: |-
+            =icnSearch.Color
+            //RGBA(0, 18, 107, 1)
+        Height: =icnSearch_6.Height
+        Icon: =Icon.Reset
+        OnSelect: |-
+            =Reset(datCompleted);
+            Reset(txtSearch_6)
+        TabIndex: =0
+        Tooltip: ="Filter Reset"
+        Width: =icnSearch_6.Width-10
+        X: =txtSearch_6.X+txtSearch_6.Width
+        Y: =txtSearch_6.Y
+        ZIndex: =11
+
+    HeaderNavigation_15 As HeaderNavigation:
+        Height: |
+            =//HeaderNavigation.HeaderHeight
+            If(HeaderNavigation_15.AdminVisible,480,40)
+        Visible: =App.ActiveScreen.Size>2
+        ZIndex: =12
+
+    grp_Loading_9 As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =15
+
+        rec_BGPopup_43 As rectangle:
+            Fill: =RGBA(0, 0, 0, 0.2)
+            Height: =Parent.Height
+            Visible: =Loading
+            Width: =Parent.Width
+            ZIndex: =13
+
+        Image1_15 As image:
+            Image: =slds_spinner_brand
+            Visible: =Loading
+            X: =Parent.Width/2
+            Y: =Parent.Height/2
+            ZIndex: =14
+

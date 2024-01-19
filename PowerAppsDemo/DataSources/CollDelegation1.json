@@ -1,0 +1,9 @@
+[
+  {
+    "IsComponentScoped": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "Name": "CollDelegation1",
+    "Type": "CollectionDataSourceInfo"
+  }
+]
