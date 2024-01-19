@@ -27,3 +27,12 @@ Screen1 As screen:
         Y: =538
         ZIndex: =3
 
+    "TabList1 As 'Tab list'.pcfdataset":
+        DisplayMode: =DisplayMode.Edit
+        Height: =55
+        Items: =["Item 1", "Item 2", "Item 3"]
+        Width: =280
+        X: =662
+        Y: =274
+        ZIndex: =4
+
